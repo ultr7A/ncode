@@ -132,7 +132,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
      * @argument {boolean} declaration // aka: identAsString // TODO: check if still needed?
      * @returns  {expressions.Expression}
      */
-    parseExpression(precedence: number, declaration = false): Expression {
+    public parseExpression(precedence: number, declaration = false): Expression {
         let curTokenType = this.curToken.Type;
         let prefix = this.prefixParseFns[curTokenType], leftExp;
 
@@ -161,7 +161,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
     }
 
 
-    parseDeclaration(curTokenType: Token) {
+    public parseDeclaration(curTokenType: Token) {
         let pure = false;
 
         if (curTokenType === Token.PURE) {
@@ -179,7 +179,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         }
     }
 
-    parsePrefixExpression(): Node {
+    public parsePrefixExpression(): Node {
         var expression = new PrefixExpression(this.curToken.Literal as Operator, null);
 
         this.nextToken();
@@ -187,7 +187,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         return expression;
     }
 
-    parseInfixExpression(left: Expression): Node {
+    public parseInfixExpression(left: Expression): Node {
         var expression = new InfixExpression(left, this.curToken.Literal as Operator, null), 
             precedence = this.curPrecedence();
 
@@ -196,7 +196,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         return expression;
     }
 
-    parseGroupedExpression(): Expression {
+    public parseGroupedExpression(): Expression {
         this.nextToken();
         let exp = this.parseExpression(Precedence.LOWEST);
         if (!this.expectPeek(Token.RPAREN)) {
@@ -205,13 +205,13 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         return exp;
     }
 
-    parseCallExpression(fun: FunctionNode | Identifier) {
+    public parseCallExpression(fun: FunctionNode | Identifier) {
         var exp = new CallExpression(fun);
         exp.Values = this.parseExpressionList(Token.RPAREN);
         return exp;
     }
 
-    parseNewExpression(): NewExpression {
+    public parseNewExpression(): NewExpression {
         var exp = new NewExpression(null);
 
         if (!this.expectPeek(Token.IDENT)) {
@@ -233,7 +233,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         return exp;
     }
 
-    parseIndexExpression(left: Expression): Node {
+    public parseIndexExpression(left: Expression): Node {
         let exp: IndexExpression | IndexedAssignmentStatement = null;
 
         this.nextToken();
@@ -253,7 +253,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         return exp;
     }
 
-    parseDotIndexExpression(left: Expression): Node {
+    public parseDotIndexExpression(left: Expression): Node {
         let exp: IndexExpression | IndexedAssignmentStatement = null, 
             Index: Expression = null;
 
@@ -279,7 +279,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
     }
 
     //TODO: Revisit this:
-    parseReadStreamExpression(source) {
+    public parseReadStreamExpression(source) {
         const streamTransformErr = " Parse Error; invalid element in stream transform";
         let exp = new StreamExpression(STREAM_DIRECTION.READ, null, null, null);
 
@@ -298,7 +298,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
     }
 
     //TODO: Revisit this:
-    parseWriteStreamExpression(sink) {
+    public parseWriteStreamExpression(sink) {
         const streamTransformErr = " Parse Error; invalid element in stream transform";
         let exp = new StreamExpression(STREAM_DIRECTION.WRITE, null, null, null);
             
@@ -317,7 +317,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
     }
 
 
-    parseStatement(): Statement {
+    public parseStatement(): Statement {
         if (this.curToken.Type == Token.IDENT && this.peekTokenIs(Token.ASSIGN)) {
             return this.parseAssignmentStatement();
         }
@@ -359,12 +359,12 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         }
     }
 
-    parseConceptStatement(): Statement
+    public parseConceptStatement(): Statement
     {
         throw new Error("Method not implemented.");
     }
     
-    parseExpressionStatement(): ExpressionStatement {
+    public parseExpressionStatement(): ExpressionStatement {
         var stmt = new ExpressionStatement(null);
 
         stmt.Operand = this.parseExpression(Precedence.LOWEST);
@@ -378,7 +378,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         return stmt;
     }
 
-    parseIfStatement(): IfStatement {
+    public parseIfStatement(): IfStatement {
         var controlStructure = new IfStatement(null, null, null);
 
         if (!this.expectPeek(Token.LPAREN)) { return null; }
@@ -401,7 +401,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         return controlStructure;
     }
     
-    parseForStatement(): ForStatement {
+    public parseForStatement(): ForStatement {
         // TODO: Analyzer should always be handling this:
         this.diagnosticContext.hasLoops = true;
         var controlStructure = new ForStatement(null, null, null);
@@ -437,7 +437,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         return controlStructure;
     }
     
-    parseWhileStatement() {
+    public parseWhileStatement() {
         // TODO: Analyzer should always be handling this:
         this.diagnosticContext.hasLoops = true;
         var Statement = new WhileStatement(null, null);
@@ -454,7 +454,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         return Statement;
     }
     
-    parseSleepStatement() {
+    public parseSleepStatement() {
         var statement = new SleepStatement(null, null);
 
         if (!this.expectPeek(Token.LPAREN)) { return null; }
@@ -469,7 +469,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         return statement;
     }
 
-    parseExecStatement(): ExecStatement {
+    public parseExecStatement(): ExecStatement {
         var exp = new ExecStatement(null, null);
 
         if (!this.expectPeek(Token.LBRACKET)) { return null; }
@@ -482,7 +482,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         return exp;
     }
 
-    parseAssignmentStatement() {
+    public parseAssignmentStatement() {
         var stmt = new AssignmentStatement(new Identifier(this.curToken.Literal), null);
 
         if (!this.expectPeek(Token.ASSIGN)) {
@@ -496,7 +496,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         return stmt;
     }
 
-    parseLetStatement(pure = false) {
+    public parseLetStatement(pure = false) {
         var stmt = new LetStatement(null, null, null);
 
         stmt.DataType = this.checkDataType(false);
@@ -527,7 +527,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         return stmt;
     }
 
-    parseClassStatement() {
+    public parseClassStatement() {
         var stmt = new ClassStatement(null, null);
 
         if (!this.expectPeek(Token.IDENT)) {
@@ -547,7 +547,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         return stmt;
     }
 
-    parseReturnStatement() {
+    public parseReturnStatement() {
         var stmt = new ReturnStatement(null);
         this.nextToken();
         stmt.Operand = this.parseExpression(Precedence.LOWEST);
@@ -557,7 +557,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         return stmt;
     }
 
-    parseBlockStatement(isPureFunction = false) {
+    public parseBlockStatement(isPureFunction = false) {
         const  block              = new BlockStatement();
         let    hasReturnStatement = false,
                errors             = [] as string[];
@@ -595,7 +595,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
     }
 
 
-    parseIdentifier(): Identifier {
+    public parseIdentifier(): Identifier {
         // TODO: Analyzer should always be handling this:
         if (!this.diagnosticContext.declaredVariables[this.curToken.Literal]) {
             this.diagnosticContext.undeclaredVariables[this.curToken.Literal] = true;
@@ -603,11 +603,11 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         return new Identifier(this.curToken.Literal);
     }
 
-    parseBoolean(): BooleanLiteral {
+    public parseBoolean(): BooleanLiteral {
         return new BooleanLiteral(this.curTokenIs(Token.TRUE));
     }
 
-    parseIntegerLiteral(): IntegerLiteral {
+    public parseIntegerLiteral(): IntegerLiteral {
         let lit = new IntegerLiteral(null), value = parseInt(this.curToken.Literal);
         if (value == null || value == NaN) {
             this.errors.push("could not parse " + this.curToken.Literal + " as integer");
@@ -616,7 +616,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         lit.Value = value;
         return lit;
     }  
-    parseFloatLiteral(): FloatLiteral {
+    public parseFloatLiteral(): FloatLiteral {
         let lit = new FloatLiteral(null), value = parseFloat(this.curToken.Literal);
         if (value == null || value == NaN) {
             this.errors.push("could not parse " + this.curToken.Literal + " as float");
@@ -626,7 +626,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         return lit;
     }
 
-    parseFunctionLiteral(_, returnType, pure): FunctionNode {
+    public parseFunctionLiteral(_, returnType, pure): FunctionNode {
         if (!this.expectPeek(Token.LPAREN)) {
             return null;
         }
@@ -646,7 +646,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         return lit;
     }
 
-    parsePureFunctionLiteral(_, returnType: string): PureFunctionLiteral {
+    public parsePureFunctionLiteral(_, returnType: string): PureFunctionLiteral {
         returnType = this.parseDataType(true)?.Literal;
         this.nextToken();
         return this.parseFunctionLiteral(null, returnType, true) as PureFunctionLiteral;
@@ -659,7 +659,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         */
     public parseGraphLiteral(): GraphLiteral {
         const edges = [] as GraphEdge<GraphOperator, Expression, StringLiteral>[],
-              nodes = [] as GraphNode<Expression>[];
+              nodes = [] as GraphNode<StringLiteral, Expression>[];
 
         this.graphParser.parseGraph(nodes, edges, "GraphLiteral");
         
