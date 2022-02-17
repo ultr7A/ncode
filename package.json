@@ -5,7 +5,8 @@
   "main": "index.js",
   "module": "main.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node ./lib/10_0_SYSTEM/4_shell/index.ts"
   },
   "keywords": [],
   "author": "",

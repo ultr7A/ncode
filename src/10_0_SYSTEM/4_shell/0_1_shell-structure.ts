@@ -1,5 +1,6 @@
-import { CodeCoordinates, CodeData } from "../../../2_Sequence_📘🌊/0_source/source-code";
-import { AbstractTokenizer } from "../../0_tokenizer/0_1_tokenizer-core/0_2_abstract-tokenizer";
+import { AbstractTokenizer } from "../0_tokenizer/0_1_tokenizer-core/0_2_abstract-tokenizer";
+import { CodeData, CodeCoordinates }  
+                             from "../../01_2_Sequence_📘🌊/0_source/source-code";
 
 export interface IShell<
                     Coordinates extends CodeCoordinates, 

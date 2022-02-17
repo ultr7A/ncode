@@ -14,7 +14,7 @@ import { Analyzer } from "../../../2_compiler/0_3_analyzer/1_3_expression-analyz
 import { precedences } from "../../0_0_parser-core/2_1_precedence";
 
 import { PrefixParseFn, InfixParseFn } from "../../0_0_parser-core/3_0_parse-functions";
-import { AbstractParser }              from "../../0_2_abstract-parser/0_2_1_abstract-parser";
+import { AbstractParser }              from "../../0_2_abstract-parser/0_0_1_abstract-parser";
 
 import { GraphParserThree } from "./0_2_4_graph-parser.three";
 

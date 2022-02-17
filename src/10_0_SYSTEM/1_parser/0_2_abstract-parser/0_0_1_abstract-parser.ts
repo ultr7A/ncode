@@ -1,11 +1,12 @@
-import { ParseTreeAnalysis } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/4_0_0_meta";
-import { Operator }          from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators";
-import { Node, Expression }  from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { ParseTreeAnalysis }                          from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/4_0_0_meta";
+import { Operator }                                   from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators";
+import { Node, Expression, Statement, FunctionNode }  from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
 import { sprintf }           from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util";
 
 import { AbstractToken } from "../../../01_1_ELEMENT/1_token_💧/0_1_token-structure";
 import { Token } from "../../../01_1_ELEMENT/1_token_💧/2_1_token";
 import { CodeCoordinates, CodeData } from "../../../01_2_Sequence_📘🌊/0_source/source-code";
+
 import { AbstractTokenizer } from "../../0_tokenizer/0_1_tokenizer-core/0_2_abstract-tokenizer";
 import { ExpressionAnalysisDiagnosticContext } from "../../2_compiler/0_3_analyzer/0_1_analyzer-structure";
 import { AbstractAnalyzer } from "../../2_compiler/0_3_analyzer/0_3_abstract-analyzer";
@@ -30,15 +31,16 @@ export abstract class AbstractParser<
 
     protected curToken:  TokenObject;
     protected peekToken: TokenObject;
+    protected errors = [] as string[];
+    //TODO: move analyzer logic out of ParserOne and into AbstractAnalyzer<>:
+    protected analyzer?: AnalyzerType;
 
     abstract prefixParseFns: Partial<{ [key in Token]: PrefixParseFn<ExpressionNodeType, OutputNodeType> }>;
     abstract infixParseFns:  Partial<{ [key in Token]:  InfixParseFn<ExpressionNodeType, OutputNodeType> }>;
+   
 
-    protected errors = [] as string[];
     diagnosticContext: ParseTreeAnalysis;
 
-    //TODO: move analyzer logic out of ParserOne and into AbstractAnalyzer<>:
-    protected analyzer?: AnalyzerType;
 
 
     constructor(
@@ -56,7 +58,9 @@ export abstract class AbstractParser<
         this.resetDiagnosticContext();
     }
 
-    protected parse() {
+
+
+    public parse() {
         this.reset();
         this.nextToken();
         this.nextToken();
@@ -65,7 +69,6 @@ export abstract class AbstractParser<
     protected resetDiagnosticContext() {
         this.diagnosticContext = new ExpressionAnalysisDiagnosticContext();
     }
-
 
     // Reading tokens:
     //      No disintegration:

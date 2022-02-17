@@ -1,25 +1,6 @@
 import { Token } from "../../01_1_ELEMENT/1_token_💧/2_1_token";
 
 
-// System module structure:
-export interface AssociativeModule<M, K> {
-    module: M, key: K
-}
-
-export interface Modular<M extends AssociativeModule<any, K>, K> {
-    modules: M[];
-}
-
-export  interface ModularLattice<
-            InnerModuleType,
-            K                                                        = Token,
-            ModuleType extends AssociativeModule<InnerModuleType, K> = AssociativeModule<InnerModuleType, K>, 
-
-            RowType                                                  =           Modular<ModuleType, K>[]
-        >
-{
-    modules: RowType;
-}
 
 export interface StateMachineLike<StateType, TransitionType extends string = Token> {
     transitions?: { [key in TransitionType]: StateType };

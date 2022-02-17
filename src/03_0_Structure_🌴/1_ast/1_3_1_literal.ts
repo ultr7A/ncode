@@ -242,7 +242,7 @@ export class GraphLiteral implements IGraph<Expression, GraphOperator, StringLit
     public NodeName = NodeName.GraphLiteral;
 
     constructor(public Left: Sequence<GraphEdge<GraphOperator, Expression, StringLiteral>>,
-                public Right: Sequence<GraphNode<Expression, StringLiteral>>
+                public Right: Sequence<GraphNode<StringLiteral, Expression>>
     ) {}
 
     public UnParse(ctx: UnParser) {
@@ -254,7 +254,7 @@ export class ConceptGraphLiteral implements IGraph<ConceptExpression, ConceptOpe
     public NodeName = NodeName.ConceptGraph;
 
     constructor(public Left: Sequence<GraphEdge<ConceptOperator, ConceptExpression, StringLiteral>>,
-                public Right: Sequence<GraphNode<ConceptExpression, StringLiteral>>
+                public Right: Sequence<GraphNode<StringLiteral, ConceptExpression>>
     ) {}
 
     public UnParse(ctx: UnParser) {

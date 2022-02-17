@@ -62,8 +62,8 @@ export class ClassMethod implements Value {
 
 /** {  💎  }   **/
 export class GraphNode<
-                        V extends Node = Expression, 
-                        K extends Node = StringLiteral
+                        K extends Node = StringLiteral,
+                        V extends Node = Expression
                       > 
                       implements IGraphNode<K, V> {
     NodeName = NodeName.GraphNode;

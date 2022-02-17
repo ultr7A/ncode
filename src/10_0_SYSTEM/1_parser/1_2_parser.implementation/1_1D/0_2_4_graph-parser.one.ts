@@ -25,8 +25,10 @@ export class GraphParserOne
     constructor(
         private readonly nextToken:      ()             => void,
         private readonly curTokenIs:     (token: Token) => boolean,
-        private readonly parseGraphNode: (nodes: GraphNodeType[])                            => string,
-        private readonly parseGraphEdge: (direction: Orient.ation.X, edges: GraphEdgeType[]) => GraphEdgeType
+        
+                                                   // TODO:  Use component class VS method ref to avoid type `Function`
+        private readonly parseGraphNode: Function, //(nodes: GraphNodeType[])                            => GraphNodeType,
+        private readonly parseGraphEdge: Function  //(direction: Orient.ation.X, edges: GraphEdgeType[]) => GraphEdgeType
     ) {}
 
     public parseGraph(
@@ -42,7 +44,7 @@ export class GraphParserOne
             if (this.curTokenIs(Token.LT) || this.curTokenIs(Token.SINK)) { // Edge pointing left
                 const edge = this.parseGraphEdge("left", edges);
                 
-                const fromNodeId = this.parseGraphNode(nodes);
+                const fromNodeId = this.parseGraphNode(nodes).Left;
                 const from_and_to = new Pair(new StringLiteral(fromNodeId), new StringLiteral(nodeId));
 
                 edge.Right = from_and_to;
@@ -50,14 +52,14 @@ export class GraphParserOne
             } else if (this.curTokenIs(Token.MINUS) || this.curTokenIs(Token.SOURCE)) { // Edge pointing right
                 const edge = this.parseGraphEdge("right", edges);
 
-                const toNodeId = this.parseGraphNode(nodes);
+                const toNodeId = this.parseGraphNode(nodes).Left;
                 const from_and_to = new Pair(new StringLiteral(nodeId), new StringLiteral(toNodeId));
             
                 edge.Right = from_and_to;
 
             } else { // Otherwise, this is a graph node:
                 // Keep track of last node:
-                nodeId = this.parseGraphNode(nodes);
+                nodeId = this.parseGraphNode(nodes).Left;
             }
 
             this.nextToken();

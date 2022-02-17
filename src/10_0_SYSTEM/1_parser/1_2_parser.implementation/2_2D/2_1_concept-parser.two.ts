@@ -12,7 +12,7 @@ import { ConceptAnalyzer } from "../../../2_compiler/0_3_analyzer/2_3_concept-an
 import { conceptPrecedences } from "../../0_0_parser-core/2_2_concept-precedence";
 
 import { InfixParseFn, PrefixParseFn }     from "../../0_0_parser-core/3_0_parse-functions";
-import { AbstractParser }                  from "../../0_2_abstract-parser/0_2_1_abstract-parser";
+import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser";
 
 import { GraphParserTwo } from "./0_2_4_graph-parser.two";
 
