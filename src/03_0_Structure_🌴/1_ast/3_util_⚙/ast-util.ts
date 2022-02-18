@@ -2,22 +2,27 @@ import
         { FloatLiteral, IntegerLiteral, StringLiteral, BooleanLiteral } 
 from "../1_3_1_literal";
 
-import { Node } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { Node }     from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { NodeName } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum";
+import { DataType } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/primitive/type.enum";
 
 export function getDataTypeByNodeName(node: Node): string {
     var NodeName = node ? node.NodeName : "";
-    switch (NodeName) {
+    switch (NodeName as NodeName) {
+        case "Boolean":
+            return DataType.BOOLEAN;
         case "IntegerLiteral":
-            return "int";
+            return DataType.INT;
         case "FloatLiteral":
-            return "float";
-        case "BooleanLiteral":
-            return "boolean";
+            return DataType.FLOAT;
         case "ArrayLiteral":
-            return "array";
+            return DataType.ARRAY;
         case "HashLiteral":
-            return "hash";
-        // handle NewExpression
+            return DataType.HASH;
+        case "ClassLiteral": 
+            return DataType.CLASS_DEFINITION;
+            
+        //TODO: handle NewExpression
         default:
             return "any";
     }

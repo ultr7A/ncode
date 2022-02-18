@@ -1,12 +1,9 @@
-import { Node } from "../../../../1_Structure_🌴/1_ast/0_1_0_structure-concept";
+import { ParseTreeAnalysis }        from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/4_0_0_meta";
+import { ClassifiedObject }         from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
+import { EObject, FunctionObject }  from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
+import { Environment }              from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
 
-import { Program }           from "../../../../1_Structure_🌴/1_ast/1_0_1_root";
-import { ParseTreeAnalysis } from "../../../../1_Structure_🌴/1_ast/4_0_0_meta";
-
-import { EObject, FunctionObject } from "../../../../3_Operation_⏰/1_object_[⭕]/0_1_object-structure";
-import { ClassifiedObject }        from "../../../../3_Operation_⏰/1_object_[⭕]/1_0_object";
-
-import { Environment } from "../1_4_0_environment";
+import { Program } from "../../../../03_0_Structure_🌴/1_ast/1_0_1_root";
 
 
 export type EvalFunction = (node: Node, env: Environment, objectContext?: ClassifiedObject, analysis?: ParseTreeAnalysis) => EObject;

@@ -1,16 +1,16 @@
-import { Expression, FunctionNode, Node, Statement } 
-                                    from "../../../1_Structure_🌴/1_ast/0_1_0_structure-concept";
-import { BlockStatement, Program }  from "../../../1_Structure_🌴/1_ast/1_0_1_root";
 
-import { CallExpression, IndexExpression, InfixExpression, PrefixExpression } 
-                                        from "../../../1_Structure_🌴/1_ast/1_1_1_expression";
-import { AssignmentStatement, ExpressionStatement, ForStatement, IndexedAssignmentStatement, LetStatement, ReturnStatement, WhileStatement } 
-                                        from "../../../1_Structure_🌴/1_ast/1_2_1_statement";
-import { FunctionLiteral, Identifier }  from "../../../1_Structure_🌴/1_ast/1_3_1_literal";
-import { getDataTypeByNodeName }        from "../../../1_Structure_🌴/1_ast/3_util_⚙/ast-util";
-import { ParseTreeAnalysis }            from "../../../1_Structure_🌴/1_ast/4_0_0_meta";
                             
 // If you can't see the [Forrest] for the [{Tree}(s)]', then obsessively line everything up into grids.
+import { ParseTreeAnalysis }                   from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/4_0_0_meta";
+import { DataType } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/primitive/type.enum";
+import { Node, Expression, FunctionNode, Statement } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { NodeName } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum";
+
+import { Program, BlockStatement } from "../../../03_0_Structure_🌴/1_ast/1_0_1_root";
+import { InfixExpression, PrefixExpression, CallExpression, IndexExpression } from "../../../03_0_Structure_🌴/1_ast/1_1_1_expression";
+import { ExpressionStatement, LetStatement, AssignmentStatement, ForStatement, WhileStatement, IndexedAssignmentStatement, ReturnStatement } from "../../../03_0_Structure_🌴/1_ast/1_2_1_statement";
+import { Identifier, FunctionLiteral } from "../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
+import { getDataTypeByNodeName } from "../../../03_0_Structure_🌴/1_ast/3_util_⚙/ast-util";
 import { ExpressionAnalysisDiagnosticContext } from "./0_1_analyzer-structure";
 import { AbstractAnalyzer } from "./0_3_abstract-analyzer";
 
@@ -67,7 +67,7 @@ export class Analyzer extends AbstractAnalyzer<Expression, ParseTreeAnalysis, Ex
                 break;
             case "ForStatement":
                 analysis.declaredVariables[(node as ForStatement).Element.Value] =
-                    getDataTypeByNodeName((node as ForStatement).Operand) === "hash"
+                    getDataTypeByNodeName((node as ForStatement).Operand) === DataType.HASH
                         ? "string"
                         : "int";
 
@@ -175,8 +175,9 @@ export class Analyzer extends AbstractAnalyzer<Expression, ParseTreeAnalysis, Ex
     }
 
     private analyzeLetStatement(node: LetStatement, analysis: ParseTreeAnalysis): void {
+            // TODO: Add unit test for edge-case where node has no dataType and getDataTypeByNodeName returns void;
             analysis.declaredVariables[node.Identity.Value] = node.DataType
-                || getDataTypeByNodeName(node.Value);
+                || getDataTypeByNodeName(node.Value) || "NULL";
     }
 
     private analyzeExternalVars(node: Identifier, analysis: ParseTreeAnalysis): void {

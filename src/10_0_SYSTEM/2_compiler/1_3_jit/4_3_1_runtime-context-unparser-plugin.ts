@@ -1,12 +1,12 @@
-import { Expression } from "../../../1_Structure_🌴/1_ast/0_1_0_structure-concept";
 
-import { CallExpression, IndexExpression, NewExpression }                                     
-                             from "../../../1_Structure_🌴/1_ast/1_1_1_expression";
-import { StringLiteral, ArrayLiteral, Identifier, HashLiteral }                               
-                             from "../../../1_Structure_🌴/1_ast/1_3_1_literal";
-import { AssignmentStatement, ExpressionStatement, IndexedAssignmentStatement, LetStatement } 
-                             from "../../../1_Structure_🌴/1_ast/1_2_1_statement";
-import { ParseTreeAnalysis } from "../../../1_Structure_🌴/1_ast/4_0_0_meta";
+import { ParseTreeAnalysis }  from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/4_0_0_meta";
+import { Expression }         from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { NodeName } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum";
+import { isAbstractDataType } from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util";
+
+import { IndexExpression, CallExpression, NewExpression } from "../../../03_0_Structure_🌴/1_ast/1_1_1_expression";
+import { LetStatement, AssignmentStatement, IndexedAssignmentStatement, ExpressionStatement } from "../../../03_0_Structure_🌴/1_ast/1_2_1_statement";
+import { StringLiteral, Identifier, ArrayLiteral, HashLiteral } from "../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
 import { Transpiler } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/abstract-un-parser";
 import { UnParserPlugin } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/un-parser-plugin";
 
@@ -100,12 +100,12 @@ export class JSECSContextPlugin extends UnParserPlugin {
                 if (!this.resolvedIdentifiers[identName]) {
                     // resolve it, before the rest of the program
                     this.resolvedIdentifiers[identName] = true;
-                    operations[1] = this.unparser.unParse(this.routeExternalIdentThroughContext(node.Subject), { noPlugins: true }) + ";\n";
+                    operations[1] = this.unparser.unParse(this.routeExternalIdentThroughContext(node.Subject as Identifier), { noPlugins: true }) + ";\n";
                 }
                 if (!this.updateExternalIdentifiers[identName]) {
                     this.updateExternalIdentifiers[identName] = true;
                     // update the variable from the external context's point of view, at the end:
-                    operations[2] = this.unparser.unParse(this.routeAssignmentThroughContext(node.Subject), { noPlugins: true }) + ";\n";
+                    operations[2] = this.unparser.unParse(this.routeAssignmentThroughContext(node.Subject as Identifier), { noPlugins: true }) + ";\n";
                 }
 
             }
@@ -157,15 +157,15 @@ export class JSECSContextPlugin extends UnParserPlugin {
                     }
                     // and it has not been exported to the ecs runtime yet 
                     // update external variable:
-                    operations[2] = this.updateExternalObject(node, identName, operations[2]);
+                    operations[2] = this.updateExternalObject((node as IndexedAssignmentStatement).Subject as Identifier, identName, operations[2]);
                 }
 
             }
             return operations;
         },
         "CallExpression": (node: CallExpression): [CallExpression, string, string] => {
-            var isIdent = node.Function.NodeName === "Identifier";
-            var identName;
+            const isIdent = node.Function.NodeName === "Identifier";
+            let identName;
 
             if (isIdent) {
                 
@@ -175,7 +175,7 @@ export class JSECSContextPlugin extends UnParserPlugin {
                     return this.routeBuiltinThroughContext(identName, node);
                 }
                 if (this.mutatorIdentifiers.indexOf(identName) > -1) { // Beware of mutants
-                    return [node, "", this.updateExternalObject(node.Values[0], identName, "")];
+                    return [node, "", this.updateExternalObject(node.Values[0] as Identifier, identName, "")];
                 } 
 
             } else if (node.Function.NodeName === "IndexExpression") {
@@ -199,7 +199,7 @@ export class JSECSContextPlugin extends UnParserPlugin {
                     var outerType = this.dataTypesByIdent[objName];
 
                     if (this.ecsNativeClasses.indexOf(outerType) > -1) {
-                        return this.routeBuiltinMethodThroughContext(outerType, identName, node, (node.Function as IndexExpression).Left);
+                        return this.routeBuiltinMethodThroughContext(outerType, identName, node, ((node.Function as IndexExpression).Left as HashLiteral));
                     }
 
                 } else {
@@ -208,13 +208,16 @@ export class JSECSContextPlugin extends UnParserPlugin {
                 
             } else if (node.Function.NodeName === "NewExpression") {
 
-                identName = (node.Function as NewExpression).Value.Value;
-                var externalNewable = this.affectedIdentifiers[identName] && isAbstractDataType(this.dataTypesByIdent[identName]);
+                if ((node.Function as NewExpression).Value.NodeName === NodeName.Identifier) {
+                    identName = ((node.Function as NewExpression).Value as Identifier).Value;
+                    
+                    var externalNewable = this.affectedIdentifiers[identName] && isAbstractDataType(this.dataTypesByIdent[identName]);
 
-                if (this.ecsNativeFunctions[identName] || externalNewable) {
-                    return this.routeBuiltinThroughContext(identName, node);
+                    if (this.ecsNativeFunctions[identName] || externalNewable) {
+                        return this.routeBuiltinThroughContext(identName, node);
+                    }
                 }
-
+                
             }
             // handle external functions
             if (isIdent && this.affectedIdentifiers[identName] &&

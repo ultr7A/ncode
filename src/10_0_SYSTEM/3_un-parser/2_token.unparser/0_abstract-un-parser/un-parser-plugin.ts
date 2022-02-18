@@ -1,5 +1,4 @@
-import { Node } from "../../../../1_Structure_🌴/1_ast/0_1_0_structure-concept";
-import { NodeName } from "../../../../1_Structure_🌴/1_ast/0_1_2_2_structure-implementation-enumeration";
+import { Node } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
 
 import { Transpiler } from "./abstract-un-parser";
 
