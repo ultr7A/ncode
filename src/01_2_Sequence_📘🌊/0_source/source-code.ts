@@ -1,5 +1,14 @@
 
 export type CodeCoordinates = number | [number, number] | [number, number, number];
+
+export enum CodeDataType {
+    String,
+    Bitmap,
+    Geometry,
+    Model,
+    Audio
+}
+
 export type CodeData        = string | string[] | string[][];
 
 export interface SourceContext<CoordinateSystem extends CodeCoordinates> { 
