@@ -1,3 +1,6 @@
+
+
+
 export function platformSpecificCallNoSpread(scope, nodeImpl: Function, webImpl: Function, args?: any[]) {
     if (typeof Window == 'undefined' && typeof self === 'undefined') {
         return nodeImpl(scope, args);
@@ -7,8 +10,11 @@ export function platformSpecificCallNoSpread(scope, nodeImpl: Function, webImpl:
     }
 }
 
-export function platformSpecificCall(scope: Record<string, unknown>, 
-    nodeImpl: Function, webImpl: Function, args?: any[]) 
+
+
+
+export function platformSpecificCall<T = Promise<unknown>>(scope: Record<string, unknown>, 
+    nodeImpl: Function, webImpl: Function, args?: any[]): T 
 {
     if (typeof Window == 'undefined' && typeof self === 'undefined') {
         if (args) {

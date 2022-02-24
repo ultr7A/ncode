@@ -36,10 +36,10 @@ import {    BooleanLiteral, ClassLiteral, ConceptSequenceLiteral, GraphLiteral, 
                                     from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
 
 
-import { evaluateSourceFile, readWholeFile, printNativeString } from "../../../../3_Operation_☀/3_util_(🔥)/4_io-util";
+import { evaluateSourceFile, printNativeString } from "../../../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util";
 
-import { builtins } from "../../../../4_Outer-FRAME_⚡/2_builtin";
-import { nodeObjects } from "../../../../4_Outer-FRAME_⚡/4_io/1_file-system/2_compatibility";
+import { builtins } from "../../../../4_Frame_⚡/2_builtin";
+import { nodeObjects } from "../../../../4_Frame_⚡/4_io/1_file-system/2_compatibility";
 
 
 

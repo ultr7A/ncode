@@ -3,7 +3,11 @@ import { Orient } from "../../0_0_system-structure/1_0_system-structure";
 import { TokenizerOne } from "../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one";
 import { AbstractShell } from "../2_abstract-shell";
 
-export class LinearShell extends AbstractShell<number, CodeDataType.String, string, Orient.ation.One> {
+export class LinearShell extends AbstractShell< number, 
+                                                CodeDataType.String, 
+                                                string, 
+                                                Orient.ation.One > 
+{
     
     constructor(public tokenizer: TokenizerOne) {
         super();

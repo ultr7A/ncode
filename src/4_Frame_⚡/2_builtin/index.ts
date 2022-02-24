@@ -16,7 +16,7 @@ import { systemColorRenderer, ImageObject, Graphics }      from "meta.gl";
 
 import { MATHS_ }                   from "./maths";
 import { JSON_  }                   from "./json";
-import { println, printNativeString } from "../../3_Operation_☀/3_util_(🔥)/4_io-util";
+import { println, printNativeString } from "../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util";
 
 
 export const builtins = {
