@@ -40,6 +40,7 @@ import { evaluateSourceFile, printNativeString } from "../../../../3_Operation_�
 
 import { builtins } from "../../../../4_Frame_⚡/2_builtin";
 import { nodeObjects } from "../../../../4_Frame_⚡/4_io/1_file-system/2_compatibility";
+import { readWholeFile } from "../../../../3_Operation_☀/3_util_(🔥)/4_0_io-util";
 
 
 
@@ -50,10 +51,10 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
     private conceptEvaluator:    ConceptEvaluator;
 
     constructor() {
-        this.optimizer = new RuntimeOptimizer(new JSTranspiler(), applyFunction, this.Eval);
+        this.optimizer = new RuntimeOptimizer(new JSTranspiler(), applyFunction, this);
         this.analyzer  = new Analyzer();
 
-        this.embeddedInterpreter = makeRuntimeEnvironment(this.Eval, this.evalProgram);
+        this.embeddedInterpreter = makeRuntimeEnvironment(this);
     }
 
     private optimizedEvalProgram(program: Program, env: Environment) {
@@ -229,7 +230,7 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
         return null;
     }
 
-    private evalProgram(program: Program, env: Environment) {
+    public evalProgram(program: Program, env: Environment) {
         var result;
         var statements = program.Values;
         for (var s = 0, l = statements.length; s < l; s++) {

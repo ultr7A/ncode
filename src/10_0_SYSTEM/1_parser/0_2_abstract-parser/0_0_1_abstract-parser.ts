@@ -6,6 +6,7 @@ import { sprintf }           from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]
 import { AbstractToken } from "../../../01_1_ELEMENT/1_token_💧/0_1_token-structure";
 import { Token } from "../../../01_1_ELEMENT/1_token_💧/2_1_token";
 import { CodeCoordinates, CodeData } from "../../../01_2_Sequence_📘🌊/0_source/source-code";
+import { Program } from "../../../03_0_Structure_🌴/1_ast/1_0_1_root";
 
 import { AbstractTokenizer } from "../../0_tokenizer/0_1_tokenizer-core/0_2_abstract-tokenizer";
 import { ExpressionAnalysisDiagnosticContext } from "../../2_compiler/0_3_analyzer/0_1_analyzer-structure";
@@ -37,7 +38,9 @@ export abstract class AbstractParser<
 
     abstract prefixParseFns: Partial<{ [key in Token]: PrefixParseFn<ExpressionNodeType, OutputNodeType> }>;
     abstract infixParseFns:  Partial<{ [key in Token]:  InfixParseFn<ExpressionNodeType, OutputNodeType> }>;
-   
+                
+    abstract doParseProgram(statements: Statement[], program: Program): void;
+
 
     diagnosticContext: ParseTreeAnalysis;
 
@@ -64,6 +67,15 @@ export abstract class AbstractParser<
         this.reset();
         this.nextToken();
         this.nextToken();
+    }
+
+
+    public parseProgram() {
+        var Statements = [], program = new Program(Statements);
+        this.doParseProgram(Statements, program);
+        // console.log(JSON.stringify(this.diagnosticContext, null, 2));
+        // console.log(JSON.stringify(program, null, 2));
+        return program;
     }
 
     protected resetDiagnosticContext() {

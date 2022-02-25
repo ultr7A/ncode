@@ -3,7 +3,7 @@
 // If you can't see the [Forrest] for the [{Tree}(s)]', then obsessively line everything up into grids.
 import { ParseTreeAnalysis }                   from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/4_0_0_meta";
 import { DataType } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/primitive/type.enum";
-import { Node, Expression, FunctionNode, Statement } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { Node, Expression, FunctionNode, Statement, IBlockStatement } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
 import { NodeName } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum";
 
 import { Program, BlockStatement } from "../../../03_0_Structure_🌴/1_ast/1_0_1_root";
@@ -27,7 +27,7 @@ export class Analyzer extends AbstractAnalyzer<Expression, ParseTreeAnalysis, Ex
     
     constructor () { super(ExpressionAnalysisDiagnosticContext); }
 
-    public analyzeParseTree(program: Program) {
+    public analyzeParseTree(program: IBlockStatement) {
         return this.analyzeNode(program, this.initAnalysis());
     }
 

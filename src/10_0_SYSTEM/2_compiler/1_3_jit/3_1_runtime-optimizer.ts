@@ -10,6 +10,7 @@ import { Environment }      from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/
 import { Transpiler } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/abstract-un-parser";
 import { Analyzer } from "../0_3_analyzer/1_3_expression-analyzer";
 import { ApplyFunctionFunction, EvalFunction } from "./0_0_jit-compiler-structure/0_3_3_eval-types"
+import { ExpressionEvaluator } from "./2_0_evaluator/2_0_evaluator";
 
 import { JSECSContextPlugin } from "./4_3_1_runtime-context-unparser-plugin";
 import { JSECSEvaluatorContext } from "./4_3_2_hybrid-runtime-context";
@@ -29,11 +30,11 @@ export class RuntimeOptimizer implements Optimizer {
     private analyzer: Analyzer;
     private jsECSContext: JSECSEvaluatorContext;
 
-    constructor(unparser: Transpiler, applyFunction: ApplyFunctionFunction, evalFn: EvalFunction) {
+    constructor(unparser: Transpiler, applyFunction: ApplyFunctionFunction, evaluator: ExpressionEvaluator) {
         this.unparser = unparser;
         this.unParserPlugin = new JSECSContextPlugin();
         this.analyzer = new Analyzer();
-        this.jsECSContext = new JSECSEvaluatorContext(applyFunction, evalFn);
+        this.jsECSContext = new JSECSEvaluatorContext(applyFunction, evaluator.Eval);
         this.unParserPlugin.setUnParser(this.unparser);
     }
 

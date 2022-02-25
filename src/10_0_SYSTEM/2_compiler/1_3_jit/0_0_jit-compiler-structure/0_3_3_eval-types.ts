@@ -7,6 +7,7 @@ import { Program } from "../../../../03_0_Structure_🌴/1_ast/1_0_1_root";
 
 
 export type EvalFunction = (node: Node, env: Environment, objectContext?: ClassifiedObject, analysis?: ParseTreeAnalysis) => EObject;
+
 export type EvalProgramFunction = (program: Program, env: Environment) => EObject;
 export type EvalBodyAndApplyFunctionFn = (fn: FunctionObject, env: Environment, args: EObject[]) => EObject;
 export type ApplyFunctionFunction = (fn: FunctionObject, env: Environment, args: EObject[], objectContext?: ClassifiedObject) => EObject;

@@ -113,6 +113,24 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         (this.tokenizer as TokenizerOne).loadSourceCode(code as string);
     }
 
+    public doParseProgram(statements: Statement[], program: Program) {
+        this.nextToken();
+        while (!this.curTokenIs(Token.EOF)) {
+            var stmt = this.parseStatement();
+            if (stmt != null) {
+                if (stmt.NodeName == "ExpressionStatement") {
+                    if ((stmt as ExpressionStatement).Operand == null) {
+                        continue;
+                    }
+                }
+                program.Values.push(stmt);
+            }
+            this.nextToken();
+        }
+    }
+
+
+
     parseModifiers(): number[] {
         let modifiers = [], 
             modifier = modifierNames.indexOf(this.curToken.Type as Token);

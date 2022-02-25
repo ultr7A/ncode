@@ -5,19 +5,20 @@ import { Program } from "../../../../03_0_Structure_🌴/1_ast/1_0_1_root";
 
 import { Parser }       from "../../../1_parser/1_1_parser/3_1_1_parser";
 import { EvalFunction, EvalProgramFunction } from "../0_0_jit-compiler-structure/0_3_3_eval-types";
+import { ExpressionEvaluator } from "./2_0_evaluator";
 
 
 
 export class RecursiveEvaluator {
     private evalProgram: EvalProgramFunction;
-    private eval: EvalFunction;
+    private eval: Function;
 
     private parser: Parser;
 
-    constructor (_parser, evalFunction: EvalFunction, evalProgramFunction: EvalProgramFunction) {
+    constructor (_parser, evaluator: ExpressionEvaluator) {
         this.parser = _parser;
-        this.eval = evalFunction;
-        this.evalProgram = evalProgramFunction;
+        this.eval = evaluator.Eval;
+        this.evalProgram = evaluator.evalProgram;
     }
 
     public makeEnvironment(outer: Environment) { 
@@ -83,6 +84,6 @@ export class RecursiveEvaluator {
 }
 
 
-export function makeRuntimeEnvironment(evalFunction: EvalFunction, evalProgram: EvalProgramFunction) {
-    return new RecursiveEvaluator(new Parser(), evalFunction, evalProgram);
+export function makeRuntimeEnvironment(evaluator: ExpressionEvaluator) { //evalFunction: EvalFunction, evalProgram: EvalProgramFunction) {
+    return new RecursiveEvaluator(new Parser(), evaluator);
 };

@@ -1,25 +1,30 @@
-import { Program } from "../../../1_Structure_🌴/1_ast/1_0_1_root";
-import { LetStatement } from "../../../1_Structure_🌴/1_ast/1_2_1_statement";
 
 
-import { ApplyFunctionFunction, EvalFunction } from "./0_0_jit-compiler-structure/0_3_3_eval-types";
+import { IBlockStatement } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { FunctionObject, DynamicFunction }  from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
+import { ClassifiedObject }                 from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
+import { Environment }                      from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
+import { ecsObjectToNativeObject, nativeListToArray, nativeObjToClassifiedObject, nativeValueToECSValue } from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
+
+import { LetStatement } from "../../../03_0_Structure_🌴/1_ast/1_2_1_statement";
+import { builtins } from "../../../4_Frame_⚡/2_builtin";
+import { ApplyFunctionFunction } from "./0_0_jit-compiler-structure/0_3_3_eval-types";
 import { EvaluatorContext } from "./0_0_jit-compiler-structure/0_3_4_evaluator-context-type";
 
-import { Environment } from "./1_4_0_environment";
 
 
 export class JSECSEvaluatorContext implements EvaluatorContext {
     
-    program: Program;
+    program: IBlockStatement;
     env: Environment;
     applyFunction: ApplyFunctionFunction;
-    evalFn: EvalFunction;
+    evalFn: Function;
 
-    constructor(applyFunction: ApplyFunctionFunction, evalFn: EvalFunction) {
+    constructor(applyFunction: ApplyFunctionFunction, evalFn: Function) {
         this.applyFunction = applyFunction;
         this.evalFn = evalFn;
     }
-    public setProgram(program: Program): JSECSEvaluatorContext {
+    public setProgram(program: IBlockStatement): JSECSEvaluatorContext {
         this.program = program;
         return this;
     }
@@ -63,7 +68,7 @@ export class JSECSEvaluatorContext implements EvaluatorContext {
         if (typeof value === "function") {
             var letStatement = this.program.Values
                 .filter(function (statement) { return statement.NodeName === "LetStatement"; })
-                .find(function (statement) { return (statement as LetStatement).Subject.Value === identName; });
+                .find(function (statement) { return (statement as LetStatement).Identity.Value === identName; });
             //     ^^^ Maybe these can be thrown into a map keyed by identName, ahead of time 
             if (letStatement) {
                 this.evalFn(letStatement, this.env);
@@ -141,19 +146,3 @@ export class JSECSEvaluatorContext implements EvaluatorContext {
         }
     }
 }
-function nativeValueToECSValue(value: any): any {
-    throw new Error("Function not implemented.");
-}
-
-function ecsObjectToNativeObject(ecsValue: any): any {
-    throw new Error("Function not implemented.");
-}
-
-function nativeObjToClassifiedObject(objectContext: Record<string, unknown>): any {
-    throw new Error("Function not implemented.");
-}
-
-function nativeListToArray(args: any[]) {
-    throw new Error("Function not implemented.");
-}
-
