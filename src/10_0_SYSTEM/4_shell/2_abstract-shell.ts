@@ -17,4 +17,6 @@ export abstract class   AbstractShell<  CoordinateSystem  extends CodeCoordinate
     abstract handleUserInput(): void;
 
     abstract renderOutput(): void;
+
+    abstract listen(): void;
 }
