@@ -40,19 +40,22 @@ export const localEvaluate = function (
 ) {
     tokenizer.loadSourceCode(text);
     p.parseProgram();
-    var program = p.parseProgram(), evaluated;
+    let program = p.parseProgram(), evaluated;
+
     if (p.errors.length != 0) {
         printParserErrors(p.errors);
         return;
     }
     if (unparseTarget) {
         if (replPlugins && replPlugins.transpilers) {
-            var unparsers = replPlugins.transpilers;
-            for (var tPlugin in unparsers) {
+            let unparsers = replPlugins.transpilers;
+
+            for (let tPlugin in unparsers) {
                 lang.loadTranspiler(tPlugin, unparsers[tPlugin]);
             }
         }
-        var unparser = lang.getTranspiler(unparseTarget);
+        let unparser = lang.getTranspiler(unparseTarget);
+        
         if (unparser) {
             console.log(unparser.transpile(program, null, p.diagnosticContext));
         }

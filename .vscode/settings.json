@@ -1,5 +1,5 @@
 {
     "editor.mouseWheelZoom": true,
-    "window.zoomLevel": 0,
+    "window.zoomLevel": -1,
     "editor.fontFamily": "'Jet Brains Mono', 'Source Code Pro', 'Droid Sans Mono', 'monospace', monospace"
 }

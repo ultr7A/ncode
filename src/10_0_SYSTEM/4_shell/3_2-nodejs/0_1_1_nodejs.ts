@@ -1,5 +1,5 @@
 import { Environment }     from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
-import { forceSingleLine } from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util";
+
 import { nodeObjects } from "../../../4_Frame_⚡/4_io/1_file-system/2_compatibility";
 import { TokenizerOne } from "../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one";
 import { Parser } from "../../1_parser/1_1_parser/3_1_1_parser";
