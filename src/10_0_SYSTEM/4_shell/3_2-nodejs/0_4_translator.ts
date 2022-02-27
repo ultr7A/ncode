@@ -1,5 +1,5 @@
 import { UnParser } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/system/un-parser";
-import { JSTranspiler } from "../3_un-parser/2_token.unparser/2_un-parse_targets/1_1_javascript";
+import { JSTranspiler } from "../../3_un-parser/2_token.unparser/2_un-parse_targets/1_1_javascript";
 
 export class Translator {
 

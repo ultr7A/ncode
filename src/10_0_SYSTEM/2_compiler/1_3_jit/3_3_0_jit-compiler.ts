@@ -28,4 +28,9 @@ export class JITCompiler {
    public transpiler:   UnParser;
    public environment:  Environment;
 
+
+   constructor() {
+      
+   }
+
 }

@@ -7,6 +7,8 @@ import { ModuleLinker } from "../../4_2_1_native-module-linker/1_1_0_module-link
 export abstract class AbstractAOTCompiler<NodeType extends Node, OutputType> {
     
     abstract linker: ModuleLinker;
-    abstract compile(node: NodeType): OutputType;
+    abstract compileFromAST(node: NodeType): OutputType;
+    abstract compileAndRun(entryPointFile: string): Promise<void>;
+    abstract compile(targetLanguage: string, entryPointFile: string): Promise<void>;
 
 }
