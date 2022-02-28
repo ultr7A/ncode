@@ -14,10 +14,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@types/mocha": "^9.0.0",
     "esm": "^3.2.25",
-    "meta.gl": "file:../../Graphics/prototype/meta.gl",
-    "wrapt.co_re": "file:../wrapt.co_re"
+    "meta.gl": "^0.0.2",
+    "wrapt.co_re": "^1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.24",

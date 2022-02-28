@@ -29,7 +29,7 @@ export function printToDocument(value) {
 
 
 export function printNativeString(scope, str) {
-    if (typeof Window == 'undefined') {
+    if (eval('typeof Window') == 'undefined') {
         console.log(str);
     } else {
         printToDocument(str);

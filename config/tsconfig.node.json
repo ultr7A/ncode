@@ -18,6 +18,7 @@
       "outDir":  "lib/node"
     },
     "include": [
+      "../src/*",
       "../src/**/*"
     ]
   }
