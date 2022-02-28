@@ -6,12 +6,12 @@
   "module": "main.js",
   "scripts": {
     "test": "jest",
-    "start": "node ./lib/10_0_SYSTEM/4_shell/index.ts",
+    "start": "node ./lib/node/10_0_SYSTEM/4_shell/index.js",
     "build": "tsc --project config/tsconfig.node.json",
     "browser-build": "tsc --project config/tsconfig.browser.json"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jeremy Evans <openspacehexagon@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "esm": "^3.2.25",

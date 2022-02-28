@@ -15,7 +15,11 @@
         "node",
         "jest"
       ],
-      "rootDir": "src",
-      "outDir":  "lib/browser"
-    }
+      "rootDir": "../src",
+      "outDir":  "../lib/browser"
+    },
+    "include": [
+      "../src/*",
+      "../src/**/*"
+    ]
   }

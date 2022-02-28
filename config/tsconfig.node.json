@@ -1,8 +1,9 @@
 {
     "compilerOptions": {
       "target": "es6",
-      "module": "ESNext",
+      "module": "commonjs",
       "moduleResolution": "node",
+      "esModuleInterop": true,
       "noResolve": false,
       "noImplicitAny": false,
       "sourceMap": true,
@@ -15,7 +16,7 @@
         "node"
       ],
       "rootDir": "../src",
-      "outDir":  "lib/node"
+      "outDir":  "../lib/node"
     },
     "include": [
       "../src/*",
