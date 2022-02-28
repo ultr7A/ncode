@@ -16,7 +16,7 @@
         "node"
       ],
       "rootDir": "../src",
-      "outDir":  "../lib/node"
+      "outDir":  "../bin"
     },
     "include": [
       "../src/*",

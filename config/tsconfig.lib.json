@@ -16,7 +16,7 @@
         "jest"
       ],
       "rootDir": "../src",
-      "outDir":  "../lib/browser"
+      "outDir":  "../lib"
     },
     "include": [
       "../src/*",

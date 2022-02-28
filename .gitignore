@@ -1,6 +1,6 @@
 # npm package
 lib
-
+bin
 # Logs
 logs
 *.log
