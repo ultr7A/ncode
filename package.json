@@ -6,7 +6,9 @@
   "module": "main.js",
   "scripts": {
     "test": "jest",
-    "start": "node ./lib/10_0_SYSTEM/4_shell/index.ts"
+    "start": "node ./lib/10_0_SYSTEM/4_shell/index.ts",
+    "build": "tsc --project config/tsconfig.node.json",
+    "browser-build": "tsc --project config/tsconfig.browser.json"
   },
   "keywords": [],
   "author": "",
@@ -14,8 +16,8 @@
   "dependencies": {
     "@types/mocha": "^9.0.0",
     "esm": "^3.2.25",
-    "wrapt.co_re": "file:../wrapt.co_re",
-    "meta.gl":     "file:../../Graphics/prototype/meta.gl"
+    "meta.gl": "file:../../Graphics/prototype/meta.gl",
+    "wrapt.co_re": "file:../wrapt.co_re"
   },
   "devDependencies": {
     "@types/jest": "^26.0.24",
@@ -38,7 +40,7 @@
     "globals": {
       "ts-jest": {
         "babelConfig": true,
-        "tsConfig": "jest.tsconfig.json"
+        "tsConfig": "config/jest.tsconfig.json"
       }
     },
     "coveragePathIgnorePatterns": [

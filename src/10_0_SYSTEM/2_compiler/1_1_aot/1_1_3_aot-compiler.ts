@@ -10,7 +10,7 @@ import { Parser } from "../../1_parser/1_1_parser/3_1_1_parser";
 import { Transpiler } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/abstract-un-parser";
 import { localEvaluate } from "../../4_shell/3_2-nodejs/0_1_0_nodejs";
 import { Analyzer } from "../0_3_analyzer/1_3_expression-analyzer";
-import { ExpressionEvaluator } from "../1_3_jit/2_0_evaluator/2_0_evaluator";
+import { applyFunction, ExpressionEvaluator } from "../1_3_jit/2_0_evaluator/2_0_evaluator";
 import { RuntimeOptimizer } from "../1_3_jit/3_1_runtime-optimizer";
 import { ModuleLinker } from "../4_2_1_native-module-linker/1_1_0_module-linker";
 import { AbstractAOTCompiler } from "./0_0_aot-compiler-structure/0_2_1_abstract-aot-compiler";
@@ -32,9 +32,9 @@ import { AbstractAOTCompiler } from "./0_0_aot-compiler-structure/0_2_1_abstract
  * ****************************************************** */
 export class AOTCompiler extends AbstractAOTCompiler<Node, string> {
     
-
-    public parser:      Parser;
+    
     public tokenizer:   TokenizerOne;
+    public parser:      Parser;
     public optimizer:   RuntimeOptimizer;
     public analyzer:    Analyzer;
     public unparser:    Transpiler;
@@ -42,7 +42,6 @@ export class AOTCompiler extends AbstractAOTCompiler<Node, string> {
     public linker:      ModuleLinker
     
 
-    
     constructor() {
         super();     
 
@@ -50,6 +49,8 @@ export class AOTCompiler extends AbstractAOTCompiler<Node, string> {
         this.parser    = new Parser();
         this.analyzer  = new Analyzer();
         this.evaluator = new ExpressionEvaluator();
+        this.optimizer = new RuntimeOptimizer(this.unparser, applyFunction, this.evaluator);
+        this.linker    = new ModuleLinker();
     }
 
 
@@ -57,7 +58,6 @@ export class AOTCompiler extends AbstractAOTCompiler<Node, string> {
         return "TODO: implement";
     }
 
-    
     public compile(targetLanguage: string, entryPointFile: string, replPlugins: Record<string, any> = {}): Promise<void> {
         const env = new Environment();
             

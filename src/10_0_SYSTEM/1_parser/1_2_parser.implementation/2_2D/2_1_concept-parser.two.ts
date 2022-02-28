@@ -1,6 +1,7 @@
 
-import { Node, ConceptExpression } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { ConceptOperator }   from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements";
+import { Node, ConceptExpression }  from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { ConceptOperator }          from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements";
+
 import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token";
 
 import { TypedTokenSurface } from "../../../../01_1_ELEMENT/1_token_💧/2_2_token-surface";
@@ -37,6 +38,11 @@ export class ConceptParserTwo extends AbstractParser<TypedTokenSurface, Node, Co
     constructor(l: TokenizerTwo) {
         super(l, conceptPrecedences);
         this.analyzer = new ConceptAnalyzer();
+    }
+
+
+    public doParseProgram(): void {
+        console.log("TODO: implement")
     }
 
 }

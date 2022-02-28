@@ -1,9 +1,10 @@
+import { ObjectType } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/object/object-type.enum";
+import { BuiltinFunctionObject } from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
+import { platformSpecificCall } from "../../../../3_Operation_☀/3_util_(🔥)/2_platform-utils";
+import { getWindow } from "../../../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util";
+import { nodeObjects } from "../../1_file-system/2_compatibility";
 
 
-var object_1 = require("../../object/object");
-var util_1 = require("../../util");
-var object = require("../../object/object");
-var node_objects_1 = require("../../repl/node-objects");
 /*************************************************
  *  Human Input Devices
  *************************************************/
@@ -17,35 +18,39 @@ function addKeyEventHandler(callback) {
     }
 }
 function setUpKeyEventHandler() {
-    var stdin = node_objects_1.nodeObjects.process.stdin;
+    var stdin = nodeObjects.process.stdin;
     stdin.setRawMode(true);
     stdin.resume();
     stdin.setEncoding('utf8');
     stdin.on('data', function (key) {
         // ctrl-c ( end of text )
         if (key === '\u0003') {
-            node_objects_1.nodeObjects.process.exit();
+            nodeObjects.process.exit();
         }
         for (var h in keyEventHandlers) {
             keyEventHandlers[h](key);
         }
     });
 }
-exports.onKeyUp = new object.Builtin("keyUp", [object_1.ObjectType.FUNCTION, function(scope, jsScope, callback) {
-    return util_1.platformSpecificCall( scope, function () {
+
+export const onKeyUp = new BuiltinFunctionObject("keyUp", [ObjectType.FUNCTION], function(scope, jsScope, callback) {
+    return platformSpecificCall( scope, function () {
         //addKeyEventHandler(callback)
     }, function () {
-        util_1.getWindow().document.addEventListener("keyup", function (e) {
+        getWindow().document.addEventListener("keyup", function (e) {
             callback(e);
         }, true);
-    }, function () { return util_1.workerNativeCall( "addEventListener", ["keyUp", callback], false); });
+    } //, function () { return workerNativeCall( "addEventListener", ["keyUp", callback], false); }
+    );
 });
-exports.onKeyDown = new object.Builtin("keyDown", [object_1.ObjectType.FUNCTION, function(scope, jsScope, callback) {
-    return util_1.platformSpecificCall( scope, function () {
+
+exports.onKeyDown = new BuiltinFunctionObject("keyDown", [ObjectType.FUNCTION], function(scope, jsScope, callback) {
+    return platformSpecificCall( scope, function () {
         addKeyEventHandler(callback);
     }, function () {
-        util_1.getWindow().document.addEventListener("keydown", function (e) {
+        getWindow().document.addEventListener("keydown", function (e) {
             callback(e);
         }, true);
-    }, function () { return util_1.workerNativeCall( "addEventListener", ["keyDown", callback]); });
+    } //, function () { return workerNativeCall( "addEventListener", ["keyDown", callback]); }
+    );
 });

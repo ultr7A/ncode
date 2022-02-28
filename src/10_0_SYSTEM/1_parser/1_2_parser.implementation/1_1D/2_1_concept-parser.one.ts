@@ -208,4 +208,8 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
 
         return graphNode;
     }
+
+    public doParseProgram(): void {
+        console.log("TODO: implement")
+    }
 }

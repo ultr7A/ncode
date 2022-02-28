@@ -1,12 +1,12 @@
+import { SyntaxGraph } from "../../../03_0_Structure_🌴/3_abstract-syntax-graph/0_graph-root";
+import { TokenizerOne } from "../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one";
+import { ExpressionParserOne } from "../1_2_parser.implementation/1_1D/1_1_expression-parser.one";
 import { SyntaxGraphParser } from "./syntax-graph.parser";
-import { TokenizerOne } from "../../0_tokenizer/2_tokenizer/tokenizer.one";
-import { ParserOne } from "../../1_parser/2_token-parser/1_parser.one";
-import { SyntaxGraph } from "../../../1_Structure_🌴/3_abstract-syntax-graph/0_graph-root";
 
 describe("Parser for transformation SyntaxGraph into (AST) Node", (): void => {
     const syntaxGraphParser = new SyntaxGraphParser();
     const tokenizer = new TokenizerOne();
-    const parser = new ParserOne(tokenizer);
+    const parser = new ExpressionParserOne(tokenizer);
 
     it("should create a [AST Program] from data-flow graph", (): void => {
         tokenizer.loadSourceCode(``);

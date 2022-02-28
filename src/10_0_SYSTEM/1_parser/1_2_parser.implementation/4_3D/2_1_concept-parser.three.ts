@@ -1,4 +1,4 @@
-import { Node, ConceptExpression } from "../../../../../../wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { Node, ConceptExpression } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
 
 import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token";
 import { TypedTokenVolume } from "../../../../01_1_ELEMENT/1_token_💧/2_4_token-volume";
@@ -31,5 +31,10 @@ export class ConceptParserThree extends AbstractParser<TypedTokenVolume, Node, C
     constructor(l: TokenizerThree) {
         super(l, conceptPrecedences);
         this.analyzer = new ConceptAnalyzer();
+    }
+
+    
+    public doParseProgram(): void {
+        console.log("TODO: implement")
     }
 }

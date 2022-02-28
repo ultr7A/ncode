@@ -16,7 +16,16 @@ function done() {
 }
 
 
-export const makeHandleInput = function (onInput) {
+export const makeHandleInput = function (
+    onInput,
+
+    tokenizer: TokenizerOne, 
+    p: Parser, 
+    env: Environment, 
+    replPlugins, 
+    evaluator: ExpressionEvaluator,
+    unparseTarget = ""
+) {
     return function (text) {
         if (text === 'quit\n' || text === 'exit\n') {
             done();
@@ -25,7 +34,7 @@ export const makeHandleInput = function (onInput) {
         if (text[text.length - 2] != ";") {
             text = text + ";";
         }
-        onInput(text);
+        onInput(text, unparseTarget, tokenizer, p, env, replPlugins, evaluator);
     };
 };
 
@@ -55,7 +64,7 @@ export const localEvaluate = function (
             }
         }
         let unparser = lang.getTranspiler(unparseTarget);
-        
+
         if (unparser) {
             console.log(unparser.transpile(program, null, p.diagnosticContext));
         }

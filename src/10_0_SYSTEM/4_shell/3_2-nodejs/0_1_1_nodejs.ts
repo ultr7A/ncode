@@ -28,6 +28,14 @@ export function makeCLIRepl(
             introMessage();
             process.stdin.resume();
             process.stdin.setEncoding('utf8');
-            process.stdin.on('data', makeHandleInput(localEvaluate));
+            process.stdin.on('data', makeHandleInput(
+                                        localEvaluate, 
+                                        
+                                        tokenizer,
+                                        p,
+                                        env,
+                                        replPlugins,
+                                        evaluator
+                            )       );
     };
 }

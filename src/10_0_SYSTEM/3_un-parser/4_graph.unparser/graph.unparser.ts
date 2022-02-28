@@ -1,9 +1,11 @@
-import { Statement } from "../../../1_Structure_🌴/1_ast/0_1_0_structure-concept";
 
-import { Program }                from "../../../1_Structure_🌴/1_ast/1_0_1_root";
-import { AbstractBlockStatement } from "../../../1_Structure_🌴/1_ast/2_meta_ast_🧩/abstract-statement";
 
 // import { SyntaxGraph }            from "../../../1_Structure_🌴/3_abstract-syntax-graph_🎈/0_graph-root";
+
+import { Statement } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { Program } from "../../../03_0_Structure_🌴/1_ast/1_0_1_root";
+import { AbstractBlockStatement } from "../../../03_0_Structure_🌴/1_ast/2_meta_ast_🧩/abstract-statement";
+import { SyntaxGraph } from "../../../03_0_Structure_🌴/3_abstract-syntax-graph/0_graph-root";
 
 
 /**
@@ -13,7 +15,7 @@ export class SyntaxGraphUnParser {
 
     public buildSyntaxGraphFromParseTree(parseTree: Program): SyntaxGraph {
         const newProgram = new Program([]);
-        const changes = [] as AbstractBlockStatement[];
+        const changes = [] as { id: string, block: AbstractBlockStatement}[];
         const dataNodes = [], dataEdges = [];
 
         const graph = new SyntaxGraph(dataNodes, dataEdges, newProgram, changes);

@@ -53,5 +53,10 @@ export class ExpressionParserTwo extends AbstractParser<TypedTokenSurface, Node,
         throw new Error("Method not implemented");
         return [];
     }
+
+    
+    public doParseProgram(): void {
+        console.log("TODO: implement")
+    }
     
 }

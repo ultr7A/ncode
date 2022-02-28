@@ -24,9 +24,7 @@ if (args.length > 0 && (args[0] as string).match(/[\/\\a-zA-Z\.\-]+/)) {
                 if (args.length < 3) {
                     console.log("not enough arguments to transpile: ecs -u js filename.ecs");
                 } else {
-                    let unparseTarget = args[1];
-                    let params = args.slice(2);
-
+                    
                     compiler = new AOTCompiler();
                     compiler.compile(args[1], args[2])
                     

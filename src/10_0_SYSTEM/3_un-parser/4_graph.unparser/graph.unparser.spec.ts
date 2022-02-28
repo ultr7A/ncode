@@ -1,6 +1,6 @@
-// import { SyntaxGraph } from "../../../1_Structure_🌴/3_abstract-syntax-graph_🎈/0_graph-root";
-// import { DataNode, DataNodeType } from "../../../1_Structure_🌴/3_abstract-syntax-graph_🎈/2_graph-data-node";
-// import { ASTGraphEdge, DataEdgeType } from "../../../1_Structure_🌴/3_abstract-syntax-graph_🎈/4_graph-edge";
+import { SyntaxGraph } from "../../../03_0_Structure_🌴/3_abstract-syntax-graph/0_graph-root";
+import { DataNode, DataNodeType } from "../../../03_0_Structure_🌴/3_abstract-syntax-graph/2_graph-data-node";
+import { ASTGraphEdge, DataEdgeType } from "../../../03_0_Structure_🌴/3_abstract-syntax-graph/4_graph-edge";
 import { TokenizerOne } from "../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one";
 import { ExpressionParserOne } from "../../1_parser/1_2_parser.implementation/1_1D/1_1_expression-parser.one";
 import { SyntaxGraphUnParser } from "./graph.unparser";
