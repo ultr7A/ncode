@@ -1,4 +1,5 @@
 import { ObjectType } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/object/object-type.enum";
+import { Hash } from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
 
 import { platformSpecificCall } from "./2_platform-utils";
 import { readWholeFileNode } from "./4_1_node-io-util";
@@ -29,7 +30,7 @@ export function getSourceFile(path: string, readWholeFile: (path: string, fs) =>
 
 
 
-export function println(scope: Record<string, unknown>, jsScope?: Record<string, unknown>, args?: any[]): void {
+export function println(scope: Hash, args?: any[]): void {
     platformSpecificCall( scope, function () {
         var out = "";
         for (var l = args.length, a = 0; a < l; a++) {

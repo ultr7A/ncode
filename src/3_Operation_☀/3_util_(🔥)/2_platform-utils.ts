@@ -13,8 +13,8 @@ export function platformSpecificCallNoSpread(scope, nodeImpl: Function, webImpl:
 
 
 
-export function platformSpecificCall<T = Promise<unknown>>(scope: Record<string, unknown>, 
-    nodeImpl: Function, webImpl: Function, args?: any[]): T 
+export function platformSpecificCall<R = Promise<unknown>, CTX = any>(scope: CTX,//Record<string, unknown>, 
+    nodeImpl: Function, webImpl: Function, args?: any[]): R 
 {
     if (eval('typeof Window') == 'undefined' && eval('typeof self') === 'undefined') {
         if (args) {

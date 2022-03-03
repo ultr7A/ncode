@@ -15,7 +15,7 @@
   "dependencies": {
     "esm": "^3.2.25",
     "meta.gl": "^0.0.2",
-    "wrapt.co_re": "^1.0.0"
+    "wrapt.co_re": "^1.1.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.24",

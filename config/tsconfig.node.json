@@ -15,12 +15,13 @@
         "jest",
         "node"
       ],
-      "rootDir": "../src",
+      "rootDir": "..",
       "outDir":  "../bin"
     },
     "include": [
       "../src/*",
       "../src/**/*",
-      "../node_modules"
+      "../node_modules/wrapt.co_re/**/*",
+      "../node_modules/meta.gl/**/*",
     ]
   }

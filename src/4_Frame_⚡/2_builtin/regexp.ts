@@ -15,17 +15,22 @@ export const _RegExp = makeBuiltinClass("RegExp",
             new BuiltinFunctionObject(
                 "RegExp",   [                           ObjectType.STRING], 
                 function    (context, scope, jsScope,   pattern          ) {
-                if (context === void 0) { context = null; }
-                if (scope === void 0) { scope = null; }
-                jsScope = new RegExpState(pattern.Value);
-            }, null, null, true),
+                    if (context === void 0) { context = null; }
+                    if (scope === void 0) { scope = null; }
+                    jsScope = new RegExpState(pattern.Value);
+                }, 
+            null, null, true),
             [Modifier.PUBLIC, Modifier.STATIC]  
         ],
         [
             "test",
-            new BuiltinFunctionObject("test", [ObjectType.STRING], function (context, scope, jsScope, against) {
-                return scope.builtins.kernel.test(against.Value) ? TRUE : FALSE;
-            }, null, null, true),
+            new BuiltinFunctionObject(
+               "test",   [                          ObjectType.STRING], 
+                function (context, scope, jsScope,  against          ) {
+                    return scope.builtins.kernel.test(against.Value) ? TRUE : FALSE;
+                }, 
+                null, null, true
+            ),
             [Modifier.PUBLIC, Modifier.STATIC]
         ]
     ]);

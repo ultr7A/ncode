@@ -15,7 +15,7 @@ export function getDocument() {
     return !!win ? win.document : null;
 }
 
-export function readLineFromDocument(prompt) {
+export function readLineFromDocument(prompt: string) {
     var win = getWindow();
     return win ? win.prompt(prompt) : "Error: no document to prompt user with";
 }

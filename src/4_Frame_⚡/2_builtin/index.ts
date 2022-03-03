@@ -52,7 +52,7 @@ export const builtins = {
         for (var _i = 3; _i < arguments.length; _i++) {
             args[_i - 3] = arguments[_i];
         }
-        println( scope, null, args);
+        println( scope, args);
         return NULL;
     }, null, null, true),
 

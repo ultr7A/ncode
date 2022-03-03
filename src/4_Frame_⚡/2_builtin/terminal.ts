@@ -5,6 +5,7 @@ import { Modifier } from "../../01_1_ELEMENT/1_token_💧/2_1_token";
 import { platformSpecificCall } from "../../3_Operation_☀/3_util_(🔥)/2_platform-utils";
 import { getDocument } from "../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util";
 
+
 export const getTerminalSize = function (scope) {
     if (scope === void 0) { scope = null; }
     var stdout = process ? process.stdout : null;
@@ -13,6 +14,7 @@ export const getTerminalSize = function (scope) {
         stdout != null ? stdout.rows : scope ? scope.height : -2,
     ];
 };
+
 export const getDOMTerminalSize = function () {
     var output = getDocument().querySelector("#ecs-output");
     var x = 1, y = 1;
@@ -22,6 +24,7 @@ export const getDOMTerminalSize = function () {
     }
     return [x, y];
 };
+
 
 var clear = new BuiltinFunctionObject("clear", [], 
     function (context, scope) {
@@ -71,6 +74,7 @@ var clear = new BuiltinFunctionObject("clear", [],
         return NULL;
     }, null, null, true);
 
+    
 export const Terminal = makeBuiltinClass(   "Terminal",
     [],
     [

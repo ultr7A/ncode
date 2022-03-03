@@ -1,5 +1,5 @@
 import { ObjectType } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/object/object-type.enum";
-import { BuiltinFunctionObject } from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
+import { BuiltinFunctionObject, Hash } from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
 import { platformSpecificCall } from "../../../../3_Operation_☀/3_util_(🔥)/2_platform-utils";
 import { getWindow } from "../../../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util";
 import { nodeObjects } from "../../1_file-system/2_compatibility";
@@ -33,18 +33,22 @@ function setUpKeyEventHandler() {
     });
 }
 
-export const onKeyUp = new BuiltinFunctionObject("keyUp", [ObjectType.FUNCTION], function(scope, jsScope, callback) {
-    return platformSpecificCall( scope, function () {
-        //addKeyEventHandler(callback)
-    }, function () {
-        getWindow().document.addEventListener("keyup", function (e) {
-            callback(e);
-        }, true);
-    } //, function () { return workerNativeCall( "addEventListener", ["keyUp", callback], false); }
-    );
-});
+export const onKeyUp = new BuiltinFunctionObject(
+    "keyUp", [                ObjectType.FUNCTION], 
+    function (scope, callback           ) 
+    {
+        return platformSpecificCall( scope, function () {
+            //addKeyEventHandler(callback)
+        },  function () {
+                getWindow().document.addEventListener("keyup", function (e) {
+                    callback(e);
+                }, true);
+            } //, function () { return workerNativeCall( "addEventListener", ["keyUp", callback], false); }
+        );
+    }
+);
 
-export const onKeyDown = new BuiltinFunctionObject("keyDown", [ObjectType.FUNCTION], function(scope, jsScope, callback) {
+export const onKeyDown = new BuiltinFunctionObject<Hash>("keyDown", [ObjectType.FUNCTION], function(scope, jsScope, callback) {
     return platformSpecificCall( scope, function () {
         addKeyEventHandler(callback);
     }, function () {
