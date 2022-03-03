@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "Multi-paradigm, multi-dimensional programming language with AOT compilation to JS",
   "main": "index.js",
-  "module": "main.js",
   "scripts": {
     "test": "jest",
     "start": "node ./bin/10_0_SYSTEM/4_shell/index.js",

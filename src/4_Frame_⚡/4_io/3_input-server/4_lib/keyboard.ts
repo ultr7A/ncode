@@ -44,7 +44,7 @@ export const onKeyUp = new BuiltinFunctionObject("keyUp", [ObjectType.FUNCTION],
     );
 });
 
-exports.onKeyDown = new BuiltinFunctionObject("keyDown", [ObjectType.FUNCTION], function(scope, jsScope, callback) {
+export const onKeyDown = new BuiltinFunctionObject("keyDown", [ObjectType.FUNCTION], function(scope, jsScope, callback) {
     return platformSpecificCall( scope, function () {
         addKeyEventHandler(callback);
     }, function () {

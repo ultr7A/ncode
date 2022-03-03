@@ -9,27 +9,32 @@ import { assertBuiltinArgs }        from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍
 import { copyListElements, nativeObjToMap, newError } 
                                     from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
 
+import { systemColorRenderer, ImageObject, Graphics }      from "meta.gl";                               /*    
+▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃  */
 
-import { systemColorRenderer, ImageObject, Graphics }      from "meta.gl";
 
-/*******  *  *  *  *  *  *  *  *  * ***************************************************************/
-
-import { MATHS_ }                   from "./maths";
-import { JSON_  }                   from "./json";
 import { printNativeString } from "../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util";
-import { println } from "../../3_Operation_☀/3_util_(🔥)/4_0_io-util";
+import { println           } from "../../3_Operation_☀/3_util_(🔥)/4_0_io-util";                         /*
+▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃  */
+
+
+import { Terminal } from "./terminal";
+import { MATHS_   } from "./maths";
+import { _RegExp  } from "./regexp";
+import { _JSON    } from "./json";
+
 
 
 export const builtins = {
     "gl": Graphics,
     // "io": io,
-    // "terminal": terminal,
+    "terminal": Terminal,
     "Image": ImageObject,
     "Matrix": Matrix,
     "Vector": Vector,
     "Math":   MATHS_,
-    "JSON":   JSON_,
-    // "RegExp": RegExp_,
+    "JSON":   _JSON,
+    "RegExp": _RegExp,
 
     "toFloat": new BuiltinFunctionObject("toFloat", [], function (_, _2, _3, val) {
         if (!val || val.Type() != ObjectType.INTEGER_OBJ) {
