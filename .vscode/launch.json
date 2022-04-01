@@ -1,0 +1,35 @@
+{
+    "configurations": [
+        {
+            "name": "Attach",
+            "port": 9229,
+            "request": "attach",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        {
+            "name": "Attach by Process ID",
+            "processId": "${command:PickProcess}",
+            "request": "attach",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        {
+            "type": "pwa-chrome",
+            "name": "WS:127.0.0.1:9229",
+            "request": "launch",
+            "url": "WS:127.0.0.1:9229"
+        },
+        {
+            "type": "node-terminal",
+            "name": "Run Script: start",
+            "request": "launch",
+            "command": "npm run start",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

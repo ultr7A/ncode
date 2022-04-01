@@ -1,6 +1,6 @@
 {
     "editor.mouseWheelZoom": true,
-    "window.zoomLevel": -1,
+    "window.zoomLevel": 0,
     "editor.fontFamily": "'Jetbrains Mono', 'Source Code Pro', 'Droid Sans Mono', 'monospace', monospace",
     "workbench.colorTheme": "Freshcut (rainglow)",
     "editor.lineHeight": 0.9,

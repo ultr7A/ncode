@@ -2,12 +2,13 @@
   "name": "wrapt.org",
   "version": "0.1.0",
   "description": "Multi-paradigm, multi-dimensional programming language with AOT compilation to JS",
-  "main": "index.js",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
   "scripts": {
     "test": "jest",
     "start": "node ./bin/10_0_SYSTEM/4_shell/index.js",
-    "build": "tsc --project config/tsconfig.node.json",
-    "browser-build": "tsc --project config/tsconfig.browser.json"
+    "build": "tsc -p config/tsconfig.esm.json && tsc -p config/tsconfig.cjs.json",
+    "prepublish": "npm run build"
   },
   "keywords": [],
   "author": "Jeremy Evans <openspacehexagon@gmail.com>",
