@@ -9,7 +9,7 @@ import { assertBuiltinArgs }        from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍
 import { copyListElements, nativeObjToMap, newError } 
                                     from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
 
-import { systemColorRenderer, ImageObject, Graphics }      from "meta.gl/lib/index";                               /*    
+import { systemColorRenderer, ImageObject, Graphics }      from "meta.gl/lib";                               /*    
 ▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃  */
 
 
