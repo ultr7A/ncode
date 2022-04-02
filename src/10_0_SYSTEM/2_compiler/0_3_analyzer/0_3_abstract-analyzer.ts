@@ -1,6 +1,6 @@
 
-import { ParseTreeAnalysis } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/4_0_0_meta";
-import { Node, Expression } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { ParseTreeAnalysis } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/4_0_0_meta";
+import { Node, Expression } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
 import { ExpressionAnalysisDiagnosticContext } from "./0_1_analyzer-structure";
 
 /**

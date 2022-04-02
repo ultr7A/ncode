@@ -1,10 +1,10 @@
 
 
-import { IBlockStatement } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { FunctionObject, DynamicFunction }  from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
-import { ClassifiedObject }                 from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
-import { Environment }                      from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
-import { ecsObjectToNativeObject, nativeListToArray, nativeObjToClassifiedObject, nativeValueToECSValue } from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
+import { IBlockStatement } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { FunctionObject, DynamicFunction }  from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
+import { ClassifiedObject }                 from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
+import { Environment }                      from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
+import { ecsObjectToNativeObject, nativeListToArray, nativeObjToClassifiedObject, nativeValueToECSValue } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
 
 import { LetStatement } from "../../../03_0_Structure_🌴/1_ast/1_2_1_statement";
 import { builtins } from "../../../4_Frame_⚡/2_builtin";

@@ -1,6 +1,6 @@
-import { Operator }      from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators";
-import { Node, Expression, Statement }    from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { GraphOperator } from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements";
+import { Operator }      from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators";
+import { Node, Expression, Statement }    from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { GraphOperator } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements";
 
 import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token";
 import { TypedTokenSurface } from "../../../../01_1_ELEMENT/1_token_💧/2_2_token-surface";

@@ -1,4 +1,4 @@
-import { ParseTreeAnalysis } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/4_0_0_meta";
+import { ParseTreeAnalysis } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/4_0_0_meta";
 
 import { TokenizerOne }          from "../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one";
 import { AbstractParser }        from "../0_2_abstract-parser/0_0_1_abstract-parser";

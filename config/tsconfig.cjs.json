@@ -17,13 +17,13 @@
         "jest",
         "node"
       ],
-      "rootDir": "../src",
+      "rootDir": "..",
       "outDir":  "../lib/cjs"
     },
     "include": [
       "../src/*",
       "../src/**/*",
-      // "../node_modules/wrapt.co_re/**/*",
-      // "../node_modules/meta.gl/**/*",
+      "../node_modules/wrapt.co_re/lib/**/*",
+      "../node_modules/meta.gl/lib/**/*",
     ]
   }

@@ -1,5 +1,5 @@
 
-import { Environment } from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
+import { Environment } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
 
 import { Program } from "../../../../03_0_Structure_🌴/1_ast/1_0_1_root";
 import { ApplyFunctionFunction } from "./0_3_3_eval-types";

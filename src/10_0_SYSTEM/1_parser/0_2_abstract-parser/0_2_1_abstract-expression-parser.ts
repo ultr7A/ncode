@@ -1,4 +1,4 @@
-import { Node, Statement, Expression, FunctionNode } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { Node, Statement, Expression, FunctionNode } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
 
 import { AbstractToken } from "../../../01_1_ELEMENT/1_token_💧/0_1_token-structure";
 import { Token }         from "../../../01_1_ELEMENT/1_token_💧/2_1_token";

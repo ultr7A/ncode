@@ -1,4 +1,4 @@
-import { PrimitiveConcept } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/2_concept-operators";
+import { PrimitiveConcept } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/2_concept-operators";
 const  { StructureOperator, SequenceOperator, OperatorOperator } = PrimitiveConcept; 
 
 

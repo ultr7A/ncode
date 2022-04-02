@@ -1,6 +1,6 @@
-import { ObjectType } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/object/object-type.enum";
-import { Environment }  from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
-import { newError }     from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
+import { ObjectType } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/object-type.enum";
+import { Environment }  from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
+import { newError }     from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
 import { RecursiveEvaluator } from "../../10_0_SYSTEM/2_compiler/1_3_jit/2_0_evaluator/2_4_recursive-evaluator";
 import { platformSpecificCall } from "./2_platform-utils";
 import { getSourceFile } from "./4_0_io-util";

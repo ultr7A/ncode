@@ -1,6 +1,6 @@
-import { NodeName }                   from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum";
-import { FunctionNode, IBlockStatement, IIdentifier, Statement } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept"; 
-import { UnParser }                   from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/system/un-parser";
+import { NodeName }                   from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum";
+import { FunctionNode, IBlockStatement, IIdentifier, Statement } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept"; 
+import { UnParser }                   from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/system/un-parser";
 import { IndexExpression, NewExpression } from "./1_1_1_expression";
 
 /** 📘📚 */

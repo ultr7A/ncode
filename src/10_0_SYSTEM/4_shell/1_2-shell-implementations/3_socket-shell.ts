@@ -1,4 +1,4 @@
-import { WebSocketRemoteShellServer } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/system/remote-shell-server";
+import { WebSocketRemoteShellServer } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/system/remote-shell-server";
 
 import { CodeDataType } from "../../../01_2_Sequence_📘🌊/0_source/source-code";
 import { NodeJSObjects } from "../../../4_Frame_⚡/4_io/1_file-system/2_compatibility";

@@ -1,4 +1,4 @@
-import { Environment }     from "wrapt.co_re/src/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
+import { Environment }     from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
 
 import { nodeObjects } from "../../../4_Frame_⚡/4_io/1_file-system/2_compatibility";
 import { TokenizerOne } from "../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one";

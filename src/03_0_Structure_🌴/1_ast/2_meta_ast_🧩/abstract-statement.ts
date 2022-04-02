@@ -18,9 +18,9 @@
      * 
      * */
 
-import { Sequence } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { NodeName } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum";
-import { UnParser } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/system/un-parser";
+import { Sequence } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { NodeName } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum";
+import { UnParser } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/system/un-parser";
 
 
 export class AbstractStatement {

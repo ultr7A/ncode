@@ -1,4 +1,4 @@
-import { Node } from "wrapt.co_re/src/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { Node } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
 
 export type PrefixParseFn <ParamNodeType extends Node, OutputType extends Node = Node> 
         = (exp?: ParamNodeType, returnType?: string, pure?: boolean) => OutputType;
