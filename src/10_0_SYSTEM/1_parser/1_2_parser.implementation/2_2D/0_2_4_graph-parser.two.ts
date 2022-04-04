@@ -8,7 +8,7 @@ import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token";
 import { TypedTokenSurface } from "../../../../01_1_ELEMENT/1_token_💧/2_2_token-surface";
 import { GraphEdge, GraphNode } from "../../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements";
 import { ConceptGraphLiteral, GraphLiteral, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
-import { Orient } from "../../../0_0_system-structure/1_0_system-structure";
+import { Orientation_XY } from "../../../0_0_system-structure/1_0_system-structure";
 
 
 export class GraphParserTwo  <
@@ -24,7 +24,7 @@ constructor(
 
     private readonly parseGraphNode: (nodes: IGraphNode<GraphKeyType, GraphNodeType>[]) => IGraphNode<GraphKeyType, GraphNodeType>,
 
-    private readonly parseGraphEdge: (direction: Orient.ation.XY, edges: GraphEdge<AbstractOperator<Node>, Node>[]) 
+    private readonly parseGraphEdge: (direction: Orientation_XY, edges: GraphEdge<AbstractOperator<Node>, Node>[]) 
                                                                             => IGraphEdge<GraphOperatorType, GraphKeyType, GraphNodeType>
 ) {}
 
@@ -39,7 +39,7 @@ constructor(
     }
 
 
-    public parseDirectionalGraphEdge(direction: Orient.ation.XY) {
+    public parseDirectionalGraphEdge(direction: Orientation_XY) {
         this.nextToken(); // skip initial `-` or `->` or `<-`
 
         // if (direction === "left") {

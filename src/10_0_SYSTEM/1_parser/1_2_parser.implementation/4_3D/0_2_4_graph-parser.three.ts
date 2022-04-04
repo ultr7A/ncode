@@ -6,16 +6,16 @@ import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token";
 import { TypedTokenVolume } from "../../../../01_1_ELEMENT/1_token_💧/2_4_token-volume";
 import { GraphEdge, GraphNode } from "../../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements";
 import { ConceptGraphLiteral, GraphLiteral, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
-import { Orient } from "../../../0_0_system-structure/1_0_system-structure";
+import { Orientation_Type, Orientation_WXYZ, Oriented } from "../../../0_0_system-structure/1_0_system-structure";
 
 
 export class GraphParserThree  <
             GraphOperatorType extends AbstractOperator<any> = GraphOperator, 
             GraphKeyType      extends Node                  = StringLiteral, 
             GraphNodeType     extends Node                  = Expression,
-            Orientation       extends Orient.ation.Type     = Orient.ation.WXYZ
+            Orientation       extends Orientation_Type     = Orientation_WXYZ
         >
-        implements Orient.ed<Orientation>
+        implements Oriented<Orientation>
 {
 
     direction = [0, 0, 0, 1] as Orientation;
@@ -26,7 +26,7 @@ export class GraphParserThree  <
 
         private readonly parseGraphNode: (nodes: IGraphNode<GraphKeyType, GraphNodeType>[]) => IGraphNode<GraphKeyType, GraphNodeType>,
 
-        private readonly parseGraphEdge: (direction: Orient.ation.WXYZ, edges: GraphEdge<AbstractOperator<Node>, Node>[]) 
+        private readonly parseGraphEdge: (direction: Orientation_WXYZ, edges: GraphEdge<AbstractOperator<Node>, Node>[]) 
                                                                                 => IGraphEdge<GraphOperatorType, GraphKeyType, GraphNodeType>
     ) {}
          

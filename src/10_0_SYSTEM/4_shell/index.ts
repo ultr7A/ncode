@@ -1,6 +1,5 @@
-
-debugger;
 import { nodeObjects } from "../../4_Frame_⚡/4_io/1_file-system/2_compatibility";
+debugger;
 import { AOTCompiler } from "../2_compiler/1_1_aot/1_1_3_aot-compiler";
 import { JITCompiler } from "../2_compiler/1_3_jit/3_3_0_jit-compiler";
 import { LinearShell } from "./1_2-shell-implementations/1_linear-shell";

@@ -8,7 +8,7 @@ import { PrefixConceptExpression } from "../../../../03_0_Structure_🌴/1_ast/1
 import { ConceptStatement } from "../../../../03_0_Structure_🌴/1_ast/1_2_1_statement";
 import { GraphEdge, GraphNode } from "../../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements";
 import { ArrayLiteral, ConceptGraphLiteral, ConceptSequenceLiteral, Identifier, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
-import { Orient } from "../../../0_0_system-structure/1_0_system-structure";
+import { Orientation_X } from "../../../0_0_system-structure/1_0_system-structure";
 import { TokenizerOne } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one";
 import { Analyzer } from "../../../2_compiler/0_3_analyzer/1_3_expression-analyzer";
 import { ConceptAnalyzer } from "../../../2_compiler/0_3_analyzer/2_3_concept-analyzer";
@@ -173,7 +173,7 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
 
 
     private parseConceptGraphLiteralEdge(
-        direction: Orient.ation.X, 
+        direction: Orientation_X, 
         edges:     GraphEdge<ConceptOperator, ConceptExpression>[]
     ): GraphEdge<ConceptOperator, ConceptExpression> {
 

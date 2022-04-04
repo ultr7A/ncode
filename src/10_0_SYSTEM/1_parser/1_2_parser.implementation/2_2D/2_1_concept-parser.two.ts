@@ -6,7 +6,7 @@ import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token";
 
 import { TypedTokenSurface } from "../../../../01_1_ELEMENT/1_token_💧/2_2_token-surface";
 import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
-import { Orient } from "../../../0_0_system-structure/1_0_system-structure";
+import { Orientation_XY, Oriented } from "../../../0_0_system-structure/1_0_system-structure";
 import { TokenizerTwo } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_2_1_tokenizer.two";
 
 import { ConceptAnalyzer } from "../../../2_compiler/0_3_analyzer/2_3_concept-analyzer";
@@ -22,12 +22,12 @@ import { GraphParserTwo } from "./0_2_4_graph-parser.two";
  * 
  * */
 export class ConceptParserTwo extends AbstractParser<TypedTokenSurface, Node, ConceptExpression, ConceptOperator, ConceptAnalyzer>
-                              implements Orient.ed<Orient.ation.XY> {
+                              implements Oriented<Orientation_XY> {
     
     public analyzer:    ConceptAnalyzer;
     public graphParser: GraphParserTwo  <ConceptOperator, StringLiteral, ConceptExpression>;
 
-    public direction:   Orient.ation.XY = 0;
+    public direction:   Orientation_XY = 0;
     
     protected curToken:  TypedTokenSurface;
     protected peekToken: TypedTokenSurface;

@@ -7,7 +7,7 @@ import { GraphOperator }                 from "wrapt.co_re/lib/Model [╍⬡╍�
 import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token";
 import { TypedTokenVolume } from "../../../../01_1_ELEMENT/1_token_💧/2_4_token-volume";
 import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
-import { Directional, Orient } from "../../../0_0_system-structure/1_0_system-structure";
+import { Directional, Orientation_WXYZ } from "../../../0_0_system-structure/1_0_system-structure";
 import { TokenizerThree } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_4_1_tokenizer.three";
 
 import { Analyzer } from "../../../2_compiler/0_3_analyzer/1_3_expression-analyzer";
@@ -23,12 +23,12 @@ import { GraphParserThree } from "./0_2_4_graph-parser.three";
  * 
  */
 export class ExpressionParserThree extends AbstractParser<TypedTokenVolume, Node, Expression, Operator> 
-                                   implements Directional<Orient.ation.WXYZ> {
+                                   implements Directional<Orientation_WXYZ> {
     
     public analyzer:    Analyzer;
     public graphParser: GraphParserThree  <GraphOperator, StringLiteral, ConceptExpression>;
 
-    public direction:    Orient.ation.WXYZ = [0, 0, 0, 0];
+    public direction:    Orientation_WXYZ = [0, 0, 0, 0];
     
     protected curToken:  TypedTokenVolume;
     protected peekToken: TypedTokenVolume;

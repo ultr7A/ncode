@@ -7,7 +7,7 @@ import { TypedTokenSurface } from "../../../../01_1_ELEMENT/1_token_💧/2_2_tok
 import { CodeData } from "../../../../01_2_Sequence_📘🌊/0_source/source-code";
 import { Program } from "../../../../03_0_Structure_🌴/1_ast/1_0_1_root";
 import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
-import { Orient } from "../../../0_0_system-structure/1_0_system-structure";
+import { Orientation_XY, Oriented } from "../../../0_0_system-structure/1_0_system-structure";
 import { TokenizerOne } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one";
 
 import { TokenizerTwo } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_2_1_tokenizer.two";
@@ -23,7 +23,7 @@ import { GraphParserTwo } from "./0_2_4_graph-parser.two";
  * 
  */
 export class ExpressionParserTwo extends AbstractParser<TypedTokenSurface, Node, Expression, Operator, Analyzer> 
-                                 implements Orient.ed<Orient.ation.XY> {
+                                 implements Oriented<Orientation_XY> {
 
     public analyzer:    Analyzer;
     public graphParser: GraphParserTwo  <GraphOperator, StringLiteral, Expression>;

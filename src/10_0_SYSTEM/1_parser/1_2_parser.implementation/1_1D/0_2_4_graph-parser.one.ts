@@ -6,7 +6,7 @@ import { GraphOperator }    from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/
                  import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token";
 import { Pair } from "../../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements";
 import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
-import { Orient } from "../../../0_0_system-structure/1_0_system-structure";
+import { Oriented, Orientation_X } from "../../../0_0_system-structure/1_0_system-structure";
 
 
 export class GraphParserOne
@@ -17,10 +17,10 @@ export class GraphParserOne
                     GraphEdgeType          extends IGraphEdge<any, StringLiteral, GraphNodeValueType>
                                                                          = IGraphEdge<GraphOperatorType, StringLiteral, GraphNodeValueType>
                 > 
-        implements Orient.ed<Orient.ation.X>
+        implements Oriented<Orientation_X>
 {
 
-    public direction: Orient.ation.X = "right";
+    public direction: Orientation_X = "right";
 
     constructor(
         private readonly nextToken:      ()             => void,
@@ -28,7 +28,7 @@ export class GraphParserOne
         
                                                    // TODO:  Use component class VS method ref to avoid type `Function`
         private readonly parseGraphNode: Function, //(nodes: GraphNodeType[])                            => GraphNodeType,
-        private readonly parseGraphEdge: Function  //(direction: Orient.ation.X, edges: GraphEdgeType[]) => GraphEdgeType
+        private readonly parseGraphEdge: Function  //(direction: Orientation_X, edges: GraphEdgeType[]) => GraphEdgeType
     ) {}
 
     public parseGraph(

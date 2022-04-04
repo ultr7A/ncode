@@ -1,14 +1,14 @@
 import { CodeData } from "../../01_2_Sequence_📘🌊/0_source/source-code";
-import { Orient } from "../../10_0_SYSTEM/0_0_system-structure/1_0_system-structure";
+import { Orientation_One } from "../../10_0_SYSTEM/0_0_system-structure/1_0_system-structure";
 import { AbstractToken } from "./0_1_token-structure";
 import { DynamicToken, ITokenPattern }  from "./0_2_dynamic-token";
 
 
 export abstract class LinearDynamicToken 
-       extends DynamicToken<TypedTokenLiteral, CodeData, number, Orient.ation. One> 
+       extends DynamicToken<TypedTokenLiteral, CodeData, number, Orientation_One> 
 {
     searchSpace = {
-        direction: "forward" as Orient.ation. One,
+        direction: "forward" as Orientation_One,
         coordinates: {
             position:     0,
             readPosition: 0

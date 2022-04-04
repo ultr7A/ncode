@@ -1,5 +1,3 @@
-export namespace ModuleTopology {
-    export interface LINEAR { code: string }
-    export interface PLANAR { code: string[] }   
-    export interface VOLUME { code: string[][] }
-}
+export interface ModuleTopology_LINEAR { code: string }
+export interface ModuleTopology_PLANAR { code: string[] }   
+export interface ModuleTopology_VOLUME { code: string[][] }
