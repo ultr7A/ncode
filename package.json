@@ -2,11 +2,9 @@
   "name": "wrapt.org",
   "version": "0.1.2",
   "description": "Multi-paradigm, multi-dimensional programming language with AOT compilation to JS",
-  "type": "module",
   "scripts": {
     "test": "jest",
-    "start": "node ./lib/cjs/10_0_SYSTEM/4_shell/index.js",
-    "build": "tsc -p config/tsconfig.esm.json && tsc -p config/tsconfig.cjs.json",
+    "build": "tsc -p config/tsconfig.cjs.json",
     "prepublish": "npm run build"
   },
   "repository": {
@@ -18,8 +16,8 @@
   "license": "MIT",
   "dependencies": {
     "esm": "^3.2.25",
-    "meta.gl": "^0.0.12",
-    "wrapt.co_re": "^1.1.5"
+    "meta.gl": "^0.0.13",
+    "wrapt.co_re": "^1.1.6"
   },
   "devDependencies": {
     "@types/jest": "^26.0.24",
@@ -27,7 +25,6 @@
     "ts-jest": "^26.4.4",
     "typescript": "^4.0.5"
   },
-  "exports": "./lib/esm/index.js",
   "jest": {
     "moduleFileExtensions": [
       "ts",

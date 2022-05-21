@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-      "target": "ES6",
+      "target": "es5",
       "module": "commonjs",
       "moduleResolution": "node",
       "esModuleInterop": true,
@@ -19,11 +19,5 @@
       ],
       "rootDir": "..",
       "outDir":  "../lib/cjs"
-    },
-    "include": [
-      "../src/*",
-      "../src/**/*",
-      "../node_modules/wrapt.co_re/lib/**/*",
-      "../node_modules/meta.gl/lib/**/*",
-    ]
+    }
   }
