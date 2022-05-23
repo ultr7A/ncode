@@ -3,8 +3,9 @@
   "version": "0.1.2",
   "description": "Multi-paradigm, multi-dimensional programming language with AOT compilation to JS",
   "scripts": {
+    "start": "node lib/src/10_0_SYSTEM/4_shell/index.js",
     "test": "jest",
-    "build": "tsc -p config/tsconfig.cjs.json",
+    "build": "tsc -p config/tsconfig.json",
     "prepublish": "npm run build"
   },
   "repository": {
