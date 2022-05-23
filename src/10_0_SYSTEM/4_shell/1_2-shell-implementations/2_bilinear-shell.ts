@@ -5,7 +5,7 @@ import { JITCompiler } from "../../2_compiler/1_3_jit/3_3_0_jit-compiler";
 import { AbstractShell } from "../2_abstract-shell";
 import { makeCLIRepl } from "../3_2-nodejs/0_1_1_nodejs";
 
-export class LinearShell extends AbstractShell< number, 
+export class BiLinearShell extends AbstractShell< number, 
                                                 CodeDataType.String, 
                                                 string, 
                                                 Orientation_One > 
