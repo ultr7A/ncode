@@ -6,7 +6,7 @@ import { ArrayLiteral, FunctionLiteral, HashLiteral, Identifier, IntegerLiteral,
 import { Transpiler } from "../0_abstract-un-parser/abstract-un-parser";
 
 /**
- * ECS to Javascript Un-parse--r
+ * Wrapt.org to Javascript Un-parse--r
  */
 
 export class JSTranspiler extends Transpiler {
