@@ -3,14 +3,14 @@
  */
 
 import { ObjectType } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/object-type.enum";
-import { BuiltinFunctionObject, StringObject } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
+import { _BuiltinFunctionObject, StringObject } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
 import { objectToNativeObject, arrayToNativeList, nativeListToArray, nativeObjToMap } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
 import { makeBuiltinClass } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/3_builtin_util";
 import { Modifier } from "../../01_1_ELEMENT/1_token_💧/2_1_token";
 
 
 
-var stringify = new BuiltinFunctionObject(
+var stringify = new _BuiltinFunctionObject(
    
    "stringify", [               [ObjectType.HASH, ObjectType.ARRAY] ], 
     function    (scope, jsScope, input: any                         )
@@ -31,7 +31,7 @@ var stringify = new BuiltinFunctionObject(
 );
 
 
-var parse = new BuiltinFunctionObject(
+var parse = new _BuiltinFunctionObject(
 
    "parse",  [                ObjectType.STRING     ],           
     function (scope, jsScope, input: StringObject   ) 

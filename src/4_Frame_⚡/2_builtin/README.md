@@ -1,7 +1,7 @@
 # Auto-Lexical Built-in Function  Implementation   Refactor:
 -------------------------------------------------------------
 
--   BuiltinFunctionObject 
+-   _BuiltinFunctionObject 
     
     should 
     take

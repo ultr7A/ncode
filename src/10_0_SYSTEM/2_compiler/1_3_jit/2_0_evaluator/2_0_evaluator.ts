@@ -6,7 +6,7 @@ import { ObjectType }               from "wrapt.co_re/lib/Domain [╍🌐╍🧭
 import { STREAM_DIRECTION }         from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum";
 import { Optimizer }                from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/system/optimizer";
 
-import { ArrayObject, BooleanObject, BuiltinFunctionObject, ClassifiedObject, ConceptObject, ErrorObject, Float, GraphObject, 
+import { ArrayObject, BooleanObject, _BuiltinFunctionObject, ClassifiedObject, ConceptObject, ErrorObject, Float, GraphObject, 
     Hash, Integer, LambdaFunction, PureFunction, ReturnValue, StreamObject, StringObject, WheelObject } 
                                                     from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
 import { TRUE, FALSE, NULL }                        from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton";
@@ -477,7 +477,7 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
             var pairType = pairs[p].Value.Type();
             if (pairType == ObjectType.BUILTIN || pairType == ObjectType.FUNCTION) {
                 // console.log("setting object context", instance);
-                ((pairs[p].Value as LambdaFunction | BuiltinFunctionObject).ObjectContext) = instance;
+                ((pairs[p].Value as LambdaFunction | _BuiltinFunctionObject).ObjectContext) = instance;
             }
         }
     }
@@ -619,7 +619,7 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
         var stream = new StreamObject(se.Direction, transforms, source, sink, "");
         // if the source is a builtin,
         if (source.Type() == "BUILTIN" && se.Direction == STREAM_DIRECTION.READ) { // a host event handler has to be added
-            applyBuiltinFunction(source as BuiltinFunctionObject, [
+            applyBuiltinFunction(source as _BuiltinFunctionObject, [
                 transforms.length
                     ? transforms[0] // if there is a stream transform chain, pass the event data to it.
                     : sink // if there are no transformations, connect the source and sink directly with an event handler.
@@ -1006,13 +1006,13 @@ export function applyFunction(fn: FunctionObject | ClassifiedObject, env: Enviro
         //     }
         //     return fn;
         case "BUILTIN":
-            return applyBuiltinFunction(fn as BuiltinFunctionObject, args, env, objectContext);
+            return applyBuiltinFunction(fn as _BuiltinFunctionObject, args, env, objectContext);
         default:
             return newError("not a function: %s", fn.Type());
     }
 }
 
-function applyBuiltinFunction(fn: BuiltinFunctionObject, args: EObject[], env: Environment, objectContext?: ClassifiedObject) {
+function applyBuiltinFunction(fn: _BuiltinFunctionObject, args: EObject[], env: Environment, objectContext?: ClassifiedObject) {
     const objContext = fn.ObjectContext || objectContext; 
 
     if (fn.ecsOnly) {

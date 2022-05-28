@@ -1,6 +1,6 @@
 import { ObjectType } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/object-type.enum";
 import { FunctionObject } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
-import { BooleanObject, BuiltinFunctionObject, Hash, StringObject } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
+import { BooleanObject, _BuiltinFunctionObject, Hash, StringObject } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
 import { NULL } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton";
 import { newError } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
 import { makeBuiltinClass } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/3_builtin_util";
@@ -15,7 +15,7 @@ import { nodeObjects } from "../4_io/1_file-system/2_compatibility";
 type  FileObject = Hash & { Elements: { resource: StringObject } };
 
 
-const fileConstructor = new BuiltinFunctionObject(
+const fileConstructor = new _BuiltinFunctionObject(
         "File",  [                ObjectType.STRING         ],
         function (scope: FileObject, resourceName: StringObject) 
         {
@@ -27,7 +27,7 @@ const fileConstructor = new BuiltinFunctionObject(
         null, null, true
     ),
 
-    fileOpen = new BuiltinFunctionObject(
+    fileOpen = new _BuiltinFunctionObject(
         "open",  [     ], 
         function (scope) 
         {
@@ -36,7 +36,7 @@ const fileConstructor = new BuiltinFunctionObject(
         null, null, true
     ),
 
-    fileReadAll = new BuiltinFunctionObject<FileObject>(
+    fileReadAll = new _BuiltinFunctionObject<FileObject>(
         "readAll", [             ObjectType.FUNCTION     ],
         function   (scope: Hash, callback: FunctionObject) 
         {
@@ -55,7 +55,7 @@ const fileConstructor = new BuiltinFunctionObject(
         null, null, true
     ),
 
-    fileWriteLine = new BuiltinFunctionObject<FileObject>(
+    fileWriteLine = new _BuiltinFunctionObject<FileObject>(
         "writeLine", [              ObjectType.STRING ], 
         function     (scope: Hash,  line: StringObject) 
         {
@@ -65,7 +65,7 @@ const fileConstructor = new BuiltinFunctionObject(
         null, null, true
     ),
 
-    fileReadLine = new BuiltinFunctionObject(
+    fileReadLine = new _BuiltinFunctionObject(
         "readLine", [],
         function    (scope) 
         {
@@ -75,7 +75,7 @@ const fileConstructor = new BuiltinFunctionObject(
         null, null, true
 
     ),
-    fileHasNextLine = new BuiltinFunctionObject(
+    fileHasNextLine = new _BuiltinFunctionObject(
         "hasNextLine", [],
         function (scope) 
         {

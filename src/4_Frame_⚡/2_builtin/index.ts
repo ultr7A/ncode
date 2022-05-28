@@ -2,7 +2,7 @@
 import { ObjectType }               from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/object-type.enum";
 import { Matrix }                   from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/maths/3d/matrix";
 import { Vector }                   from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/maths/3d/vector";
-import { ArrayObject, BuiltinFunctionObject, Float, Integer, StringObject  }
+import { ArrayObject, _BuiltinFunctionObject, Float, Integer, StringObject  }
                                     from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";   
 import { NULL }                     from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton";
 import { assertBuiltinArgs }        from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/3_builtin_util";
@@ -36,18 +36,18 @@ export const builtins = {
     "JSON":   _JSON,
     "RegExp": _RegExp,
 
-    "toFloat": new BuiltinFunctionObject("toFloat", [], function (_, _2, _3, val) {
+    "toFloat": new _BuiltinFunctionObject("toFloat", [], function (_, _2, _3, val) {
         if (!val || val.Type() != ObjectType.INTEGER_OBJ) {
             return newError("argument to `toFloat` must be int, got %s", val ? val.Type() : "null");
         }
         return new Float((val.Value));
     }, null, null, true),
     
-    "time": new BuiltinFunctionObject("time", [], function () {
+    "time": new _BuiltinFunctionObject("time", [], function () {
         return new Integer(Date.now());
     }, null, null, true),
 
-    "print": new BuiltinFunctionObject("print", [], function(scope, _3) {
+    "print": new _BuiltinFunctionObject("print", [], function(scope, _3) {
         var args = [];
         for (var _i = 3; _i < arguments.length; _i++) {
             args[_i - 3] = arguments[_i];
@@ -56,11 +56,11 @@ export const builtins = {
         return NULL;
     }, null, null, true),
 
-    "colorize": new BuiltinFunctionObject("colorize", [ObjectType.ARRAY, ObjectType.STRING], function (_, _2, _3, color, str) {
+    "colorize": new _BuiltinFunctionObject("colorize", [ObjectType.ARRAY, ObjectType.STRING], function (_, _2, _3, color, str) {
         return systemColorRenderer(color, str);
     }),
 
-    "len": new BuiltinFunctionObject("len", [], function (_, _2, _3, obj) {
+    "len": new _BuiltinFunctionObject("len", [], function (_, _2, _3, obj) {
         var arg = obj, argType = arg.Type();
         switch (argType) {
             case ObjectType.ARRAY:
@@ -72,7 +72,7 @@ export const builtins = {
         }
     }, null, null, true),
 
-    "push": new BuiltinFunctionObject("push", [], function (_, _2, _3, list, item) {
+    "push": new _BuiltinFunctionObject("push", [], function (_, _2, _3, list, item) {
         var err = assertBuiltinArgs([list, item], 2, null, 'push', [ObjectType.ARRAY]);
         if (err) {
             return err;
@@ -81,7 +81,7 @@ export const builtins = {
         return list;
     }, null, null, true),
 
-    "pop": new BuiltinFunctionObject("pop", [], function (_, _2, _3, list) {
+    "pop": new _BuiltinFunctionObject("pop", [], function (_, _2, _3, list) {
         var err = assertBuiltinArgs([list], 1, null, 'pop', [ObjectType.ARRAY]);
         if (err) {
             return err;
@@ -89,7 +89,7 @@ export const builtins = {
         return list.Elements.pop();
     }, null, null, true),
 
-    "shift": new BuiltinFunctionObject("shift", [], function (_, _2, _3, list) {
+    "shift": new _BuiltinFunctionObject("shift", [], function (_, _2, _3, list) {
         var err = assertBuiltinArgs([list], 1, null, 'shift', [ObjectType.ARRAY]);
         if (err) {
             return err;
@@ -97,7 +97,7 @@ export const builtins = {
         return list.Elements.shift();
     }, null, null, true),
 
-    "splice": new BuiltinFunctionObject("splice", [], function (_, _2, _3) {
+    "splice": new _BuiltinFunctionObject("splice", [], function (_, _2, _3) {
         var args = [];
         for (var _i = 3; _i < arguments.length; _i++) {
             args[_i - 3] = arguments[_i];
@@ -113,7 +113,7 @@ export const builtins = {
         return new ArrayObject(elems);
     }, null, null, true),
 
-    "concat": new BuiltinFunctionObject("concat", [ObjectType.ARRAY, ObjectType.ARRAY], function (_, scope = null, jsScope = null, listOne, listTwo: ArrayObject) {
+    "concat": new _BuiltinFunctionObject("concat", [ObjectType.ARRAY, ObjectType.ARRAY], function (_, scope = null, jsScope = null, listOne, listTwo: ArrayObject) {
         var err = assertBuiltinArgs([listOne, listTwo], 1, null, 'concat', [ObjectType.ARRAY, ObjectType.ARRAY]);
         if (err) {
             return err;
@@ -121,7 +121,7 @@ export const builtins = {
         return new ArrayObject(listOne.Elements.concat(copyListElements(listTwo)));
     }, null, null, true),
 
-    "join": new BuiltinFunctionObject("join", [], function (_, _2, _3) {
+    "join": new _BuiltinFunctionObject("join", [], function (_, _2, _3) {
         var args = [];
         for (var _i = 3; _i < arguments.length; _i++) {
             args[_i - 3] = arguments[_i];
@@ -161,7 +161,7 @@ export const builtins = {
         return new StringObject(outStr);
     }, null, null, true),
 
-    "split": new BuiltinFunctionObject("split", [], function (_, _2, _3) {
+    "split": new _BuiltinFunctionObject("split", [], function (_, _2, _3) {
         var args = [];
         for (var _i = 3; _i < arguments.length; _i++) {
             args[_i - 3] = arguments[_i];
@@ -197,7 +197,7 @@ export const builtins = {
         }
     }, null, null, true),
 
-    "help": new BuiltinFunctionObject("help", [], function (_, _2, _3) {
+    "help": new _BuiltinFunctionObject("help", [], function (_, _2, _3) {
         var args = [];
         for (var _i = 3; _i < arguments.length; _i++) {
             args[_i - 3] = arguments[_i];

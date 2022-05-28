@@ -1,5 +1,5 @@
 import { ObjectType } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/object-type.enum";
-import { BuiltinFunctionObject, Hash } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
+import { _BuiltinFunctionObject, Hash } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
 import { platformSpecificCall } from "../../../../3_Operation_☀/3_util_(🔥)/2_platform-utils";
 import { getWindow } from "../../../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util";
 import { nodeObjects } from "../../1_file-system/2_compatibility";
@@ -33,7 +33,7 @@ function setUpKeyEventHandler() {
     });
 }
 
-export const onKeyUp = new BuiltinFunctionObject(
+export const onKeyUp = new _BuiltinFunctionObject(
     "keyUp", [                ObjectType.FUNCTION], 
     function (scope, callback           ) 
     {
@@ -48,7 +48,7 @@ export const onKeyUp = new BuiltinFunctionObject(
     }
 );
 
-export const onKeyDown = new BuiltinFunctionObject<Hash>("keyDown", [ObjectType.FUNCTION], function(scope, jsScope, callback) {
+export const onKeyDown = new _BuiltinFunctionObject<Hash>("keyDown", [ObjectType.FUNCTION], function(scope, jsScope, callback) {
     return platformSpecificCall( scope, function () {
         addKeyEventHandler(callback);
     }, function () {

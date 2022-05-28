@@ -1,4 +1,4 @@
-import { BuiltinFunctionObject } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
+import { _BuiltinFunctionObject } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
 import { NULL } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton";
 import { makeBuiltinClass } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/3_builtin_util";
 import { Modifier } from "../../01_1_ELEMENT/1_token_💧/2_1_token";
@@ -26,7 +26,7 @@ export const getDOMTerminalSize = function () {
 };
 
 
-var clear = new BuiltinFunctionObject("clear", [], 
+var clear = new _BuiltinFunctionObject("clear", [], 
     function (context, scope) {
         platformSpecificCall(scope, 
             function () { console.clear(); }, 
@@ -37,7 +37,7 @@ var clear = new BuiltinFunctionObject("clear", [],
         return NULL;
     }, null, null, true),
 
-    getDimensions = new BuiltinFunctionObject("getDimensions", [], 
+    getDimensions = new _BuiltinFunctionObject("getDimensions", [], 
     function (context, scope) {
         return platformSpecificCall(scope, 
             function () { return exports.getTerminalSize(scope); }, 
@@ -46,7 +46,7 @@ var clear = new BuiltinFunctionObject("clear", [],
         );
     }, null, null, true), 
 
-    hasColorSupport = new BuiltinFunctionObject("hasColorSupport", [], 
+    hasColorSupport = new _BuiltinFunctionObject("hasColorSupport", [], 
     function (context, scope) {
         return platformSpecificCall(scope, 
             function () { return true; }, 
@@ -56,7 +56,7 @@ var clear = new BuiltinFunctionObject("clear", [],
 
     }, null, null, true),
 
-    has3dSupport = new BuiltinFunctionObject("has3dSupport", [], 
+    has3dSupport = new _BuiltinFunctionObject("has3dSupport", [], 
     function (context, scope) {
         return platformSpecificCall(scope, 
             function () { return false; }, function () { return true; },  
@@ -64,7 +64,7 @@ var clear = new BuiltinFunctionObject("clear", [],
         );
     }, null, null, true),
     
-    beep = new BuiltinFunctionObject("beep", [], 
+    beep = new _BuiltinFunctionObject("beep", [], 
     function (context, scope) {
         platformSpecificCall(scope, 
             function () { return console.log('\u0007'); }, 
