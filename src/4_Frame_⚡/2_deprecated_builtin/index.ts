@@ -3,7 +3,7 @@ import { ObjectType }               from "wrapt.co_re/lib/Domain [╍🌐╍🧭
 import { Matrix }                   from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/maths/3d/matrix";
 import { Vector }                   from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/maths/3d/vector";
 import { ArrayObject, _BuiltinFunctionObject, Float, Integer, StringObject  }
-                                    from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";   
+                                    from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object";   
 import { NULL }                     from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton";
 import { assertBuiltinArgs }        from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/3_builtin_util";
 import { copyListElements, nativeObjToMap, newError } 

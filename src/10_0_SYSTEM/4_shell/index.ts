@@ -2,9 +2,9 @@ import { nodeObjects } from "../../4_Frame_⚡/4_io/1_file-system/2_compatibilit
 debugger;
 import { AOTCompiler } from "../2_compiler/1_1_aot/1_1_3_aot-compiler";
 import { JITCompiler } from "../2_compiler/1_3_jit/3_3_0_jit-compiler";
+import { SocketShell } from "./1_2-shell-implementations/0_socket-shell";
 import { LinearShell } from "./1_2-shell-implementations/1_linear-shell";
-import { CosmicShell } from "./1_2-shell-implementations/2_cosmic-shell";
-import { SocketShell } from "./1_2-shell-implementations/3_socket-shell";
+import { CosmicShell } from "./1_2-shell-implementations/4_cosmic-shell";
 
 const args = process.argv.slice(2);
 let compiler

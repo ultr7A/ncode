@@ -12,7 +12,7 @@ import { localEvaluate } from "../../4_shell/3_2-nodejs/0_1_0_nodejs";
 import { Analyzer } from "../0_3_analyzer/1_3_expression-analyzer";
 import { applyFunction, ExpressionEvaluator } from "../1_3_jit/2_0_evaluator/2_0_evaluator";
 import { RuntimeOptimizer } from "../1_3_jit/3_1_runtime-optimizer";
-import { ModuleLinker } from "../4_2_1_native-module-linker/1_1_0_module-linker";
+import { ModuleLinker } from "../4_2_1_module_linker/1_1_0_module-linker";
 import { AbstractAOTCompiler } from "./0_0_aot-compiler-structure/0_2_1_abstract-aot-compiler";
 
 /* ******************************************************* *

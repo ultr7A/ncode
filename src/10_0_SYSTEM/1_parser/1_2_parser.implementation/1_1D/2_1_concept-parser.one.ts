@@ -1,6 +1,6 @@
+import { ConceptSequenceOperator } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/2_concept-operators";
 import { Node, ConceptExpression, InfixStructure, Structure, ConceptStructure, Value, IGraphNode } 
                             from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { PrimitiveConcept } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/2_concept-operators";
 import { ConceptOperator }  from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements";
 
 import { Token, TypedTokenLiteral } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token";
@@ -188,7 +188,7 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
             this.nextToken(2);
             this.graphParser.parseDirectionalGraphEdge(direction);
         } else {
-            operatorExpression = new Identifier(PrimitiveConcept.SequenceOperator.PROJECT);
+            operatorExpression = new Identifier(ConceptSequenceOperator.PROJECT);
             operator = new ConceptOperator(operatorExpression, 0); 
         }
 

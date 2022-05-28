@@ -8,7 +8,7 @@ import { Optimizer }                from "wrapt.co_re/lib/Domain [╍🌐╍🧭
 
 import { ArrayObject, BooleanObject, _BuiltinFunctionObject, ClassifiedObject, ConceptObject, ErrorObject, Float, GraphObject, 
     Hash, Integer, LambdaFunction, PureFunction, ReturnValue, StreamObject, StringObject, WheelObject } 
-                                                    from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
+                                                    from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object";
 import { TRUE, FALSE, NULL }                        from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton";
 
 import { Environment, NewEnclosedEnvironment }      from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
@@ -38,7 +38,7 @@ import {    BooleanLiteral, ClassLiteral, ConceptSequenceLiteral, GraphLiteral, 
 
 import { evaluateSourceFile, printNativeString } from "../../../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util";
 
-import { builtins } from "../../../../4_Frame_⚡/2_builtin";
+import { builtins } from "../../../../4_Frame_⚡/2_deprecated_builtin";
 import { nodeObjects } from "../../../../4_Frame_⚡/4_io/1_file-system/2_compatibility";
 import { readWholeFile } from "../../../../3_Operation_☀/3_util_(🔥)/4_0_io-util";
 

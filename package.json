@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node lib/src/10_0_SYSTEM/4_shell/index.js",
     "test": "jest",
-    "build": "tsc -p config/tsconfig.json",
+    "build": "tsc",
     "prepublish": "npm run build"
   },
   "repository": {
@@ -17,8 +17,8 @@
   "license": "MIT",
   "dependencies": {
     "esm": "^3.2.25",
-    "meta.gl": "^0.0.13",
-    "wrapt.co_re": "^1.1.6"
+    "meta.gl": "^0.0.14",
+    "wrapt.co_re": "^1.1.8"
   },
   "devDependencies": {
     "@types/jest": "^26.0.24",

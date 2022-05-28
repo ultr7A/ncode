@@ -1,6 +1,6 @@
 import { ObjectType } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/object-type.enum";
 import { FunctionObject } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
-import { BooleanObject, _BuiltinFunctionObject, Hash, StringObject } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
+import { BooleanObject, _BuiltinFunctionObject, Hash, StringObject } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object";
 import { NULL } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton";
 import { newError } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
 import { makeBuiltinClass } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/3_builtin_util";

@@ -1,5 +1,5 @@
 import { Node }         from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { ModuleLinker } from "../../4_2_1_native-module-linker/1_1_0_module-linker";
+import { ModuleLinker } from "../../4_2_1_module_linker/1_1_0_module-linker";
 
 /**
  * 
