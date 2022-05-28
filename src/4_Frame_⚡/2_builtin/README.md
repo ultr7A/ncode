@@ -1,12 +1,12 @@
 # Auto-Lexical Built-in Function  Implementation   Refactor:
 -------------------------------------------------------------
 
-
-BuiltinFunctionObject 
-    should   
--   take 
+-   BuiltinFunctionObject 
+    
+    should 
+    take
   
-
+    
     string filePath   parameter
 
     instead
@@ -15,19 +15,13 @@ BuiltinFunctionObject
     TypeScript  function-literal.
 
 
-
 -   Special fields in jsScope, 
-    
+   
     such 
     as
-
     RegExp, node.js-specific terminal-size detection, etc 
 
-
-
     need 
-
-
 
     to  be  registered as a target-language specific 
                             implementation
