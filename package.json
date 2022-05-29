@@ -1,6 +1,6 @@
 {
     "name": "wrapt.org",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "Multi-paradigm, multi-dimensional programming language with AOT compilation to JS",
     "scripts": {
         "start": "node lib/src/10_0_SYSTEM/4_shell/index.js",
