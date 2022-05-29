@@ -6,7 +6,7 @@ import { platformSpecificCall } from "../../3_Operation_☀/3_util_(🔥)/2_plat
 import { readStdInSync } from "../../3_Operation_☀/3_util_(🔥)/4_1_node-io-util";
 import { readLineFromDocument } from "../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util";
 import { nodeObjects } from "../4_io/1_file-system/2_compatibility";
-import { _File } from "./file";
+import { FileObject } from "./file";
 
 
 
@@ -42,7 +42,7 @@ var readLn = new _BuiltinFunctionObject(
 export const io = _makeBuiltinClass(
     "File",
     [
-        ["File", _File, [Modifier.PUBLIC]]
+        ["File", FileObject, [Modifier.PUBLIC]]
     ],
     [
          
