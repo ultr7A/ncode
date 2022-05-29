@@ -28,12 +28,16 @@ export class RuntimeOptimizer implements Optimizer {
     private unparser: Transpiler;
     private unParserPlugin: JSECSContextPlugin;
     private analyzer: Analyzer;
+
+    // ** DEPRECATED **
     private jsECSContext: JSECSEvaluatorContext;
 
     constructor(unparser: Transpiler, applyFunction: ApplyFunctionFunction, evaluator: ExpressionEvaluator) {
         this.unparser = unparser;
         this.unParserPlugin = new JSECSContextPlugin();
         this.analyzer = new Analyzer();
+
+        // ** DEPRECATED **
         this.jsECSContext = new JSECSEvaluatorContext(applyFunction, evaluator.Eval);
         this.unParserPlugin.setUnParser(this.unparser);
     }
@@ -75,22 +79,30 @@ export class RuntimeOptimizer implements Optimizer {
         return function () {
             //TODO: only pass context if function is impure
             return hotFunction.apply(null, Array.prototype.concat([
+                // ** DEPRECATED **
                 opt.jsECSContext
                     .setProgram(obj.Body)
                     .setEnv(env)
+                // ^^^^^^^^^^^^^^^^^^^^^^
+                // Something may need to replace this, parameter, however.
+
             ], arguments));
         };
     }
 
     public compileClass(obj: ClassifiedObject, env: Environment) {
+        // TODO: implement
     }
 
     public runAsJS(parseTree: IBlockStatement, env: Environment, jsProgram: string) {
         var hotFunction = new Function(["ctx"] as unknown as string, jsProgram);
         //TODO: memoize
-        return hotFunction(this.jsECSContext
-            .setProgram(parseTree)
-            .setEnv(env));
+        return hotFunction(
+            // ** DEPRECATED **
+            this.jsECSContext
+                .setProgram(parseTree)
+                .setEnv(env)
+        );
     }
 }
 
