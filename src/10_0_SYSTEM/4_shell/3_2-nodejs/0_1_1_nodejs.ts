@@ -23,7 +23,7 @@ export function makeCLIRepl(
     nodeObjects.process = process;
     
 
-    return function (args ) {
+    return function (args) {
 
             introMessage();
             process.stdin.resume();

@@ -27,11 +27,12 @@ export class LinearShell extends AbstractShell< number,
 
     }
 
-    public listen(): void {
+    public listen(args: string[]): void {
+        console.log("Shell :: listen ()");
         makeCLIRepl(this.compiler.tokenizer, 
                     this.compiler.parser, 
                     this.compiler.environment, 
                     {}, 
-                    this.compiler.evaluator)
+                    this.compiler.evaluator)(args);
     }
 }
