@@ -1,17 +1,17 @@
-import { UnParser }        from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/un-parser";
+import { UnParser }        from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/un-parser.js"
 import { ConceptExpression, Expression, FunctionNode, 
          Duality, InfixStructure, Sequence, Structure, Value, IIdentifier } 
                            from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { NodeName }        from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum";
-import { Operator }        from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators";
+import { NodeName }        from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum.js"
+import { Operator }        from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators.js"
 
-import { ConceptOperator } from "./1_1_0_expression-elements";
+import { ConceptOperator } from "./1_1_0_expression-elements.js"
 
 import  { ArrayLiteral, ClassLiteral, HashLiteral, Identifier } 
                            from "./1_3_1_literal"; 
                            
-import { CallableNode } from "./1_0_1_root";
-import { STREAM_DIRECTION } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum";
+import { CallableNode } from "./1_0_1_root.js"
+import { STREAM_DIRECTION } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum.js"
         {_:                     `
 ████████████████████████████████████████████████████████████████████████████████████████████
 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`   

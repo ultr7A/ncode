@@ -1,4 +1,4 @@
-import { EObject } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
+import { EObject } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure.js"
 
 /**
  * Provides a execution context (programatic heap) for an AbstractEvaluator,

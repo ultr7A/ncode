@@ -1,20 +1,20 @@
-import { ParseTreeAnalysis }                          from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta";
-import { Operator }                                   from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators";
-import { Node, Expression, Statement, FunctionNode }  from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { sprintf }           from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util";
+import { ParseTreeAnalysis }                          from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta.js"
+import { Operator }                                   from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators.js"
+import { Node, Expression, Statement, FunctionNode }  from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
+import { sprintf }           from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util.js"
 
-import { AbstractToken } from "../../../01_1_ELEMENT/1_token_💧/0_1_token-structure";
-import { Token } from "../../../01_1_ELEMENT/1_token_💧/2_1_token";
-import { CodeCoordinates, CodeData } from "../../../01_2_Sequence_📘🌊/0_source/source-code";
-import { Program } from "../../../03_0_Structure_🌴/1_ast/1_0_1_root";
+import { AbstractToken } from "../../../01_1_ELEMENT/1_token_💧/0_1_token-structure.js"
+import { Token } from "../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
+import { CodeCoordinates, CodeData } from "../../../01_2_Sequence_📘🌊/0_source/source-code.js"
+import { Program } from "../../../03_0_Structure_🌴/1_ast/1_0_1_root.js"
 
-import { AbstractTokenizer } from "../../0_tokenizer/0_1_tokenizer-core/0_2_abstract-tokenizer";
-import { ExpressionAnalysisDiagnosticContext } from "../../2_compiler/0_3_analyzer/0_1_analyzer-structure";
-import { AbstractAnalyzer } from "../../2_compiler/0_3_analyzer/0_3_abstract-analyzer";
-import { Analyzer } from "../../2_compiler/0_3_analyzer/1_3_expression-analyzer";
-import { IPrecedences } from "../0_0_parser-core/0_1_precedence-structure";
-import { Precedence } from "../0_0_parser-core/2_1_precedence";
-import { InfixParseFn, PrefixParseFn } from "../0_0_parser-core/3_0_parse-functions";
+import { AbstractTokenizer } from "../../0_tokenizer/0_1_tokenizer-core/0_2_abstract-tokenizer.js"
+import { ExpressionAnalysisDiagnosticContext } from "../../2_compiler/0_3_analyzer/0_1_analyzer-structure.js"
+import { AbstractAnalyzer } from "../../2_compiler/0_3_analyzer/0_3_abstract-analyzer.js"
+import { Analyzer } from "../../2_compiler/0_3_analyzer/1_3_expression-analyzer.js"
+import { IPrecedences } from "../0_0_parser-core/0_1_precedence-structure.js"
+import { Precedence } from "../0_0_parser-core/2_1_precedence.js"
+import { InfixParseFn, PrefixParseFn } from "../0_0_parser-core/3_0_parse-functions.js"
 
 
 

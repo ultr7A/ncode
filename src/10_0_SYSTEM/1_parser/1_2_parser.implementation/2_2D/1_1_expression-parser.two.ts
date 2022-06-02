@@ -1,21 +1,21 @@
-import { Operator }      from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators";
-import { Node, Expression, Statement }    from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { GraphOperator } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements";
+import { Operator }      from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators.js"
+import { Node, Expression, Statement }    from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
+import { GraphOperator } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements.js"
 
-import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token";
-import { TypedTokenSurface } from "../../../../01_1_ELEMENT/1_token_💧/2_2_token-surface";
-import { CodeData } from "../../../../01_2_Sequence_📘🌊/0_source/source-code";
-import { Program } from "../../../../03_0_Structure_🌴/1_ast/1_0_1_root";
-import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
-import { Orientation_XY, Oriented } from "../../../0_0_system-structure/1_0_system-structure";
-import { TokenizerOne } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one";
+import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
+import { TypedTokenSurface } from "../../../../01_1_ELEMENT/1_token_💧/2_2_token-surface.js"
+import { CodeData } from "../../../../01_2_Sequence_📘🌊/0_source/source-code.js"
+import { Program } from "../../../../03_0_Structure_🌴/1_ast/1_0_1_root.js"
+import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
+import { Orientation_XY, Oriented } from "../../../0_0_system-structure/1_0_system-structure.js"
+import { TokenizerOne } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one.js"
 
-import { TokenizerTwo } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_2_1_tokenizer.two";
-import { Analyzer } from "../../../2_compiler/0_3_analyzer/1_3_expression-analyzer";
-import { precedences }                 from "../../0_0_parser-core/2_1_precedence";
-import { InfixParseFn, PrefixParseFn } from "../../0_0_parser-core/3_0_parse-functions";
-import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser";
-import { GraphParserTwo } from "./0_2_4_graph-parser.two";
+import { TokenizerTwo } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_2_1_tokenizer.two.js"
+import { Analyzer } from "../../../2_compiler/0_3_analyzer/1_3_expression-analyzer.js"
+import { precedences }                 from "../../0_0_parser-core/2_1_precedence.js"
+import { InfixParseFn, PrefixParseFn } from "../../0_0_parser-core/3_0_parse-functions.js"
+import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser.js"
+import { GraphParserTwo } from "./0_2_4_graph-parser.two.js"
 
 
 

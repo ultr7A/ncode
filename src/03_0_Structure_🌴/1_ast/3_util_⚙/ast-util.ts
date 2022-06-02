@@ -2,9 +2,9 @@ import
         { FloatLiteral, IntegerLiteral, StringLiteral, BooleanLiteral } 
 from "../1_3_1_literal";
 
-import { Node }     from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { NodeName } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum";
-import { DataType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/primitive/type.enum";
+import { Node }     from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
+import { NodeName } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum.js"
+import { DataType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/primitive/type.enum.js"
 
 export function getDataTypeByNodeName(node: Node): string {
     var NodeName = node ? node.NodeName : "";

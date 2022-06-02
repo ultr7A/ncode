@@ -1,5 +1,5 @@
-import { TypedTokenSurface, TokenSurface } from "../../../01_1_ELEMENT/1_token_💧/2_2_token-surface";
-import { AbstractTokenizer } from "../0_1_tokenizer-core/0_2_abstract-tokenizer";
+import { TypedTokenSurface, TokenSurface } from "../../../01_1_ELEMENT/1_token_💧/2_2_token-surface.js"
+import { AbstractTokenizer } from "../0_1_tokenizer-core/0_2_abstract-tokenizer.js"
 
 /**
  * 

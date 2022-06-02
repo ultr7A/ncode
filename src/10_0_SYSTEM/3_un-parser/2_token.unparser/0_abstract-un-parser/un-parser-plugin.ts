@@ -1,6 +1,6 @@
-import { Node } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { Node } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
 
-import { Transpiler } from "./abstract-un-parser";
+import { Transpiler } from "./abstract-un-parser.js"
 
 export abstract class UnParserPlugin {
     

@@ -1,7 +1,7 @@
-import { SyntaxGraph } from "../../../03_0_Structure_🌴/3_abstract-syntax-graph/0_graph-root";
-import { TokenizerOne } from "../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one";
-import { ExpressionParserOne } from "../1_2_parser.implementation/1_1D/1_1_expression-parser.one";
-import { SyntaxGraphParser } from "./syntax-graph.parser";
+import { SyntaxGraph } from "../../../03_0_Structure_🌴/3_abstract-syntax-graph/0_graph-root.js"
+import { TokenizerOne } from "../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one.js"
+import { ExpressionParserOne } from "../1_2_parser.implementation/1_1D/1_1_expression-parser.one.js"
+import { SyntaxGraphParser } from "./syntax-graph.parser.js"
 
 describe("Parser for transformation SyntaxGraph into (AST) Node", (): void => {
     const syntaxGraphParser = new SyntaxGraphParser();

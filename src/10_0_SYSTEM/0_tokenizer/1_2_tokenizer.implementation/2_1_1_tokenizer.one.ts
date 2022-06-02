@@ -1,5 +1,5 @@
-import { LookupIdent, Token, TypedTokenLiteral } from "../../../01_1_ELEMENT/1_token_💧/2_1_token";
-import { AbstractTokenizer } from "../0_1_tokenizer-core/0_2_abstract-tokenizer";
+import { LookupIdent, Token, TypedTokenLiteral } from "../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
+import { AbstractTokenizer } from "../0_1_tokenizer-core/0_2_abstract-tokenizer.js"
 
 
 /***

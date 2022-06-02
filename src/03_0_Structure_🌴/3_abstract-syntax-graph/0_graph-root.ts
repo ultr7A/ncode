@@ -1,6 +1,6 @@
-import { Program } from "../1_ast/1_0_1_root";
-import { AbstractBlockStatement } from "../1_ast/2_meta_ast_🧩/abstract-statement";
-import { ASTGraphEdge } from "./4_graph-edge";
+import { Program } from "../1_ast/1_0_1_root.js"
+import { AbstractBlockStatement } from "../1_ast/2_meta_ast_🧩/abstract-statement.js"
+import { ASTGraphEdge } from "./4_graph-edge.js"
 
 export interface DataFlowGraph {
     dataNodes: GraphNode[];

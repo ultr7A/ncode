@@ -1,4 +1,4 @@
-import { ConceptOperatorOperator, ConceptOperatorType, ConceptSequenceOperator, ConceptStructureOperator } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/2_concept-operators";
+import { ConceptOperatorOperator, ConceptOperatorType, ConceptSequenceOperator, ConceptStructureOperator } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/2_concept-operators.js"
 ; 
 
 

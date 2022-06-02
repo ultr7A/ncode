@@ -1,4 +1,4 @@
-import { AbstractEnvironment } from "./0_2_0-abstract-environment";
+import { AbstractEnvironment } from "./0_2_0-abstract-environment.js"
 
 /* ************************************************************************
  *  ConceptEnvironment is used by both JIT and AOT compilers,

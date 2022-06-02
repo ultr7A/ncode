@@ -1,10 +1,10 @@
 
 import { ConceptExpression, ControlInvocation, ControlStructureInvocation, DataOperationInvocation, DataStructureDeclaration, Expression, IIdentifier } 
                     from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { NodeName } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum";
-import { UnParser } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/un-parser";
-import { BlockStatement } from "./1_0_1_root";
-import { ArrayLiteral, ClassLiteral, Identifier } from "./1_3_1_literal";
+import { NodeName } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum.js"
+import { UnParser } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/un-parser.js"
+import { BlockStatement } from "./1_0_1_root.js"
+import { ArrayLiteral, ClassLiteral, Identifier } from "./1_3_1_literal.js"
 
 
 

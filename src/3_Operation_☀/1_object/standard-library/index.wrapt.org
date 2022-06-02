@@ -1,27 +1,27 @@
 
-import { ObjectType }               from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/object-type.enum";
-import { Matrix }                   from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/maths/3d/matrix";
-import { Vector }                   from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/maths/3d/vector";
+import { ObjectType }               from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/object-type.enum.js"
+import { Matrix }                   from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/maths/3d/matrix.js"
+import { Vector }                   from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/maths/3d/vector.js"
 import { ArrayObject, _BuiltinFunctionObject, Float, Integer, StringObject  }
                                     from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object";   
-import { NULL }                     from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton";
-import { assertBuiltinArgs }        from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_builtin_util";
+import { NULL }                     from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton.js"
+import { assertBuiltinArgs }        from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_builtin_util.js"
 import { copyListElements, nativeObjToMap, newError } 
                                     from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
 
-import { systemColorRenderer, ImageObject, Graphics }      from "meta.gl/lib";                               /*    
+import { systemColorRenderer, ImageObject, Graphics }      from "meta.gl/lib.js"                               /*    
 ▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃  */
 
 
-import { printNativeString } from "../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util";
-import { println           } from "../../3_Operation_☀/3_util_(🔥)/4_0_io-util";                         /*
+import { printNativeString } from "../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util.js"
+import { println           } from "../../3_Operation_☀/3_util_(🔥)/4_0_io-util.js"                         /*
 ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃ ▃  */
 
 
-import { Terminal } from "./terminal";
-import { MATHS_   } from "./maths";
-import { _RegExp  } from "./regexp";
-import { _JSON    } from "./json";
+import { Terminal } from "./terminal.js"
+import { MATHS_   } from "./maths.js"
+import { _RegExp  } from "./regexp.js"
+import { _JSON    } from "./json.js"
 
 
 

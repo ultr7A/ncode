@@ -1,13 +1,13 @@
-import { Node, Statement, Expression, FunctionNode } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { Node, Statement, Expression, FunctionNode } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
 
-import { AbstractToken } from "../../../01_1_ELEMENT/1_token_💧/0_1_token-structure";
-import { Token }         from "../../../01_1_ELEMENT/1_token_💧/2_1_token";
-import { Program }       from "../../../03_0_Structure_🌴/1_ast/1_0_1_root";
-import { GraphOperator } from "../../../03_0_Structure_🌴/1_ast/1_1_0_expression-elements";
-import { ExpressionStatement, IfStatement, ForStatement, WhileStatement, SleepStatement, ExecStatement, AssignmentStatement, LetStatement, ClassStatement } from "../../../03_0_Structure_🌴/1_ast/1_2_1_statement";
-import { GraphNode, GraphEdge } from "../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements";
-import { Identifier, BooleanLiteral, IntegerLiteral, FloatLiteral, PureFunctionLiteral, GraphLiteral, HashLiteral, ClassLiteral, StringLiteral, ArrayLiteral } from "../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
-import { AbstractParser } from "./0_0_1_abstract-parser";
+import { AbstractToken } from "../../../01_1_ELEMENT/1_token_💧/0_1_token-structure.js"
+import { Token }         from "../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
+import { Program }       from "../../../03_0_Structure_🌴/1_ast/1_0_1_root.js"
+import { GraphOperator } from "../../../03_0_Structure_🌴/1_ast/1_1_0_expression-elements.js"
+import { ExpressionStatement, IfStatement, ForStatement, WhileStatement, SleepStatement, ExecStatement, AssignmentStatement, LetStatement, ClassStatement } from "../../../03_0_Structure_🌴/1_ast/1_2_1_statement.js"
+import { GraphNode, GraphEdge } from "../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements.js"
+import { Identifier, BooleanLiteral, IntegerLiteral, FloatLiteral, PureFunctionLiteral, GraphLiteral, HashLiteral, ClassLiteral, StringLiteral, ArrayLiteral } from "../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
+import { AbstractParser } from "./0_0_1_abstract-parser.js"
 
 export  abstract class AbstractExpressionParser
         <

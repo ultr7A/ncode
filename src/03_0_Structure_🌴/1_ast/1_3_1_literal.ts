@@ -2,12 +2,12 @@
 
 import { ConceptExpression, ConceptSequence, Duality, Expression, FunctionNode, IGraph, IIdentifier, Sequence, Value } 
                     from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { NodeName } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum";
-import { UnParser } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/un-parser";
+import { NodeName } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum.js"
+import { UnParser } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/un-parser.js"
 
-import { BlockStatement } from "./1_0_1_root";
-import { ConceptOperator, GraphOperator } from "./1_1_0_expression-elements";
-import { ClassMethod, ClassPair, ClassProperty, GraphEdge, GraphNode, HashPair } from "./1_3_0_literal-elements";
+import { BlockStatement } from "./1_0_1_root.js"
+import { ConceptOperator, GraphOperator } from "./1_1_0_expression-elements.js"
+import { ClassMethod, ClassPair, ClassProperty, GraphEdge, GraphNode, HashPair } from "./1_3_0_literal-elements.js"
 
 
 

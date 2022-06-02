@@ -1,24 +1,24 @@
-import { ConceptSequenceOperator } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/2_concept-operators";
+import { ConceptSequenceOperator } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/2_concept-operators.js"
 import { Node, ConceptExpression, InfixStructure, Structure, ConceptStructure, Value, IGraphNode } 
                             from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { ConceptOperator }  from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements";
+import { ConceptOperator }  from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements.js"
 
-import { Token, TypedTokenLiteral } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token";
-import { PrefixConceptExpression } from "../../../../03_0_Structure_🌴/1_ast/1_1_1_expression";
-import { ConceptStatement } from "../../../../03_0_Structure_🌴/1_ast/1_2_1_statement";
-import { GraphEdge, GraphNode } from "../../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements";
-import { ArrayLiteral, ConceptGraphLiteral, ConceptSequenceLiteral, Identifier, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
-import { Orientation_X } from "../../../0_0_system-structure/1_0_system-structure";
-import { TokenizerOne } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one";
-import { Analyzer } from "../../../2_compiler/0_3_analyzer/1_3_expression-analyzer";
-import { ConceptAnalyzer } from "../../../2_compiler/0_3_analyzer/2_3_concept-analyzer";
+import { Token, TypedTokenLiteral } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
+import { PrefixConceptExpression } from "../../../../03_0_Structure_🌴/1_ast/1_1_1_expression.js"
+import { ConceptStatement } from "../../../../03_0_Structure_🌴/1_ast/1_2_1_statement.js"
+import { GraphEdge, GraphNode } from "../../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements.js"
+import { ArrayLiteral, ConceptGraphLiteral, ConceptSequenceLiteral, Identifier, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
+import { Orientation_X } from "../../../0_0_system-structure/1_0_system-structure.js"
+import { TokenizerOne } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one.js"
+import { Analyzer } from "../../../2_compiler/0_3_analyzer/1_3_expression-analyzer.js"
+import { ConceptAnalyzer } from "../../../2_compiler/0_3_analyzer/2_3_concept-analyzer.js"
 
-import { Precedence }                   from "../../0_0_parser-core/2_1_precedence";
-import { conceptPrecedences }           from "../../0_0_parser-core/2_2_concept-precedence";
-import { InfixParseFn, PrefixParseFn }  from "../../0_0_parser-core/3_0_parse-functions";
+import { Precedence }                   from "../../0_0_parser-core/2_1_precedence.js"
+import { conceptPrecedences }           from "../../0_0_parser-core/2_2_concept-precedence.js"
+import { InfixParseFn, PrefixParseFn }  from "../../0_0_parser-core/3_0_parse-functions.js"
 
-import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser";
-import { GraphParserOne } from "./0_2_4_graph-parser.one";
+import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser.js"
+import { GraphParserOne } from "./0_2_4_graph-parser.one.js"
 
 /**
  * 

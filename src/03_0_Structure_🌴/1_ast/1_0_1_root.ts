@@ -1,7 +1,7 @@
-import { NodeName }                   from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum";
-import { FunctionNode, IBlockStatement, IIdentifier, Statement } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept"; 
-import { UnParser }                   from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/un-parser";
-import { IndexExpression, NewExpression } from "./1_1_1_expression";
+import { NodeName }                   from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum.js"
+import { FunctionNode, IBlockStatement, IIdentifier, Statement } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js" 
+import { UnParser }                   from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/un-parser.js"
+import { IndexExpression, NewExpression } from "./1_1_1_expression.js"
 
 /** 📘📚 */
 export class BlockStatement implements IBlockStatement {

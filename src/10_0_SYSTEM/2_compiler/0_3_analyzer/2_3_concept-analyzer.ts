@@ -1,6 +1,6 @@
-import { ParseTreeAnalysis } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta";
-import { ConceptExpression } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { AbstractAnalyzer } from "./0_3_abstract-analyzer";
+import { ParseTreeAnalysis } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta.js"
+import { ConceptExpression } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
+import { AbstractAnalyzer } from "./0_3_abstract-analyzer.js"
 
 
 export class ConceptDiagnosticContext {

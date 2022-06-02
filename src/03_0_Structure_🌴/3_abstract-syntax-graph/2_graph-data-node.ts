@@ -1,4 +1,4 @@
-import { ASTAddress, ASTAddressScope, ASTPathElement, GraphNode } from "./0_graph-root";
+import { ASTAddress, ASTAddressScope, ASTPathElement, GraphNode } from "./0_graph-root.js"
 
 
 export enum DataNodeType {

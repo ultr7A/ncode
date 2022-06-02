@@ -1,18 +1,18 @@
 
                             
 // If you can't see the [Forrest] for the [{Tree}(s)]', then obsessively line everything up into grids.
-import { ParseTreeAnalysis }                   from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta";
-import { DataType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/primitive/type.enum";
-import { Node, Expression, FunctionNode, Statement, IBlockStatement } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { NodeName } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum";
+import { ParseTreeAnalysis }                   from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta.js"
+import { DataType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/primitive/type.enum.js"
+import { Node, Expression, FunctionNode, Statement, IBlockStatement } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
+import { NodeName } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum.js"
 
-import { Program, BlockStatement } from "../../../03_0_Structure_🌴/1_ast/1_0_1_root";
-import { InfixExpression, PrefixExpression, CallExpression, IndexExpression } from "../../../03_0_Structure_🌴/1_ast/1_1_1_expression";
-import { ExpressionStatement, LetStatement, AssignmentStatement, ForStatement, WhileStatement, IndexedAssignmentStatement, ReturnStatement } from "../../../03_0_Structure_🌴/1_ast/1_2_1_statement";
-import { Identifier, FunctionLiteral } from "../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
-import { getDataTypeByNodeName } from "../../../03_0_Structure_🌴/1_ast/3_util_⚙/ast-util";
-import { ExpressionAnalysisDiagnosticContext } from "./0_1_analyzer-structure";
-import { AbstractAnalyzer } from "./0_3_abstract-analyzer";
+import { Program, BlockStatement } from "../../../03_0_Structure_🌴/1_ast/1_0_1_root.js"
+import { InfixExpression, PrefixExpression, CallExpression, IndexExpression } from "../../../03_0_Structure_🌴/1_ast/1_1_1_expression.js"
+import { ExpressionStatement, LetStatement, AssignmentStatement, ForStatement, WhileStatement, IndexedAssignmentStatement, ReturnStatement } from "../../../03_0_Structure_🌴/1_ast/1_2_1_statement.js"
+import { Identifier, FunctionLiteral } from "../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
+import { getDataTypeByNodeName } from "../../../03_0_Structure_🌴/1_ast/3_util_⚙/ast-util.js"
+import { ExpressionAnalysisDiagnosticContext } from "./0_1_analyzer-structure.js"
+import { AbstractAnalyzer } from "./0_3_abstract-analyzer.js"
 
 
 /**

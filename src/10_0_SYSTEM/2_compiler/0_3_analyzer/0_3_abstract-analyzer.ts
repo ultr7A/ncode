@@ -1,7 +1,7 @@
 
-import { ParseTreeAnalysis } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta";
-import { Node, Expression } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { ExpressionAnalysisDiagnosticContext } from "./0_1_analyzer-structure";
+import { ParseTreeAnalysis } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta.js"
+import { Node, Expression } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
+import { ExpressionAnalysisDiagnosticContext } from "./0_1_analyzer-structure.js"
 
 /**
  *  Inspects a Graph disguised as 

@@ -1,12 +1,12 @@
 
-import { Node, AbstractOperator, Expression, IGraphEdge, IGraphNode } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { GraphOperator }                                              from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements";
+import { Node, AbstractOperator, Expression, IGraphEdge, IGraphNode } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
+import { GraphOperator }                                              from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements.js"
 
-import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token";
-import { TypedTokenVolume } from "../../../../01_1_ELEMENT/1_token_💧/2_4_token-volume";
-import { GraphEdge, GraphNode } from "../../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements";
-import { ConceptGraphLiteral, GraphLiteral, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
-import { Orientation_Type, Orientation_WXYZ, Oriented } from "../../../0_0_system-structure/1_0_system-structure";
+import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
+import { TypedTokenVolume } from "../../../../01_1_ELEMENT/1_token_💧/2_4_token-volume.js"
+import { GraphEdge, GraphNode } from "../../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements.js"
+import { ConceptGraphLiteral, GraphLiteral, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
+import { Orientation_Type, Orientation_WXYZ, Oriented } from "../../../0_0_system-structure/1_0_system-structure.js"
 
 
 export class GraphParserThree  <

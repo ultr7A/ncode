@@ -1,8 +1,8 @@
-import { AbstractOperator, ConceptExpression } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { NodeName }                            from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum";
-import { UnParser }                            from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/un-parser";
+import { AbstractOperator, ConceptExpression } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
+import { NodeName }                            from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum.js"
+import { UnParser }                            from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/un-parser.js"
 
-import { CallExpression } from "./1_1_1_expression";
+import { CallExpression } from "./1_1_1_expression.js"
 
 
 

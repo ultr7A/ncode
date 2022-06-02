@@ -1,12 +1,12 @@
-import { ObjectType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/object-type.enum";
-import { _BuiltinFunctionObject, StringObject } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object";
-import { _makeBuiltinClass } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_builtin_util";
-import { Modifier } from "../../01_1_ELEMENT/1_token_💧/2_1_token";
-import { platformSpecificCall } from "../../3_Operation_☀/3_util_(🔥)/2_platform-utils";
-import { readStdInSync } from "../../3_Operation_☀/3_util_(🔥)/4_1_node-io-util";
-import { readLineFromDocument } from "../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util";
-import { nodeObjects } from "../4_io/1_file-system/2_compatibility";
-import { _File } from "./file";
+import { ObjectType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/object-type.enum.js"
+import { _BuiltinFunctionObject, StringObject } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object.js"
+import { _makeBuiltinClass } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_builtin_util.js"
+import { Modifier } from "../../01_1_ELEMENT/1_token_💧/2_1_token.js"
+import { platformSpecificCall } from "../../3_Operation_☀/3_util_(🔥)/2_platform-utils.js"
+import { readStdInSync } from "../../3_Operation_☀/3_util_(🔥)/4_1_node-io-util.js"
+import { readLineFromDocument } from "../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util.js"
+import { nodeObjects } from "../4_io/1_file-system/2_compatibility.js"
+import { _File } from "./file.js"
 
 
 

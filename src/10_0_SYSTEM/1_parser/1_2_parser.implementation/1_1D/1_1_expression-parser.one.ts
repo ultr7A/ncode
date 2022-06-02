@@ -1,25 +1,25 @@
 import { Node, Expression, Statement, Value, FunctionNode } 
                                     from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { Operator }                 from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators";
-import { STREAM_DIRECTION }         from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum";
-import { BuiltinGraphOperatorType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/4_graph-operators";
+import { Operator }                 from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators.js"
+import { STREAM_DIRECTION }         from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum.js"
+import { BuiltinGraphOperatorType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/4_graph-operators.js"
 
 
-import { Analyzer }       from "../../../2_compiler/0_3_analyzer/1_3_expression-analyzer";
-import { Precedence, precedences } from "../../0_0_parser-core/2_1_precedence";
-import { InfixParseFn, PrefixParseFn } from "../../0_0_parser-core/3_0_parse-functions";
-import { GraphParserOne } from "./0_2_4_graph-parser.one";
-import { TokenizerOne } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one";
-import { modifierNames, Token, TypedTokenLiteral } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token";
-import { GraphOperator } from "../../../../03_0_Structure_🌴/1_ast/1_1_0_expression-elements";
-import { CallExpression, IndexExpression, InfixExpression, NewExpression, PrefixExpression, StreamExpression } from "../../../../03_0_Structure_🌴/1_ast/1_1_1_expression";
-import { AssignmentStatement, ClassStatement, ExecStatement, ExpressionStatement, ForStatement, IfStatement, IndexedAssignmentStatement, LetStatement, ReturnStatement, SleepStatement, WhileStatement } from "../../../../03_0_Structure_🌴/1_ast/1_2_1_statement";
-import { ArrayLiteral, BooleanLiteral, ClassLiteral, FloatLiteral, FunctionLiteral, GraphLiteral, HashLiteral, Identifier, IntegerLiteral, PureFunctionLiteral, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
-import { BlockStatement, Program } from "../../../../03_0_Structure_🌴/1_ast/1_0_1_root";
-import { ClassMethod, ClassPair, ClassProperty, GraphEdge, GraphNode, HashPair } from "../../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements";
-import { getDefaultValueNodeForDataType } from "../../../../03_0_Structure_🌴/1_ast/3_util_⚙/ast-util";
-import { CodeData } from "../../../../01_2_Sequence_📘🌊/0_source/source-code";
-import { AbstractExpressionParser } from "../../0_2_abstract-parser/0_2_1_abstract-expression-parser";
+import { Analyzer }       from "../../../2_compiler/0_3_analyzer/1_3_expression-analyzer.js"
+import { Precedence, precedences } from "../../0_0_parser-core/2_1_precedence.js"
+import { InfixParseFn, PrefixParseFn } from "../../0_0_parser-core/3_0_parse-functions.js"
+import { GraphParserOne } from "./0_2_4_graph-parser.one.js"
+import { TokenizerOne } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one.js"
+import { modifierNames, Token, TypedTokenLiteral } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
+import { GraphOperator } from "../../../../03_0_Structure_🌴/1_ast/1_1_0_expression-elements.js"
+import { CallExpression, IndexExpression, InfixExpression, NewExpression, PrefixExpression, StreamExpression } from "../../../../03_0_Structure_🌴/1_ast/1_1_1_expression.js"
+import { AssignmentStatement, ClassStatement, ExecStatement, ExpressionStatement, ForStatement, IfStatement, IndexedAssignmentStatement, LetStatement, ReturnStatement, SleepStatement, WhileStatement } from "../../../../03_0_Structure_🌴/1_ast/1_2_1_statement.js"
+import { ArrayLiteral, BooleanLiteral, ClassLiteral, FloatLiteral, FunctionLiteral, GraphLiteral, HashLiteral, Identifier, IntegerLiteral, PureFunctionLiteral, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
+import { BlockStatement, Program } from "../../../../03_0_Structure_🌴/1_ast/1_0_1_root.js"
+import { ClassMethod, ClassPair, ClassProperty, GraphEdge, GraphNode, HashPair } from "../../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements.js"
+import { getDefaultValueNodeForDataType } from "../../../../03_0_Structure_🌴/1_ast/3_util_⚙/ast-util.js"
+import { CodeData } from "../../../../01_2_Sequence_📘🌊/0_source/source-code.js"
+import { AbstractExpressionParser } from "../../0_2_abstract-parser/0_2_1_abstract-expression-parser.js"
 
 
 export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLiteral> { //AbstractParser<TypedTokenLiteral, Node, Expression, Operator> {

@@ -1,30 +1,30 @@
 import { ConceptExpression, Expression, FunctionNode, IIdentifier, Node }  
                                     from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { ParseTreeAnalysis }        from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta";
-import { Operator }                 from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators";
-import { ObjectType }               from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/object-type.enum";
-import { STREAM_DIRECTION }         from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum";
-import { Optimizer }                from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/optimizer";
+import { ParseTreeAnalysis }        from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta.js"
+import { Operator }                 from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators.js"
+import { ObjectType }               from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/object-type.enum.js"
+import { STREAM_DIRECTION }         from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum.js"
+import { Optimizer }                from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/optimizer.js"
 
 import { ArrayObject, BooleanObject, _BuiltinFunctionObject, ClassifiedObject, ConceptObject, ErrorObject, Float, GraphObject, 
     Hash, Integer, LambdaFunction, PureFunction, ReturnValue, StreamObject, StringObject, WheelObject } 
                                                     from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object";
-import { TRUE, FALSE, NULL }                        from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton";
+import { TRUE, FALSE, NULL }                        from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton.js"
 
-import { Environment, NewEnclosedEnvironment }      from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
-import { EObject, FunctionObject, InMemoryScalar }  from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
+import { Environment, NewEnclosedEnvironment }      from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment.js"
+import { EObject, FunctionObject, InMemoryScalar }  from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure.js"
 import { copyClassifiedObject, copyHashMap, copyList, nativeBoolToBooleanEObject, newError } 
                                                     from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
 
 
-import { makeRuntimeEnvironment, RecursiveEvaluator } from "./2_4_recursive-evaluator";
-import { Evaluator } from "./0_1_evaluator-structure";
-import { ConceptEvaluator } from "./2_2_concept-evaluator";
-import { Analyzer } from "../../0_3_analyzer/1_3_expression-analyzer";
-import { JSTranspiler } from "../../../3_un-parser/2_token.unparser/2_un-parse_targets/1_1_javascript";
-import { RuntimeOptimizer } from "../3_1_runtime-optimizer";
+import { makeRuntimeEnvironment, RecursiveEvaluator } from "./2_4_recursive-evaluator.js"
+import { Evaluator } from "./0_1_evaluator-structure.js"
+import { ConceptEvaluator } from "./2_2_concept-evaluator.js"
+import { Analyzer } from "../../0_3_analyzer/1_3_expression-analyzer.js"
+import { JSTranspiler } from "../../../3_un-parser/2_token.unparser/2_un-parse_targets/1_1_javascript.js"
+import { RuntimeOptimizer } from "../3_1_runtime-optimizer.js"
 
-import { BlockStatement, Program }  from "../../../../03_0_Structure_🌴/1_ast/1_0_1_root";
+import { BlockStatement, Program }  from "../../../../03_0_Structure_🌴/1_ast/1_0_1_root.js"
 import {    AssignmentStatement, ClassStatement, ConceptStatement, ExecStatement, ExpressionStatement, 
             ForStatement,   IfStatement, IndexedAssignmentStatement, LetStatement, ReturnStatement, 
             SleepStatement, WhileStatement } 
@@ -36,11 +36,11 @@ import {    BooleanLiteral, ClassLiteral, ConceptSequenceLiteral, GraphLiteral, 
                                     from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
 
 
-import { evaluateSourceFile, printNativeString } from "../../../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util";
+import { evaluateSourceFile, printNativeString } from "../../../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util.js"
 
-import { builtins } from "../../../../4_Frame_⚡/2_deprecated_builtin";
-import { nodeObjects } from "../../../../4_Frame_⚡/4_io/1_file-system/2_compatibility";
-import { readWholeFile } from "../../../../3_Operation_☀/3_util_(🔥)/4_0_io-util";
+import { builtins } from "../../../../4_Frame_⚡/2_deprecated_builtin.js"
+import { nodeObjects } from "../../../../4_Frame_⚡/4_io/1_file-system/2_compatibility.js"
+import { readWholeFile } from "../../../../3_Operation_☀/3_util_(🔥)/4_0_io-util.js"
 
 
 

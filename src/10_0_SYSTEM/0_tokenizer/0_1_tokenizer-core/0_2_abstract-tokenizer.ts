@@ -1,6 +1,6 @@
-import { AbstractToken } from "../../../01_1_ELEMENT/1_token_💧/0_1_token-structure";
-import { Token, TypedTokenLiteral } from "../../../01_1_ELEMENT/1_token_💧/2_1_token";
-import { CodeCoordinates, CodeData, SourceCode } from "../../../01_2_Sequence_📘🌊/0_source/source-code";
+import { AbstractToken } from "../../../01_1_ELEMENT/1_token_💧/0_1_token-structure.js"
+import { Token, TypedTokenLiteral } from "../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
+import { CodeCoordinates, CodeData, SourceCode } from "../../../01_2_Sequence_📘🌊/0_source/source-code.js"
 
 /*
  * /T\__________[=]

@@ -1,6 +1,6 @@
 
-import { TokenVolume, TypedTokenVolume } from "../../../01_1_ELEMENT/1_token_💧/2_4_token-volume";
-import { AbstractTokenizer } from "../0_1_tokenizer-core/0_2_abstract-tokenizer";
+import { TokenVolume, TypedTokenVolume } from "../../../01_1_ELEMENT/1_token_💧/2_4_token-volume.js"
+import { AbstractTokenizer } from "../0_1_tokenizer-core/0_2_abstract-tokenizer.js"
 
 /**
  * 

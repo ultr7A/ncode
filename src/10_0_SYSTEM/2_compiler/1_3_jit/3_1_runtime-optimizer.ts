@@ -1,19 +1,19 @@
 
 
-import { ParseTreeAnalysis } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta";
-import { IBlockStatement } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { Optimizer } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/optimizer";
-import { DynamicFunction } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
-import { ClassifiedObject } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object";
-import { Environment }      from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
+import { ParseTreeAnalysis } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta.js"
+import { IBlockStatement } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
+import { Optimizer } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/optimizer.js"
+import { DynamicFunction } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure.js"
+import { ClassifiedObject } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object.js"
+import { Environment }      from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment.js"
 
-import { Transpiler } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/abstract-un-parser";
-import { Analyzer } from "../0_3_analyzer/1_3_expression-analyzer";
+import { Transpiler } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/abstract-un-parser.js"
+import { Analyzer } from "../0_3_analyzer/1_3_expression-analyzer.js"
 import { ApplyFunctionFunction, EvalFunction } from "./0_0_jit-compiler-structure/0_3_3_eval-types"
-import { ExpressionEvaluator } from "./2_0_evaluator/2_0_evaluator";
+import { ExpressionEvaluator } from "./2_0_evaluator/2_0_evaluator.js"
 
-import { JSECSContextPlugin } from "./4_3_1_runtime-context-unparser-plugin";
-import { JSECSEvaluatorContext } from "./4_3_2_hybrid-runtime-context";
+import { JSECSContextPlugin } from "./4_3_1_runtime-context-unparser-plugin.js"
+import { JSECSEvaluatorContext } from "./4_3_2_hybrid-runtime-context.js"
 
 /**
  * Optimizer reads complexity metrics from Parser

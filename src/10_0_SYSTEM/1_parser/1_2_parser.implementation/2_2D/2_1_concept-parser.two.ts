@@ -1,21 +1,21 @@
 
-import { Node, ConceptExpression }  from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { ConceptOperator }          from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements";
+import { Node, ConceptExpression }  from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
+import { ConceptOperator }          from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements.js"
 
-import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token";
+import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
 
-import { TypedTokenSurface } from "../../../../01_1_ELEMENT/1_token_💧/2_2_token-surface";
-import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
-import { Orientation_XY, Oriented } from "../../../0_0_system-structure/1_0_system-structure";
-import { TokenizerTwo } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_2_1_tokenizer.two";
+import { TypedTokenSurface } from "../../../../01_1_ELEMENT/1_token_💧/2_2_token-surface.js"
+import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
+import { Orientation_XY, Oriented } from "../../../0_0_system-structure/1_0_system-structure.js"
+import { TokenizerTwo } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_2_1_tokenizer.two.js"
 
-import { ConceptAnalyzer } from "../../../2_compiler/0_3_analyzer/2_3_concept-analyzer";
-import { conceptPrecedences } from "../../0_0_parser-core/2_2_concept-precedence";
+import { ConceptAnalyzer } from "../../../2_compiler/0_3_analyzer/2_3_concept-analyzer.js"
+import { conceptPrecedences } from "../../0_0_parser-core/2_2_concept-precedence.js"
 
-import { InfixParseFn, PrefixParseFn }     from "../../0_0_parser-core/3_0_parse-functions";
-import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser";
+import { InfixParseFn, PrefixParseFn }     from "../../0_0_parser-core/3_0_parse-functions.js"
+import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser.js"
 
-import { GraphParserTwo } from "./0_2_4_graph-parser.two";
+import { GraphParserTwo } from "./0_2_4_graph-parser.two.js"
 
 
 /**
