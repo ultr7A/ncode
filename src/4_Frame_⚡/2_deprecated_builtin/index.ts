@@ -1,13 +1,12 @@
-
 import { ObjectType }               from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/object-type.enum.js"
-import { Matrix }                   from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/maths/matrix.js"
-import { Vector }                   from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/maths/vector.js"
+import { Matrix }                   from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/maths/matrix/index.js"
+import { Vector }                   from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/maths/vector/index.js"
 import { ArrayObject, _BuiltinFunctionObject, Float, Integer, StringObject  }
-                                    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object";   
+                                    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object.js";   
 import { NULL }                     from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton.js"
 import { assertBuiltinArgs }        from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_builtin_util.js"
 import { copyListElements, nativeObjToMap, newError } 
-                                    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
+                                    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util.js";
 
 import { systemColorRenderer, ImageObject, Graphics }      from "meta.gl/dist/index.js";                               /*    
 ▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃  */

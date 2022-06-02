@@ -8,13 +8,13 @@ import { Optimizer }                from "wrapt.co_re/dist/Domain [╍🌐╍�
 
 import { ArrayObject, BooleanObject, _BuiltinFunctionObject, ClassifiedObject, ConceptObject, ErrorObject, Float, GraphObject, 
     Hash, Integer, LambdaFunction, PureFunction, ReturnValue, StreamObject, StringObject, WheelObject } 
-                                                    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object";
+                                                    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object.js";
 import { TRUE, FALSE, NULL }                        from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton.js"
 
 import { Environment, NewEnclosedEnvironment }      from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment.js"
 import { EObject, FunctionObject, InMemoryScalar }  from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure.js"
 import { copyClassifiedObject, copyHashMap, copyList, nativeBoolToBooleanEObject, newError } 
-                                                    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
+                                                    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util.js";
 
 
 import { makeRuntimeEnvironment, RecursiveEvaluator } from "./2_4_recursive-evaluator.js"
@@ -38,7 +38,7 @@ import {    BooleanLiteral, ClassLiteral, ConceptSequenceLiteral, GraphLiteral, 
 
 import { evaluateSourceFile, printNativeString } from "../../../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util.js"
 
-import { builtins } from "../../../../4_Frame_⚡/2_deprecated_builtin.js"
+import { builtins } from "../../../../4_Frame_⚡/2_deprecated_builtin/index.js"
 import { nodeObjects } from "../../../../4_Frame_⚡/4_io/1_file-system/2_compatibility.js"
 import { readWholeFile } from "../../../../3_Operation_☀/3_util_(🔥)/4_0_io-util.js"
 

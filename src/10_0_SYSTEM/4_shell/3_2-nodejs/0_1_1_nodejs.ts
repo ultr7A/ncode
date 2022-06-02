@@ -7,9 +7,9 @@ import { ExpressionEvaluator } from "../../2_compiler/1_3_jit/2_0_evaluator/2_0_
 import { introMessage } from "../3_1-shell-util/3_1-shell-util.js"
 
 
-import { localEvaluate, makeHandleInput } from "./0_1_0_nodejs";
+import { localEvaluate, makeHandleInput } from "./0_1_0_nodejs.js"
 
-var fs = require("fs");
+import * as fs from "fs";
 
 export function makeCLIRepl(
     tokenizer: TokenizerOne, 

@@ -7,7 +7,7 @@ import { Environment }                      from "wrapt.co_re/dist/Model [╍⬡
 import { ecsObjectToNativeObject, nativeListToArray, nativeObjToClassifiedObject, nativeValueToECSValue } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util.js"
 
 import { LetStatement } from "../../../03_0_Structure_🌴/1_ast/1_2_1_statement.js"
-import { builtins } from "../../../4_Frame_⚡/2_deprecated_builtin.js"
+import { builtins } from "../../../4_Frame_⚡/2_deprecated_builtin/index.js"
 import { ApplyFunctionFunction } from "./0_0_jit-compiler-structure/0_3_3_eval-types.js"
 import { EvaluatorContext } from "./0_0_jit-compiler-structure/0_3_4_evaluator-context-type.js"
 

@@ -1,6 +1,6 @@
 import 
         { FloatLiteral, IntegerLiteral, StringLiteral, BooleanLiteral } 
-from "../1_3_1_literal";
+from "../1_3_1_literal.js";
 
 import { Node }     from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
 import { NodeName } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum.js"

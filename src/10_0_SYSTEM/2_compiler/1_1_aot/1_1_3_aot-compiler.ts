@@ -8,7 +8,7 @@ import { nodeObjects } from "../../../4_Frame_⚡/4_io/1_file-system/2_compatibi
 import { TokenizerOne } from "../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one.js"
 import { Parser } from "../../1_parser/1_1_parser/3_1_1_parser.js"
 import { Transpiler } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/abstract-un-parser.js"
-import { localEvaluate } from "../../4_shell/3_2-nodejs/0_1_0_nodejs";
+import { localEvaluate } from "../../4_shell/3_2-nodejs/0_1_0_nodejs.js";
 import { Analyzer } from "../0_3_analyzer/1_3_expression-analyzer.js"
 import { applyFunction, ExpressionEvaluator } from "../1_3_jit/2_0_evaluator/2_0_evaluator.js"
 import { RuntimeOptimizer } from "../1_3_jit/3_1_runtime-optimizer.js"
