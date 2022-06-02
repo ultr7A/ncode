@@ -1,1 +1,3 @@
-export { AbstractToken, VectorToken } from "./01_1_ELEMENT/1_token_💧/0_1_token-structure";
+import { Shell } from "./10_0_SYSTEM/4_shell/index.js";
+
+Shell.start();
