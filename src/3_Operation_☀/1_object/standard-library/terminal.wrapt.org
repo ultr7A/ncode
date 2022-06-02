@@ -1,6 +1,6 @@
-import { _BuiltinFunctionObject } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object";
-import { NULL } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton";
-import { _makeBuiltinClass } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/3_builtin_util";
+import { _BuiltinFunctionObject } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object";
+import { NULL } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton";
+import { _makeBuiltinClass } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_builtin_util";
 import { Modifier } from "../../01_1_ELEMENT/1_token_💧/2_1_token";
 import { platformSpecificCall } from "../../3_Operation_☀/3_util_(🔥)/2_platform-utils";
 import { getDocument } from "../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util";

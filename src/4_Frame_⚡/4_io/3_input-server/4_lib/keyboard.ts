@@ -1,5 +1,5 @@
-import { ObjectType } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/object-type.enum";
-import { _BuiltinFunctionObject, Hash } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object";
+import { ObjectType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/object-type.enum";
+import { _BuiltinFunctionObject, Hash } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object";
 import { platformSpecificCall } from "../../../../3_Operation_☀/3_util_(🔥)/2_platform-utils";
 import { getWindow } from "../../../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util";
 import { nodeObjects } from "../../1_file-system/2_compatibility";

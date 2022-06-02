@@ -1,20 +1,20 @@
 import { ConceptExpression, Expression, FunctionNode, IIdentifier, Node }  
-                                    from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { ParseTreeAnalysis }        from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/4_0_0_meta";
-import { Operator }                 from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators";
-import { ObjectType }               from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/object-type.enum";
-import { STREAM_DIRECTION }         from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum";
-import { Optimizer }                from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/system/optimizer";
+                                    from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { ParseTreeAnalysis }        from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta";
+import { Operator }                 from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators";
+import { ObjectType }               from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/object-type.enum";
+import { STREAM_DIRECTION }         from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum";
+import { Optimizer }                from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/optimizer";
 
 import { ArrayObject, BooleanObject, _BuiltinFunctionObject, ClassifiedObject, ConceptObject, ErrorObject, Float, GraphObject, 
     Hash, Integer, LambdaFunction, PureFunction, ReturnValue, StreamObject, StringObject, WheelObject } 
-                                                    from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object";
-import { TRUE, FALSE, NULL }                        from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton";
+                                                    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object";
+import { TRUE, FALSE, NULL }                        from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton";
 
-import { Environment, NewEnclosedEnvironment }      from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
-import { EObject, FunctionObject, InMemoryScalar }  from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
+import { Environment, NewEnclosedEnvironment }      from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
+import { EObject, FunctionObject, InMemoryScalar }  from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
 import { copyClassifiedObject, copyHashMap, copyList, nativeBoolToBooleanEObject, newError } 
-                                                    from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
+                                                    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
 
 
 import { makeRuntimeEnvironment, RecursiveEvaluator } from "./2_4_recursive-evaluator";

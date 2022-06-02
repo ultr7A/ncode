@@ -1,6 +1,6 @@
-import { InspectionType } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
-import { Environment } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
-import { forceSingleLine } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util";
+import { InspectionType } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
+import { Environment } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
+import { forceSingleLine } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util";
 import { Program } from "../../../../03_0_Structure_🌴/1_ast/1_0_1_root";
 
 import { Parser }       from "../../../1_parser/1_1_parser/3_1_1_parser";

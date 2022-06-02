@@ -1,4 +1,4 @@
-import { Node, ConceptExpression } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { Node, ConceptExpression } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
 
 import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token";
 import { TypedTokenVolume } from "../../../../01_1_ELEMENT/1_token_💧/2_4_token-volume";

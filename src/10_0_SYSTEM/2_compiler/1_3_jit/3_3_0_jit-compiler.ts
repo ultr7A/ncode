@@ -10,8 +10,8 @@
  * 
  */
 
-import { UnParser }    from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/system/un-parser";
-import { Environment } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
+import { UnParser }    from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/un-parser";
+import { Environment } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
 import { TokenizerOne } from "../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one";
 import { Parser } from "../../1_parser/1_1_parser/3_1_1_parser";
 import { Transpiler } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/abstract-un-parser";

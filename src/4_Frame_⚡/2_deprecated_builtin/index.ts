@@ -1,15 +1,15 @@
 
-import { ObjectType }               from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/object-type.enum";
-import { Matrix }                   from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/maths/3d/matrix";
-import { Vector }                   from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/maths/3d/vector";
+import { ObjectType }               from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/object-type.enum";
+import { Matrix }                   from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/maths/matrix";
+import { Vector }                   from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/maths/vector";
 import { ArrayObject, _BuiltinFunctionObject, Float, Integer, StringObject  }
-                                    from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object";   
-import { NULL }                     from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton";
-import { assertBuiltinArgs }        from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/3_builtin_util";
+                                    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object";   
+import { NULL }                     from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton";
+import { assertBuiltinArgs }        from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_builtin_util";
 import { copyListElements, nativeObjToMap, newError } 
-                                    from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
+                                    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
 
-import { systemColorRenderer, ImageObject, Graphics }      from "meta.gl/lib";                               /*    
+import { systemColorRenderer, ImageObject, Graphics }      from "meta.gl/dist/index.js";                               /*    
 ▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃  */
 
 

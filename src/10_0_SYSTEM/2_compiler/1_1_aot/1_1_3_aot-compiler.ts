@@ -1,7 +1,7 @@
-import { Node }         from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { UnParser }     from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/system/un-parser";
-import { Environment } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
-import { forceSingleLine } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util";
+import { Node }         from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { UnParser }     from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/un-parser";
+import { Environment } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
+import { forceSingleLine } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util";
 import { getSourceFile, readWholeFile } from "../../../3_Operation_☀/3_util_(🔥)/4_0_io-util";
 import { nodeObjects } from "../../../4_Frame_⚡/4_io/1_file-system/2_compatibility";
 

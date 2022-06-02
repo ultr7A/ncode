@@ -1,8 +1,8 @@
 import { Node, Expression, Statement, Value, FunctionNode } 
-                                    from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { Operator }                 from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators";
-import { STREAM_DIRECTION }         from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum";
-import { BuiltinGraphOperatorType } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/4_graph-operators";
+                                    from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { Operator }                 from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators";
+import { STREAM_DIRECTION }         from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum";
+import { BuiltinGraphOperatorType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/4_graph-operators";
 
 
 import { Analyzer }       from "../../../2_compiler/0_3_analyzer/1_3_expression-analyzer";

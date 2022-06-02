@@ -1,11 +1,11 @@
 
 
-import { ParseTreeAnalysis } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/4_0_0_meta";
-import { IBlockStatement } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { Optimizer } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/system/optimizer";
-import { DynamicFunction } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
-import { ClassifiedObject } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
-import { Environment }      from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
+import { ParseTreeAnalysis } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta";
+import { IBlockStatement } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { Optimizer } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/optimizer";
+import { DynamicFunction } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
+import { ClassifiedObject } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object";
+import { Environment }      from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
 
 import { Transpiler } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/abstract-un-parser";
 import { Analyzer } from "../0_3_analyzer/1_3_expression-analyzer";

@@ -1,9 +1,10 @@
 {
     "name": "wrapt.org",
-    "version": "0.1.5",
+    "version": "0.1.6",
+    "type": "module",
     "description": "Multi-paradigm, multi-dimensional programming language with AOT compilation to JS",
     "scripts": {
-        "start": "node lib/src/10_0_SYSTEM/4_shell/index.js",
+        "start": "node dist/index.js",
         "test": "jest",
         "build": "tsc",
         "prepublish": "npm run build"
@@ -15,11 +16,6 @@
     "keywords": [],
     "author": "Jeremy Evans <openspacehexagon@gmail.com>",
     "license": "MIT",
-    "dependencies": {
-        "esm": "^3.2.25",
-        "meta.gl": "^0.0.14",
-        "wrapt.co_re": "^1.1.10"
-    },
     "devDependencies": {
         "@types/jest": "^26.0.24",
         "jest": "^27.2.5",
@@ -57,5 +53,9 @@
             "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/mocks.js",
             "\\.(css|less)$": "<rootDir>/__mocks__/mocks.js"
         }
+    },
+    "dependencies": {
+        "meta.gl": "^0.1.19",
+        "wrapt.co_re": "^1.1.25"
     }
 }

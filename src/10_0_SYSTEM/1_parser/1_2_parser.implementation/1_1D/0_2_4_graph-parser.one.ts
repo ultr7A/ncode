@@ -1,7 +1,7 @@
 
 import { AbstractOperator, Node, Expression, IGraphEdge, IGraphNode } 
-                            from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { GraphOperator }    from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements";
+                            from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { GraphOperator }    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements";
 
                  import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token";
 import { Pair } from "../../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements";
