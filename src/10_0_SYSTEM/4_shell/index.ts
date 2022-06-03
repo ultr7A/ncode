@@ -16,9 +16,8 @@ export class Shell {
             console.log("** Using AOTCompiler **");
             compiler = new AOTCompiler();
             
-
         } else { 
-            console.log("** Using JITCompiler **");
+
             compiler = new JITCompiler();
             let shell;
 

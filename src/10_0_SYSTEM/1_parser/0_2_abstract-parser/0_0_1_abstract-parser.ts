@@ -8,7 +8,7 @@ import { Token } from "../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
 import { CodeCoordinates, CodeData } from "../../../01_2_Sequence_📘🌊/0_source/source-code.js"
 import { Program } from "../../../03_0_Structure_🌴/1_ast/1_0_1_root.js"
 
-import { AbstractTokenizer } from "../../0_tokenizer/0_1_tokenizer-core/0_2_abstract-tokenizer.js"
+import { AbstractTokenizer, ITokenizer } from "../../0_tokenizer/0_1_tokenizer-core/0_2_abstract-tokenizer.js"
 import { ExpressionAnalysisDiagnosticContext } from "../../2_compiler/0_3_analyzer/0_1_analyzer-structure.js"
 import { AbstractAnalyzer } from "../../2_compiler/0_3_analyzer/0_3_abstract-analyzer.js"
 import { Analyzer } from "../../2_compiler/0_3_analyzer/1_3_expression-analyzer.js"
@@ -33,9 +33,7 @@ export abstract class AbstractParser<
     protected curToken:  TokenObject;
     protected peekToken: TokenObject;
     protected errors = [] as string[];
-    //TODO: move analyzer logic out of ParserOne and into AbstractAnalyzer<>:
-    protected analyzer?: AnalyzerType;
-
+    
     abstract prefixParseFns: Partial<{ [key in Token]: PrefixParseFn<ExpressionNodeType, OutputNodeType> }>;
     abstract infixParseFns:  Partial<{ [key in Token]:  InfixParseFn<ExpressionNodeType, OutputNodeType> }>;
                 
@@ -47,7 +45,7 @@ export abstract class AbstractParser<
 
 
     constructor(
-            protected tokenizer:  AbstractTokenizer<CodeCoordinates, CodeData, string, TokenObject>, 
+            protected tokenizer:  AbstractTokenizer<CodeData,TokenObject>, // & ITokenizer<CodeCoordinates, CodeData>, 
             protected precedence: IPrecedences
     ) {
         this.precedence = precedence;

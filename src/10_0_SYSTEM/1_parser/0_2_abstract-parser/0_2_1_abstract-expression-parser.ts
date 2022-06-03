@@ -1,4 +1,5 @@
 import { Node, Statement, Expression, FunctionNode } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
+import { NodeName }                                  from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum.js";
 
 import { AbstractToken } from "../../../01_1_ELEMENT/1_token_💧/0_1_token-structure.js"
 import { Token }         from "../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
@@ -69,7 +70,7 @@ export  abstract class AbstractExpressionParser
         while (!this.curTokenIs(Token.EOF)) {
             var stmt = this.parseStatement();
             if (stmt != null) {
-                if (stmt.NodeName == "ExpressionStatement") {
+                if (stmt.NodeName ==  NodeName.ExpressionStatement) {
                     if ((stmt as ExpressionStatement).Operand == null) {
                         continue;
                     }

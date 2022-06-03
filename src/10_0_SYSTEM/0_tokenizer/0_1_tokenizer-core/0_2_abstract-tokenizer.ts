@@ -17,24 +17,13 @@ import { CodeCoordinates, CodeData, SourceCode } from "../../../01_2_Sequence_ðŸ
  * 
  */
 export abstract class AbstractTokenizer<
-                            CoordinateSystem extends CodeCoordinates, 
                             Data             extends CodeData,               //
-                            ComparisonUnit                         = string, // (unit could be a vector)
                             OutputFormat     extends AbstractToken = TypedTokenLiteral
-                        >
-       implements     SourceCode<CoordinateSystem, Data>  
+                        >  
 {
-    coordinates: {
-        readPosition: CoordinateSystem,
-        position:     CoordinateSystem,
-    }
-    
-    abstract code:        Data;
-    abstract ch:          ComparisonUnit;
-    abstract lineNumber:  CoordinateSystem;
-
+    lineNumber: number | number[];
+   
     abstract NextToken():                               OutputFormat;
-    abstract newToken(tokenType: Token, literal: Data): OutputFormat;
     
     protected isDigit(      ch: string): boolean {
         return ('0' <= ch && ch <= '9') || ch == '.';
@@ -57,4 +46,26 @@ export abstract class AbstractTokenizer<
 
     abstract readString(endChar:string):          string ;
 
+}
+
+
+export interface ITokenizer<
+                    CoordinateSystem extends CodeCoordinates, 
+                    Data extends CodeData,
+                    ComparisonUnit = string, // (unit could be a vector)
+                    OutputFormat     extends AbstractToken = TypedTokenLiteral
+                 >
+       extends SourceCode<CoordinateSystem, Data> 
+{
+
+    coordinates: {
+        readPosition: CoordinateSystem,
+        position:     CoordinateSystem,
+    }
+    
+    code:        Data;
+    ch:          ComparisonUnit;
+    lineNumber:  CoordinateSystem;
+
+    newToken(tokenType: unknown, literal: Data): OutputFormat;
 }

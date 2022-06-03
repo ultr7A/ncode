@@ -29,14 +29,14 @@ export class ConceptParserTwo extends AbstractParser<TypedTokenSurface, Node, Co
 
     public direction:   Orientation_XY = 0;
     
-    protected curToken:  TypedTokenSurface;
-    protected peekToken: TypedTokenSurface;
+    protected curToken:  TypedTokenSurface = null;
+    protected peekToken: TypedTokenSurface = null;
 
     public prefixParseFns = {} as Partial<{ [prefixToken in Token]: PrefixParseFn<ConceptExpression, Node> }>;
     public infixParseFns  = {} as Partial<{ [infixToken  in Token]:  InfixParseFn<ConceptExpression, Node> }>;
 
-    constructor(l: TokenizerTwo) {
-        super(l, conceptPrecedences);
+    constructor(tokenizer: TokenizerTwo) {
+        super(tokenizer, conceptPrecedences);
         this.analyzer = new ConceptAnalyzer();
     }
 

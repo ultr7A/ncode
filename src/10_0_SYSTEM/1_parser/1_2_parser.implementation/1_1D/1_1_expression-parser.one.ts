@@ -6,32 +6,47 @@ import { BuiltinGraphOperatorType } from "wrapt.co_re/dist/Domain [╍🌐╍�
 
 
 import { Analyzer }       from "../../../2_compiler/0_3_analyzer/1_3_expression-analyzer.js"
-import { Precedence, precedences } from "../../0_0_parser-core/2_1_precedence.js"
+import { Precedence, precedences }     from "../../0_0_parser-core/2_1_precedence.js"
 import { InfixParseFn, PrefixParseFn } from "../../0_0_parser-core/3_0_parse-functions.js"
 import { GraphParserOne } from "./0_2_4_graph-parser.one.js"
 import { TokenizerOne } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one.js"
 import { modifierNames, Token, TypedTokenLiteral } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
-import { GraphOperator } from "../../../../03_0_Structure_🌴/1_ast/1_1_0_expression-elements.js"
-import { CallExpression, IndexExpression, InfixExpression, NewExpression, PrefixExpression, StreamExpression } from "../../../../03_0_Structure_🌴/1_ast/1_1_1_expression.js"
-import { AssignmentStatement, ClassStatement, ExecStatement, ExpressionStatement, ForStatement, IfStatement, IndexedAssignmentStatement, LetStatement, ReturnStatement, SleepStatement, WhileStatement } from "../../../../03_0_Structure_🌴/1_ast/1_2_1_statement.js"
-import { ArrayLiteral, BooleanLiteral, ClassLiteral, FloatLiteral, FunctionLiteral, GraphLiteral, HashLiteral, Identifier, IntegerLiteral, PureFunctionLiteral, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
+
+
+import { GraphOperator }           from "../../../../03_0_Structure_🌴/1_ast/1_1_0_expression-elements.js"
+import { CallExpression, IndexExpression, InfixExpression, NewExpression, PrefixExpression, StreamExpression } 
+                                   from "../../../../03_0_Structure_🌴/1_ast/1_1_1_expression.js"
+import { AssignmentStatement, ClassStatement, ExecStatement, ExpressionStatement, ForStatement, IfStatement, IndexedAssignmentStatement, LetStatement, ReturnStatement, SleepStatement, WhileStatement } 
+                                   from "../../../../03_0_Structure_🌴/1_ast/1_2_1_statement.js"
+import { ArrayLiteral, BooleanLiteral, ClassLiteral, FloatLiteral, FunctionLiteral, GraphLiteral, HashLiteral, Identifier, IntegerLiteral, PureFunctionLiteral, StringLiteral } 
+                                   from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
 import { BlockStatement, Program } from "../../../../03_0_Structure_🌴/1_ast/1_0_1_root.js"
-import { ClassMethod, ClassPair, ClassProperty, GraphEdge, GraphNode, HashPair } from "../../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements.js"
-import { getDefaultValueNodeForDataType } from "../../../../03_0_Structure_🌴/1_ast/3_util_⚙/ast-util.js"
+import { ClassMethod, ClassPair, ClassProperty, GraphEdge, GraphNode, HashPair }
+                                   from "../../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements.js"
+import { getDefaultValueNodeForDataType } 
+                                   from "../../../../03_0_Structure_🌴/1_ast/3_util_⚙/ast-util.js"
+
+
 import { CodeData } from "../../../../01_2_Sequence_📘🌊/0_source/source-code.js"
 import { AbstractExpressionParser } from "../../0_2_abstract-parser/0_2_1_abstract-expression-parser.js"
 
 
-export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLiteral> { //AbstractParser<TypedTokenLiteral, Node, Expression, Operator> {
+
+export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLiteral> {
+                                      // AbstractParser<TypedTokenLiteral, Node, Expression, Operator>
+                                 
     
     public analyzer: Analyzer;
     public graphParser: GraphParserOne<GraphOperator, Expression>;
 
+    public curToken:  TypedTokenLiteral = null;
+    public peekToken: TypedTokenLiteral = null;
+
     public prefixParseFns = {} as Partial<{ [token in Token]: PrefixParseFn<Expression, Node> }>;
     public infixParseFns  = {} as Partial<{ [token in Token]:  InfixParseFn<Expression, Node> }>;
 
-    constructor(l: TokenizerOne) {
-        super(l, precedences);
+    constructor(tokenizer: TokenizerOne) {
+        super(tokenizer, precedences);
         this.analyzer = new Analyzer();
 
         /* *************************************************** *

@@ -10,7 +10,6 @@
  * 
  */
 
-import { UnParser }    from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/un-parser.js"
 import { Environment } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment.js"
 import { TokenizerOne } from "../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one.js"
 import { Parser } from "../../1_parser/1_1_parser/3_1_1_parser.js"
@@ -33,13 +32,15 @@ export class JITCompiler {
 
 
    constructor() {
-
+      console.log("**** Construct new JITCompiler ****")
       this.tokenizer = new TokenizerOne();
       this.parser    = new Parser();
+      this.parser.setTokenizerOne(this.tokenizer);
+
       this.analyzer  = new Analyzer();
       this.unparser  = new JSTranspiler();
       this.environment = new Environment();
-      this.evaluator = new ExpressionEvaluator();
+      this.evaluator = new ExpressionEvaluator(this.parser);
       this.optimizer = new RuntimeOptimizer(this.unparser, applyFunction, this.evaluator);
 
    }

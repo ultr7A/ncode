@@ -1,14 +1,12 @@
 
 import { TokenVolume, TypedTokenVolume } from "../../../01_1_ELEMENT/1_token_💧/2_4_token-volume.js"
-import { AbstractTokenizer } from "../0_1_tokenizer-core/0_2_abstract-tokenizer.js"
+import { AbstractTokenizer, ITokenizer } from "../0_1_tokenizer-core/0_2_abstract-tokenizer.js"
 
 /**
  * 
  */
-export class TokenizerThree extends AbstractTokenizer<
-                                        [number, number, number], string[][], 
-                                        string,                   TypedTokenVolume
-                                    >
+export class TokenizerThree extends    AbstractTokenizer<string,TypedTokenVolume>
+                            implements ITokenizer<[number, number, number], string[][], string, TypedTokenVolume>
 {
 
     public ch = "";

@@ -84,6 +84,6 @@ export class RecursiveEvaluator {
 }
 
 
-export function makeRuntimeEnvironment(evaluator: ExpressionEvaluator) { //evalFunction: EvalFunction, evalProgram: EvalProgramFunction) {
-    return new RecursiveEvaluator(new Parser(), evaluator);
+export function makeRuntimeEnvironment(evaluator: ExpressionEvaluator, parser: Parser) { //evalFunction: EvalFunction, evalProgram: EvalProgramFunction) {
+    return new RecursiveEvaluator(parser, evaluator);
 };

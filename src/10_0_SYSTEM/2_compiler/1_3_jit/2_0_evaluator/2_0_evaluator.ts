@@ -41,6 +41,7 @@ import { evaluateSourceFile, printNativeString } from "../../../../3_Operation_�
 import { builtins } from "../../../../4_Frame_⚡/2_deprecated_builtin/index.js"
 import { nodeObjects } from "../../../../4_Frame_⚡/4_io/1_file-system/2_compatibility.js"
 import { readWholeFile } from "../../../../3_Operation_☀/3_util_(🔥)/4_0_io-util.js"
+import { Parser } from "../../../1_parser/1_1_parser/3_1_1_parser.js";
 
 
 
@@ -50,11 +51,11 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
     private embeddedInterpreter: RecursiveEvaluator;
     private conceptEvaluator:    ConceptEvaluator;
 
-    constructor() {
+    constructor(private parser: Parser) {
         this.optimizer = new RuntimeOptimizer(new JSTranspiler(), applyFunction, this);
         this.analyzer  = new Analyzer();
 
-        this.embeddedInterpreter = makeRuntimeEnvironment(this);
+        this.embeddedInterpreter = makeRuntimeEnvironment(this, parser);
     }
 
     private optimizedEvalProgram(program: Program, env: Environment) {

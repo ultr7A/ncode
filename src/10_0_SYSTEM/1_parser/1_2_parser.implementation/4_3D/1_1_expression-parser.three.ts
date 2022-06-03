@@ -30,14 +30,14 @@ export class ExpressionParserThree extends AbstractParser<TypedTokenVolume, Node
 
     public direction:    Orientation_WXYZ = [0, 0, 0, 0];
     
-    protected curToken:  TypedTokenVolume;
-    protected peekToken: TypedTokenVolume;
+    protected curToken:  TypedTokenVolume = null;
+    protected peekToken: TypedTokenVolume = null;
 
     public prefixParseFns = {} as Partial<{ [prefixToken in Token]: PrefixParseFn<Expression, Node> }>;
     public infixParseFns  = {} as Partial<{ [infixToken  in Token]:  InfixParseFn<Expression, Node> }>;
 
-    constructor(l: TokenizerThree) {
-        super(l, precedences);
+    constructor(tokenizer: TokenizerThree) {
+        super(tokenizer, precedences);
     }
 
     

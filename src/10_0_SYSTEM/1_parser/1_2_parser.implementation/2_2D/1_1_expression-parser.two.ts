@@ -8,6 +8,7 @@ import { CodeData } from "../../../../01_2_Sequence_📘🌊/0_source/source-cod
 import { Program } from "../../../../03_0_Structure_🌴/1_ast/1_0_1_root.js"
 import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
 import { Orientation_XY, Oriented } from "../../../0_0_system-structure/1_0_system-structure.js"
+import { AbstractTokenizer, ITokenizer } from "../../../0_tokenizer/0_1_tokenizer-core/0_2_abstract-tokenizer.js"
 import { TokenizerOne } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one.js"
 
 import { TokenizerTwo } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_2_1_tokenizer.two.js"
@@ -28,8 +29,8 @@ export class ExpressionParserTwo extends AbstractParser<TypedTokenSurface, Node,
     public analyzer:    Analyzer;
     public graphParser: GraphParserTwo  <GraphOperator, StringLiteral, Expression>;
 
-    protected curToken:  TypedTokenSurface;
-    protected peekToken: TypedTokenSurface;
+    protected curToken:  TypedTokenSurface = null;
+    protected peekToken: TypedTokenSurface = null;
 
     direction: number;
 
@@ -41,7 +42,7 @@ export class ExpressionParserTwo extends AbstractParser<TypedTokenSurface, Node,
     }
 
     public loadSourceCode(code: CodeData) {
-        (this.tokenizer as TokenizerTwo).loadSourceCode(code as string[]);
+        (this.tokenizer as unknown as TokenizerTwo).loadSourceCode(code as string[]);
     }
 
     parseStatement(): Statement {    

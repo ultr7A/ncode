@@ -1,5 +1,5 @@
 import { LookupIdent, Token, TypedTokenLiteral } from "../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
-import { AbstractTokenizer } from "../0_1_tokenizer-core/0_2_abstract-tokenizer.js"
+import { AbstractTokenizer, ITokenizer } from "../0_1_tokenizer-core/0_2_abstract-tokenizer.js"
 
 
 /***
@@ -12,7 +12,15 @@ import { AbstractTokenizer } from "../0_1_tokenizer-core/0_2_abstract-tokenizer.
  * ----------------
  * (+)__________<Z>
  */
-export class TokenizerOne extends AbstractTokenizer<number, string, string, TypedTokenLiteral> {
+export class TokenizerOne extends    AbstractTokenizer<string, TypedTokenLiteral> 
+                          implements ITokenizer       <number, string>
+{
+
+    constructor() {
+        super() 
+        console.log("** Construct new TokenizerOne **")
+
+    }
 
     coordinates = {
         readPosition: 0,
@@ -24,25 +32,29 @@ export class TokenizerOne extends AbstractTokenizer<number, string, string, Type
 
     lineNumber = 1; //TODO: Make part of CodeCoordinates?
 
-    getInputLength() {
+    getInputLength(): number {
         return this.code.length;
     }
 
-    skipWhitespace() {
+    skipWhitespace(): void {
         while (this.ch == ' ' || this.ch == '\t' || this.ch == '\r' || this.isNewLine()) {
             this.readChar();
         }
     }
 
-    loadSourceCode(input: string) {
+    loadSourceCode(input: string): void {
         this.coordinates.position = 0;
         this.coordinates.readPosition = 0;
         this.lineNumber = 1;
         this.ch = "";
         this.code = input;
+        console.log("TokenizerOne :: loadSourceCode() {(  code = "+this.code+"  )}")
+        
     };
 
-    peekChar() {
+    peekChar(): string {
+        console.log("TokenizerOne :: peekChar() {(  code = "+this.code+"  )}")
+        
         if (this.coordinates.readPosition >= this.code.length) {
             return 'Ω';
         } else {
@@ -51,6 +63,7 @@ export class TokenizerOne extends AbstractTokenizer<number, string, string, Type
     }
     
     public readChar(): void {
+        console.log("TokenizerOne :: readChar() {(  code = "+this.code+"  )}")
         this.ch = this.peekChar();
         this.coordinates.position = this.coordinates.readPosition;
         this.coordinates.readPosition += 1;

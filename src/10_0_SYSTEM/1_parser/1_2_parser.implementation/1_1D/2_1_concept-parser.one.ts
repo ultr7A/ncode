@@ -28,8 +28,8 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
     public analyzer:    ConceptAnalyzer;
     public graphParser: GraphParserOne  <ConceptOperator, ConceptExpression>;
 
-    public curToken:  TypedTokenLiteral;
-    public peekToken: TypedTokenLiteral;
+    public curToken:  TypedTokenLiteral = null;
+    public peekToken: TypedTokenLiteral = null;
 
     public prefixParseFns = {} as Partial<{ [prefixToken in Token]: PrefixParseFn<ConceptExpression, Node> }>;
     public infixParseFns  = {} as Partial<{ [infixToken  in Token]:  InfixParseFn<ConceptExpression, Node> }>;

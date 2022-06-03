@@ -48,7 +48,7 @@ export class AOTCompiler extends AbstractAOTCompiler<Node, string> {
         this.tokenizer = new TokenizerOne();
         this.parser    = new Parser();
         this.analyzer  = new Analyzer();
-        this.evaluator = new ExpressionEvaluator();
+        this.evaluator = new ExpressionEvaluator(this.parser);
         this.optimizer = new RuntimeOptimizer(this.unparser, applyFunction, this.evaluator);
         this.linker    = new ModuleLinker();
     }

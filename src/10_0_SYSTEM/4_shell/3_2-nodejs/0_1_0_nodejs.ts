@@ -48,7 +48,10 @@ export const localEvaluate = function (
     evaluator: ExpressionEvaluator
 ) {
     tokenizer.loadSourceCode(text);
+
+    p.setTokenizerOne(tokenizer);
     p.parseProgram();
+
     let program = p.parseProgram(), evaluated;
 
     if (p.errors.length != 0) {

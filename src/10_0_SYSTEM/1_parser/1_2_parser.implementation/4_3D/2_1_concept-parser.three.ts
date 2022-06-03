@@ -22,14 +22,14 @@ export class ConceptParserThree extends AbstractParser<TypedTokenVolume, Node, C
     public graphParser: GraphParserTwo  <ConceptOperator, StringLiteral, ConceptExpression>;
 
     
-    protected curToken:  TypedTokenVolume;
-    protected peekToken: TypedTokenVolume;
+    protected curToken:  TypedTokenVolume = null;
+    protected peekToken: TypedTokenVolume = null;
 
     public prefixParseFns = {} as Partial<{ [prefixToken in Token]: PrefixParseFn<ConceptExpression, Node> }>;
     public infixParseFns  = {} as Partial<{ [infixToken  in Token]:  InfixParseFn<ConceptExpression, Node> }>;
 
-    constructor(l: TokenizerThree) {
-        super(l, conceptPrecedences);
+    constructor(tokenizer: TokenizerThree) {
+        super(tokenizer, conceptPrecedences);
         this.analyzer = new ConceptAnalyzer();
     }
 
