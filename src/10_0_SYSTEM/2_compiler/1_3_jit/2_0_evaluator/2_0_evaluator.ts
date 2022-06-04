@@ -60,7 +60,7 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
 
     private optimizedEvalProgram(program: Program, env: Environment) {
         var analysis = this.analyzer.analyzeParseTree(program);
-        return this.optimizer.optimizedEvaluate(analysis, program, env, function () { return this.evalProgram(program, env); });
+        return this.optimizer.optimizedEvaluate(analysis, program, env, () => this.evalProgram(program, env) );
     }
 
     public Eval(node: Node, env: Environment, objectContext?: ClassifiedObject, analysis?: ParseTreeAnalysis): EObject {
@@ -73,7 +73,12 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
             // Statements
             case "Program":
                 // console.log(JSON.stringify(node, null, 2));
-                return this.optimizer.optimizedEvaluate(analysis, (node as BlockStatement), env, function () { return this.evalProgram(node, env); });
+                return this.optimizer.optimizedEvaluate(
+                                                            analysis, 
+                                                            (node as BlockStatement), 
+                                                            env, 
+                                                            () =>  this.evalProgram(node as Program, env)  
+                                                       );
             //evalProgram(node, env);
             case "BlockStatement":
                 return this.evalBlockStatement((node as BlockStatement), env, objectContext);
