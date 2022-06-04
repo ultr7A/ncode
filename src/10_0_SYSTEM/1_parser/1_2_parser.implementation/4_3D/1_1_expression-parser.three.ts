@@ -11,6 +11,7 @@ import { Directional, Orientation_WXYZ } from "../../../0_0_system-structure/1_0
 import { TokenizerThree } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_4_1_tokenizer.three.js"
 
 import { Analyzer } from "../../../2_compiler/0_3_analyzer/1_3_expression-analyzer.js"
+import { parseProgram } from "../../0_0_parser-core/0_3_0_parse-program.js"
 import { precedences } from "../../0_0_parser-core/2_1_precedence.js"
 
 import { PrefixParseFn, InfixParseFn } from "../../0_0_parser-core/3_0_parse-functions.js"
@@ -22,25 +23,40 @@ import { GraphParserThree } from "./0_2_4_graph-parser.three.js"
 /**
  * 
  */
-export class ExpressionParserThree extends AbstractParser<TypedTokenVolume, Node, Expression, Operator> 
-                                   implements Directional<Orientation_WXYZ> {
+export class ExpressionParserThree extends    AbstractParser<TypedTokenVolume, Node, Expression, Operator> 
+                                   implements /** IExpressionParser **/ 
+                                              Directional<Orientation_WXYZ> {
     
     public analyzer:    Analyzer;
     public graphParser: GraphParserThree  <GraphOperator, StringLiteral, ConceptExpression>;
 
     public direction:    Orientation_WXYZ = [0, 0, 0, 0];
     
-    protected curToken:  TypedTokenVolume = null;
+    protected currentToken:  TypedTokenVolume = null;
     protected peekToken: TypedTokenVolume = null;
 
     public prefixParseFns = {} as Partial<{ [prefixToken in Token]: PrefixParseFn<Expression, Node> }>;
     public infixParseFns  = {} as Partial<{ [infixToken  in Token]:  InfixParseFn<Expression, Node> }>;
+
+    public setCurrentToken(token) {
+        this.currentToken = token;
+        return token;
+    }
+
+    public setPeekToken(token) {
+        this.peekToken = token;
+        return token;
+    }
 
     constructor(tokenizer: TokenizerThree) {
         super(tokenizer, precedences);
     }
 
     
+    // public parseProgram( ) {
+    //     return parseProgram(this);
+    // }
+
     public doParseProgram(): void {
         console.log("TODO: implement")
     }

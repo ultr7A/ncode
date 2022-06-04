@@ -12,11 +12,6 @@ import { Program } from "../../../03_0_Structure_🌴/1_ast/1_0_1_root.js"
  
 export class Parser { 
  
-    constructor() {
-        console.log("construct new Parser")
-    }
-
-
     public diagnosticContext: ParseTreeAnalysis;
     public currentState: AbstractParser = null;
     
@@ -25,7 +20,6 @@ export class Parser {
 
 
     public setTokenizerOne(tokenizer: TokenizerOne): void {
-        console.log("Parser :: setTokenizerOne()")
         this.tokenizerOne = tokenizer;
     }
 
@@ -48,8 +42,6 @@ export class Parser {
     }
 
     
-
-
     private initializeCurrentState() {
         this.currentState = this.currentState 
                             || 

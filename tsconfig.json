@@ -14,7 +14,7 @@
       
       "preserveConstEnums":true,
       "allowSyntheticDefaultImports": false,
-      
+      "experimentalDecorators": true,
       "types": [
         "jest",
         "node"

@@ -29,7 +29,7 @@ export class ConceptParserTwo extends AbstractParser<TypedTokenSurface, Node, Co
 
     public direction:   Orientation_XY = 0;
     
-    protected curToken:  TypedTokenSurface = null;
+    protected currentToken:  TypedTokenSurface = null;
     protected peekToken: TypedTokenSurface = null;
 
     public prefixParseFns = {} as Partial<{ [prefixToken in Token]: PrefixParseFn<ConceptExpression, Node> }>;
@@ -40,6 +40,15 @@ export class ConceptParserTwo extends AbstractParser<TypedTokenSurface, Node, Co
         this.analyzer = new ConceptAnalyzer();
     }
 
+    public setCurrentToken(token) {
+        this.currentToken = token;
+        return token;
+    }
+
+    public setPeekToken(token) {
+        this.peekToken = token;
+        return token;
+    }
 
     public doParseProgram(): void {
         console.log("TODO: implement")

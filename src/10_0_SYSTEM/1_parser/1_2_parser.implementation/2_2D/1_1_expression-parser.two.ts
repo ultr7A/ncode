@@ -15,6 +15,7 @@ import { TokenizerTwo } from "../../../0_tokenizer/1_2_tokenizer.implementation/
 import { Analyzer } from "../../../2_compiler/0_3_analyzer/1_3_expression-analyzer.js"
 import { precedences }                 from "../../0_0_parser-core/2_1_precedence.js"
 import { InfixParseFn, PrefixParseFn } from "../../0_0_parser-core/3_0_parse-functions.js"
+import { IExpressionParser } from "../../0_0_parser-core/expression-parser.interface.js"
 import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser.js"
 import { GraphParserTwo } from "./0_2_4_graph-parser.two.js"
 
@@ -23,19 +24,30 @@ import { GraphParserTwo } from "./0_2_4_graph-parser.two.js"
 /**
  * 
  */
-export class ExpressionParserTwo extends AbstractParser<TypedTokenSurface, Node, Expression, Operator, Analyzer> 
-                                 implements Oriented<Orientation_XY> {
+export class ExpressionParserTwo extends    AbstractParser<TypedTokenSurface, Node, Expression, Operator, Analyzer> 
+                                 implements /** IExpressionParser, **/
+                                            Oriented<Orientation_XY> {
 
     public analyzer:    Analyzer;
     public graphParser: GraphParserTwo  <GraphOperator, StringLiteral, Expression>;
 
-    protected curToken:  TypedTokenSurface = null;
+    protected currentToken:  TypedTokenSurface = null;
     protected peekToken: TypedTokenSurface = null;
 
     direction: number;
 
     public prefixParseFns = {} as Partial<{ [prefixToken in Token]: PrefixParseFn<Expression, Node> }>;
     public infixParseFns  = {} as Partial<{ [infixToken  in Token]:  InfixParseFn<Expression, Node> }>;
+    
+    public setCurrentToken(token) {
+        this.currentToken = token;
+        return token;
+    }
+
+    public setPeekToken(token: any) {
+        this.peekToken = token;
+        return token;
+    }
 
     constructor(tokenizer: TokenizerTwo) {
         super(tokenizer, precedences);

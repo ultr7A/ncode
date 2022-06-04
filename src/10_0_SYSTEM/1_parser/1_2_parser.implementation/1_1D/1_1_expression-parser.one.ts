@@ -1,8 +1,8 @@
 import { Node, Expression, Statement, Value, FunctionNode } 
                                     from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { Operator }                 from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators.js"
-import { STREAM_DIRECTION }         from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum.js"
-import { BuiltinGraphOperatorType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/4_graph-operators.js"
+import { Operator }                 from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators.js";
+import { STREAM_DIRECTION }         from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum.js";
+import { BuiltinGraphOperatorType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/4_graph-operators.js";
 
 
 import { Analyzer }       from "../../../2_compiler/0_3_analyzer/1_3_expression-analyzer.js"
@@ -28,27 +28,43 @@ import { getDefaultValueNodeForDataType }
 
 
 import { CodeData } from "../../../../01_2_Sequence_📘🌊/0_source/source-code.js"
-import { AbstractExpressionParser } from "../../0_2_abstract-parser/0_2_1_abstract-expression-parser.js"
+import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser.js";
+import { setToken } from "../../0_0_parser-core/0_3_set-token.js";
+import { IExpressionParser } from "../../0_0_parser-core/expression-parser.interface.js";
 
 
 
-export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLiteral> {
-                                      // AbstractParser<TypedTokenLiteral, Node, Expression, Operator>
-                                 
+export class ExpressionParserOne extends     AbstractParser // AbstractExpressionParser<TypedTokenLiteral> 
+                                 implements  IExpressionParser       {
+                                    // AbstractParser<TypedTokenLiteral, Node, Expression, Operator>
+
     
     public analyzer: Analyzer;
     public graphParser: GraphParserOne<GraphOperator, Expression>;
 
-    public curToken:  TypedTokenLiteral = null;
+    public currentToken:  TypedTokenLiteral = null;
     public peekToken: TypedTokenLiteral = null;
 
     public prefixParseFns = {} as Partial<{ [token in Token]: PrefixParseFn<Expression, Node> }>;
     public infixParseFns  = {} as Partial<{ [token in Token]:  InfixParseFn<Expression, Node> }>;
 
+    
+    public setCurrentToken(token) {
+        this.currentToken = token;
+        return token;
+    }
+
+    public setPeekToken(token) {
+        this.peekToken = token;
+        return token;
+    }
+
     constructor(tokenizer: TokenizerOne) {
         super(tokenizer, precedences);
+        super.setSubClass(this);
+        
         this.analyzer = new Analyzer();
-
+        
         /* *************************************************** *
          *  Infix expressions:                                 *
          * *************************************************** */
@@ -130,7 +146,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
 
     public doParseProgram(statements: Statement[], program: Program) {
         this.nextToken();
-        while (!this.curTokenIs(Token.EOF)) {
+        while (!this.currentTokenIs(Token.EOF)) {
             var stmt = this.parseStatement();
             if (stmt != null) {
                 if (stmt.NodeName == "ExpressionStatement") {
@@ -148,12 +164,12 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
 
     parseModifiers(): number[] {
         let modifiers = [], 
-            modifier = modifierNames.indexOf(this.curToken.Type as Token);
+            modifier = modifierNames.indexOf(this.currentToken.Type as Token);
         
         while (modifier > -1) {
             modifiers.push(modifier);
             this.nextToken();
-            modifier = modifierNames.indexOf(this.curToken.Type as Token);
+            modifier = modifierNames.indexOf(this.currentToken.Type as Token);
         }
 
         return modifiers;
@@ -166,11 +182,11 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
      * @returns  {expressions.Expression}
      */
     public parseExpression(precedence: number, declaration = false): Expression {
-        let curTokenType = this.curToken.Type;
-        let prefix = this.prefixParseFns[curTokenType], leftExp;
+        let currentTokenType = this.currentToken.Type;
+        let prefix = this.prefixParseFns[currentTokenType], leftExp;
 
         if (declaration) {
-            leftExp = this.parseDeclaration(curTokenType);
+            leftExp = this.parseDeclaration(currentTokenType);
         } else {
             leftExp = prefix && prefix();
         }
@@ -180,7 +196,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
 
             if (!infix) {
                 if (!leftExp) {
-                    this.noPrefixParseFnError(curTokenType);
+                    this.noPrefixParseFnError(currentTokenType);
                     return null;
                 }
 
@@ -194,10 +210,10 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
     }
 
 
-    public parseDeclaration(curTokenType: Token) {
+    public parseDeclaration(currentTokenType: Token) {
         let pure = false;
 
-        if (curTokenType === Token.PURE) {
+        if (currentTokenType === Token.PURE) {
             let dataType = this.checkDataType();
             pure = true;
             if (this.peekTokenIs(Token.FUNCTION) || dataType) {
@@ -213,7 +229,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
     }
 
     public parsePrefixExpression(): Node {
-        var expression = new PrefixExpression(this.curToken.Literal as Operator, null);
+        var expression = new PrefixExpression(this.currentToken.Literal as Operator, null);
 
         this.nextToken();
         expression.Right = this.parseExpression(Precedence.PREFIX);
@@ -221,7 +237,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
     }
 
     public parseInfixExpression(left: Expression): Node {
-        var expression = new InfixExpression(left, this.curToken.Literal as Operator, null), 
+        var expression = new InfixExpression(left, this.currentToken.Literal as Operator, null), 
             precedence = this.curPrecedence();
 
         this.nextToken();
@@ -292,7 +308,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
 
         if (this.peekTokenIs(Token.IDENT)) {
             this.nextToken();
-            var identValue = this.curToken.Literal;
+            var identValue = this.currentToken.Literal;
             Index = new StringLiteral(identValue);
         
         } else {
@@ -317,9 +333,9 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         let exp = new StreamExpression(STREAM_DIRECTION.READ, null, null, null);
 
         exp.Source = source;
-        while (this.curToken.Type == Token.SOURCE) {
+        while (this.currentToken.Type == Token.SOURCE) {
             this.nextToken();
-            if (!this.curTokenIs(Token.IDENT) && !this.curTokenIs(Token.FUNCTION)) {
+            if (!this.currentTokenIs(Token.IDENT) && !this.currentTokenIs(Token.FUNCTION)) {
                 this.parseError(streamTransformErr);
                 return null;
             }
@@ -336,9 +352,9 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         let exp = new StreamExpression(STREAM_DIRECTION.WRITE, null, null, null);
             
         exp.Sink = sink;
-        while (this.curToken.Type == Token.SINK) {
+        while (this.currentToken.Type == Token.SINK) {
             this.nextToken();
-            if (!this.curTokenIs(Token.IDENT) && !this.curTokenIs(Token.FUNCTION)) {
+            if (!this.currentTokenIs(Token.IDENT) && !this.currentTokenIs(Token.FUNCTION)) {
                 this.parseError(streamTransformErr);
                 return null;
             }
@@ -351,14 +367,14 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
 
 
     public parseStatement(): Statement {
-        if (this.curToken.Type == Token.IDENT && this.peekTokenIs(Token.ASSIGN)) {
+        if (this.currentToken.Type == Token.IDENT && this.peekTokenIs(Token.ASSIGN)) {
             return this.parseAssignmentStatement();
         }
         if (this.isCustomDataType() && this.peekTokenIs(Token.IDENT)) {
             return this.parseLetStatement();
         }
         else {
-            switch (this.curToken.Type) {
+            switch (this.currentToken.Type) {
                 case Token.RETURN:
                     return this.parseReturnStatement();
                 case Token.CONST:
@@ -442,13 +458,13 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         if (!this.expectPeek(Token.LPAREN)) { return null; }
         if (!this.expectPeek(Token.IDENT)) { return null; }
 
-        controlStructure.Element = new Identifier(this.curToken.Literal);
+        controlStructure.Element = new Identifier(this.currentToken.Literal);
         
         // TODO: Analyzer should always be handling this:
         var declaredVars = this.diagnosticContext.declaredVariables;
 
-        if (!declaredVars[this.curToken.Literal]) {
-             declaredVars[this.curToken.Literal] = "int"; // todo, check range type here
+        if (!declaredVars[this.currentToken.Literal]) {
+             declaredVars[this.currentToken.Literal] = "int"; // todo, check range type here
         }
 
         if (!this.expectPeek(Token.COMMA)) { return null; }
@@ -516,7 +532,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
     }
 
     public parseAssignmentStatement() {
-        var stmt = new AssignmentStatement(new Identifier(this.curToken.Literal), null);
+        var stmt = new AssignmentStatement(new Identifier(this.currentToken.Literal), null);
 
         if (!this.expectPeek(Token.ASSIGN)) {
             return null;
@@ -538,7 +554,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
             return null;
         }
 
-        stmt.Identity = new Identifier(this.curToken.Literal);
+        stmt.Identity = new Identifier(this.currentToken.Literal);
         if (!this.peekTokenIs(Token.ASSIGN)) {
             stmt.Value = getDefaultValueNodeForDataType(stmt.DataType);
 
@@ -566,7 +582,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         if (!this.expectPeek(Token.IDENT)) {
             return null;
         }
-        stmt.Identity = new Identifier(this.curToken.Literal);
+        stmt.Identity = new Identifier(this.currentToken.Literal);
         // TODO: Analyzer should always be handling this:
         this.diagnosticContext.declaredVariables[stmt.Identity.Value] = stmt.Identity.Value;
         this.nextToken();
@@ -598,7 +614,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         block.Values = [];
         this.nextToken();
 
-        while (!this.curTokenIs(Token.RBRACE) && !this.curTokenIs(Token.EOF)) {
+        while (!this.currentTokenIs(Token.RBRACE) && !this.currentTokenIs(Token.EOF)) {
             var stmt = this.parseStatement();
             if (stmt.NodeName == "ExpressionStatement") {
                 if ((stmt as ExpressionStatement).Operand == null) {
@@ -630,29 +646,29 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
 
     public parseIdentifier(): Identifier {
         // TODO: Analyzer should always be handling this:
-        if (!this.diagnosticContext.declaredVariables[this.curToken.Literal]) {
-            this.diagnosticContext.undeclaredVariables[this.curToken.Literal] = true;
+        if (!this.diagnosticContext.declaredVariables[this.currentToken.Literal]) {
+            this.diagnosticContext.undeclaredVariables[this.currentToken.Literal] = true;
         }
-        return new Identifier(this.curToken.Literal);
+        return new Identifier(this.currentToken.Literal);
     }
 
     public parseBoolean(): BooleanLiteral {
-        return new BooleanLiteral(this.curTokenIs(Token.TRUE));
+        return new BooleanLiteral(this.currentTokenIs(Token.TRUE));
     }
 
     public parseIntegerLiteral(): IntegerLiteral {
-        let lit = new IntegerLiteral(null), value = parseInt(this.curToken.Literal);
+        let lit = new IntegerLiteral(null), value = parseInt(this.currentToken.Literal);
         if (value == null || value == NaN) {
-            this.errors.push("could not parse " + this.curToken.Literal + " as integer");
+            this.errors.push("could not parse " + this.currentToken.Literal + " as integer");
             return null;
         }
         lit.Value = value;
         return lit;
     }  
     public parseFloatLiteral(): FloatLiteral {
-        let lit = new FloatLiteral(null), value = parseFloat(this.curToken.Literal);
+        let lit = new FloatLiteral(null), value = parseFloat(this.currentToken.Literal);
         if (value == null || value == NaN) {
-            this.errors.push("could not parse " + this.curToken.Literal + " as float");
+            this.errors.push("could not parse " + this.currentToken.Literal + " as float");
             return null;
         }
         lit.Value = value;
@@ -712,7 +728,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         let operatorType;
         let operatorCallExp;
         //                        ------*( )*----->
-        if (this.curTokenIs(Token.ASTERISK_LPAREN)) {
+        if (this.currentTokenIs(Token.ASTERISK_LPAREN)) {
             this.nextToken();
           
             operatorCallExp = this.parseExpression(0);
@@ -815,10 +831,10 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         }
         this.nextToken();
         if (this.isDataType()) {
-            types.push(this.curToken.Literal);
+            types.push(this.currentToken.Literal);
             this.nextToken();
         }
-        var ident = new Identifier(this.curToken.Literal);
+        var ident = new Identifier(this.currentToken.Literal);
         identifiers.push(ident);
         
         // TODO: Analyzer should always be handling this:
@@ -828,10 +844,10 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
             this.nextToken();
             this.nextToken();
             if (this.isDataType()) {
-                types.push(this.curToken.Literal);
+                types.push(this.currentToken.Literal);
                 this.nextToken();
             }
-            ident = new Identifier(this.curToken.Literal);
+            ident = new Identifier(this.currentToken.Literal);
             // TODO: Map key of this declaredVariable + datatype must be scoped.
             // TODO: Analyzer should always be handling this:
             this.diagnosticContext.declaredVariables[ident.Value] = types[types.length - 1] || "any";
@@ -844,7 +860,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
     }
 
     parseStringLiteral(): StringLiteral {
-        return new StringLiteral(this.curToken.Literal);
+        return new StringLiteral(this.currentToken.Literal);
     }
 
     parseArrayLiteral(): ArrayLiteral {
@@ -880,7 +896,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
         var endComment = false;
         while (!endComment) {
             this.nextToken();
-            endComment = this.curToken.Type === Token.RCOMMENT;
+            endComment = this.currentToken.Type === Token.RCOMMENT;
         }
     }
 
@@ -889,14 +905,14 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
             if (peek) {
                 this.nextToken();
             }
-            return this.curToken.Literal;
+            return this.currentToken.Literal;
         }
         return null;
     }
 
     isDataType(peek = false) {
         
-        let detector = peek ? function (t) { return this.peekTokenIs(t); } : function (t) { return this.curTokenIs(t); };
+        let detector = peek ? function (t) { return this.peekTokenIs(t); } : function (t) { return this.currentTokenIs(t); };
         return detector(Token.LET_BOOL)
             || detector(Token.LET_INT) || detector(Token.LET_FLOAT)
             || detector(Token.LET_STRING) || detector(Token.LET_ARRAY)
@@ -905,7 +921,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
     }
 
     isCustomDataType() {
-        var typeStr = this.curToken.Literal, firstChar = typeStr.charCodeAt(0);
+        var typeStr = this.currentToken.Literal, firstChar = typeStr.charCodeAt(0);
         return (firstChar > 64 && firstChar < 91)
             || firstChar > 122; // anything except special characters and lower-case
     }
@@ -916,7 +932,7 @@ export class ExpressionParserOne extends AbstractExpressionParser<TypedTokenLite
                 this.nextToken();
             //}
             // this.nextToken();
-            return this.curToken;
+            return this.currentToken;
         }
     }
 

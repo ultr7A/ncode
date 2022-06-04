@@ -22,7 +22,7 @@ export class ConceptParserThree extends AbstractParser<TypedTokenVolume, Node, C
     public graphParser: GraphParserTwo  <ConceptOperator, StringLiteral, ConceptExpression>;
 
     
-    protected curToken:  TypedTokenVolume = null;
+    protected currentToken:  TypedTokenVolume = null;
     protected peekToken: TypedTokenVolume = null;
 
     public prefixParseFns = {} as Partial<{ [prefixToken in Token]: PrefixParseFn<ConceptExpression, Node> }>;
@@ -34,6 +34,16 @@ export class ConceptParserThree extends AbstractParser<TypedTokenVolume, Node, C
     }
 
     
+    public setCurrentToken(token) {
+        this.currentToken = token;
+        return token;
+    }
+
+    public setPeekToken(token) {
+        this.peekToken = token;
+        return token;
+    }
+
     public doParseProgram(): void {
         console.log("TODO: implement")
     }

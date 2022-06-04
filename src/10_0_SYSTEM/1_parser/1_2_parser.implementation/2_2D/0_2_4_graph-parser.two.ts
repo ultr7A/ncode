@@ -20,7 +20,7 @@ export class GraphParserTwo  <
 
 constructor(
     private readonly nextToken: () => TypedTokenSurface,
-    private readonly curTokenIs: (token: Token) => boolean,
+    private readonly currentTokenIs: (token: Token) => boolean,
 
     private readonly parseGraphNode: (nodes: IGraphNode<GraphKeyType, GraphNodeType>[]) => IGraphNode<GraphKeyType, GraphNodeType>,
 
@@ -43,11 +43,11 @@ constructor(
         this.nextToken(); // skip initial `-` or `->` or `<-`
 
         // if (direction === "left") {
-        //     while(this.curTokenIs(Token.MINUS) && !this.curTokenIs(Token.EOF)) {
+        //     while(this.currentTokenIs(Token.MINUS) && !this.currentTokenIs(Token.EOF)) {
         //         this.nextToken();
         //     }
         // } else {
-        //     while(!(this.curTokenIs(Token.GT) || this.curTokenIs(Token.SOURCE)) && !this.curTokenIs(Token.EOF)) {
+        //     while(!(this.currentTokenIs(Token.GT) || this.currentTokenIs(Token.SOURCE)) && !this.currentTokenIs(Token.EOF)) {
         //         this.nextToken();
         //     }
         // }

@@ -47,14 +47,12 @@ export class TokenizerOne extends    AbstractTokenizer<string, TypedTokenLiteral
         this.coordinates.readPosition = 0;
         this.lineNumber = 1;
         this.ch = "";
+
         this.code = input;
-        console.log("TokenizerOne :: loadSourceCode() {(  code = "+this.code+"  )}")
-        
+        this.readChar();
     };
 
     peekChar(): string {
-        console.log("TokenizerOne :: peekChar() {(  code = "+this.code+"  )}")
-        
         if (this.coordinates.readPosition >= this.code.length) {
             return 'Ω';
         } else {
@@ -63,7 +61,6 @@ export class TokenizerOne extends    AbstractTokenizer<string, TypedTokenLiteral
     }
     
     public readChar(): void {
-        console.log("TokenizerOne :: readChar() {(  code = "+this.code+"  )}")
         this.ch = this.peekChar();
         this.coordinates.position = this.coordinates.readPosition;
         this.coordinates.readPosition += 1;
@@ -120,193 +117,195 @@ export class TokenizerOne extends    AbstractTokenizer<string, TypedTokenLiteral
     }
 
     public NextToken(): TypedTokenLiteral {
-        let tok: TypedTokenLiteral = null, 
+        let token: TypedTokenLiteral = null, 
             num;
             
         this.skipWhitespace();
         switch (this.ch) {
             case '=':
                 if (this.peekChar() == '=') {
-                    tok.Literal = this.ch + this.peekChar();
-                    tok.Type = Token.EQ;
+                    token.Literal = this.ch + this.peekChar();
+                    token.Type = Token.EQ;
                     this.readChar();
                 }
                 else {
-                    tok = this.newToken(Token.ASSIGN, this.ch);
+                    token = this.newToken(Token.ASSIGN, this.ch);
                 }
                 break;
             case '&':
                 if (this.peekChar() == '&') {
                     this.readChar();
                 }
-                tok = this.newToken(Token.AND, this.ch + '&');
+                token = this.newToken(Token.AND, this.ch + '&');
                 break;
             case '|':
                 if (this.peekChar() == '|') {
                     this.readChar();
                 }
-                tok = this.newToken(Token.OR, this.ch + '|');
+                token = this.newToken(Token.OR, this.ch + '|');
                 break;
             case '.':
-                tok = this.newToken(Token.DOT,       this.ch);
+                token = this.newToken(Token.DOT,       this.ch);
                 break;
             case '+':
-                tok = this.newToken(Token.PLUS,      this.ch);
+                token = this.newToken(Token.PLUS,      this.ch);
                 break;
             case ',':
-                tok = this.newToken(Token.COMMA,     this.ch);
+                token = this.newToken(Token.COMMA,     this.ch);
                 break;
             case ';':
-                tok = this.newToken(Token.SEMICOLON, this.ch);
+                token = this.newToken(Token.SEMICOLON, this.ch);
                 break;
             case ':':
-                tok = this.newToken(Token.COLON,     this.ch);
+                token = this.newToken(Token.COLON,     this.ch);
                 break;
             case '(':
-                tok = this.newToken(Token.LPAREN,    this.ch);
+                token = this.newToken(Token.LPAREN,    this.ch);
                 break;
             case ')':
                 if (this.peekChar() == '#') {
-                    tok = this.newToken(Token.RPAREN_POUND, this.ch + '#');
+                    token = this.newToken(Token.RPAREN_POUND, this.ch + '#');
                     this.readChar();
                 } else if (this.peekChar() == '*') {
-                    tok = this.newToken(Token.RPAREN_ASTERISK, this.ch + '*');
+                    token = this.newToken(Token.RPAREN_ASTERISK, this.ch + '*');
                     this.readChar();
                 } else {
-                    tok = this.newToken(Token.RPAREN, this.ch);
+                    token = this.newToken(Token.RPAREN, this.ch);
                 }
                 break;
             case '{':
-                tok = this.newToken(Token.LBRACE, this.ch);
+                token = this.newToken(Token.LBRACE, this.ch);
                 break;
             case '}':
                 if (this.peekChar() == '#') {
-                    tok = this.newToken(Token.RBRACE_POUND, this.ch + '#');
+                    token = this.newToken(Token.RBRACE_POUND, this.ch + '#');
                     this.readChar();
                 } else if (this.peekChar() == '*') {
-                    tok = this.newToken(Token.RBRACE_ASTERISK, this.ch + '*');
+                    token = this.newToken(Token.RBRACE_ASTERISK, this.ch + '*');
                     this.readChar();
                 } else {
-                    tok = this.newToken(Token.RBRACE, this.ch);
+                    token = this.newToken(Token.RBRACE, this.ch);
                 }
                 break;
             case '[':
-                tok = this.newToken(Token.LBRACKET, this.ch);
+                token = this.newToken(Token.LBRACKET, this.ch);
                 break;
             case ']':
                 if (this.peekChar() == '#') {
-                    tok = this.newToken(Token.RBRACKET_POUND, this.ch + '#');
+                    token = this.newToken(Token.RBRACKET_POUND, this.ch + '#');
                     this.readChar();
                 } else if (this.peekChar() == '*') {
-                    tok = this.newToken(Token.RBRACKET_ASTERISK, this.ch + '*');
+                    token = this.newToken(Token.RBRACKET_ASTERISK, this.ch + '*');
                     this.readChar();
                 } else {
-                    tok = this.newToken(Token.RBRACKET, this.ch);
+                    token = this.newToken(Token.RBRACKET, this.ch);
                 }
                 break;
             case '!':
                 if (this.peekChar() == '=') {
-                    tok.Literal = this.ch + this.peekChar();
-                    tok.Type = Token.NOT_EQ;
+                    token.Literal = this.ch + this.peekChar();
+                    token.Type = Token.NOT_EQ;
                     this.readChar();
                 }
                 else {
-                    tok = this.newToken(Token.BANG, this.ch);
+                    token = this.newToken(Token.BANG, this.ch);
                 }
                 break;
             case '-':
                 if (this.peekChar() == '>') {
-                    tok.Literal = this.ch + '>';
-                    tok.Type = Token.SOURCE;
+                    token.Literal = this.ch + '>';
+                    token.Type = Token.SOURCE;
                     this.readChar();
                 }
                 else {
-                    tok = this.newToken(Token.MINUS, this.ch);
+                    token = this.newToken(Token.MINUS, this.ch);
                 }
                 break;
             case '/':
                 if (this.peekChar() == '*') {
-                    tok = this.newToken(Token.LCOMMENT, this.ch + '*');
+                    token = this.newToken(Token.LCOMMENT, this.ch + '*');
                     this.readChar();
                     break;
                 }
                 else {
-                    tok = this.newToken(Token.SLASH, this.ch);
+                    token = this.newToken(Token.SLASH, this.ch);
                     break;
                 }
             case '*':
                 if (this.peekChar() == '/') {
-                    tok = this.newToken(Token.RCOMMENT, this.ch + '/');
+                    token = this.newToken(Token.RCOMMENT, this.ch + '/');
                     this.readChar();
                 } else if (this.peekChar() == '(') { 
-                    tok = this.newToken(Token.ASTERISK_LPAREN, this.ch + '(');
+                    token = this.newToken(Token.ASTERISK_LPAREN, this.ch + '(');
                     this.readChar();
                 } else if (this.peekChar() == '{') { 
-                    tok = this.newToken(Token.ASTERISK_LBRACE, this.ch + '{');
+                    token = this.newToken(Token.ASTERISK_LBRACE, this.ch + '{');
                     this.readChar();
                 } else if (this.peekChar() == '[') { 
-                    tok = this.newToken(Token.ASTERISK_LBRACKET, this.ch + '[');
+                    token = this.newToken(Token.ASTERISK_LBRACKET, this.ch + '[');
                     this.readChar();
                 } else {
-                    tok = this.newToken(Token.ASTERISK, this.ch);
+                    token = this.newToken(Token.ASTERISK, this.ch);
                 }
                 break;
             case '#':
                 if (this.peekChar() == '(') {
-                    tok = this.newToken(Token.POUND_LPAREN, this.ch + '(');
+                    token = this.newToken(Token.POUND_LPAREN, this.ch + '(');
                     this.readChar();
                 } else if (this.peekChar() == '{') { 
-                    tok = this.newToken(Token.POUND_LBRACE, this.ch + '{');
+                    token = this.newToken(Token.POUND_LBRACE, this.ch + '{');
                     this.readChar();
                 } else if (this.peekChar() == '[') { 
-                    tok = this.newToken(Token.POUND_LBRACKET, this.ch + '[');
+                    token = this.newToken(Token.POUND_LBRACKET, this.ch + '[');
                     this.readChar();
                 } else {
-                    tok = this.newToken(Token.ASTERISK, this.ch);
+                    token = this.newToken(Token.ASTERISK, this.ch);
                 }
                 break;
             case '%':
-                tok = this.newToken(Token.MOD, this.ch);
+                token = this.newToken(Token.MOD, this.ch);
                 break;
             case '<':
                 if (this.peekChar() == '-') {
-                    tok.Literal = this.ch + '-';
-                    tok.Type = Token.SINK;
+                    token.Literal = this.ch + '-';
+                    token.Type = Token.SINK;
                     this.readChar();
                 }
                 else {
-                    tok = this.newToken(Token.LT, this.ch);
+                    token = this.newToken(Token.LT, this.ch);
                     break;
                 }
             case '>':
-                tok = this.newToken(Token.GT, this.ch);
+                token = this.newToken(Token.GT, this.ch);
                 break;
             case '"':
             case "'":
-                tok.Type = Token.STRING;
-                tok.Literal = this.readString(this.ch);
+                token.Type = Token.STRING;
+                token.Literal = this.readString(this.ch);
                 break;
             case 'Ω':
-                tok.Literal = "Ω";
-                tok.Type = Token.EOF;
+                token.Literal = "Ω";
+                token.Type = Token.EOF;
                 break;
             default:
+                token = { Literal: '', Type: Token.ILLEGAL };
+                
                 if (this.isLetter(this.ch)) {
-                    tok.Literal = this.readIdentifier();
-                    tok.Type = LookupIdent(tok.Literal);
-                    return tok;
+                    token.Literal = this.readIdentifier();
+                    token.Type = LookupIdent(token.Literal);
+                    return token;
                 }
                 else if (this.isDigit(this.ch)) {
                     num = this.readNumber();
-                    tok.Literal = num[1];
-                    tok.Type = num[0] ? Token.FLOAT : Token.INT;
-                    return tok;
+                    token.Literal = num[1];
+                    token.Type = num[0] ? Token.FLOAT : Token.INT;
+                    return token;
                 }
                 else {
-                    tok = this.newToken(Token.ILLEGAL, this.ch);
+                    token = this.newToken(Token.ILLEGAL, this.ch);
                 }
         }
         this.readChar();
-        return tok;
+        return token;
     }
 }

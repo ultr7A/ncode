@@ -28,7 +28,7 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
     public analyzer:    ConceptAnalyzer;
     public graphParser: GraphParserOne  <ConceptOperator, ConceptExpression>;
 
-    public curToken:  TypedTokenLiteral = null;
+    public currentToken:  TypedTokenLiteral = null;
     public peekToken: TypedTokenLiteral = null;
 
     public prefixParseFns = {} as Partial<{ [prefixToken in Token]: PrefixParseFn<ConceptExpression, Node> }>;
@@ -42,7 +42,7 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
         // Init GraphParser:
         this.graphParser = new GraphParserOne<ConceptOperator, ConceptExpression, IGraphNode<StringLiteral, any>>(
             this.nextToken,
-            this.curTokenIs,
+            this.currentTokenIs,
             this.parseConceptGraphLiteralNode,
             this.parseConceptGraphLiteralEdge
         );
@@ -58,6 +58,16 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
 
     }
 
+    public setCurrentToken(token) {
+        this.currentToken = token;
+        return token;
+    }
+
+    public setPeekToken(token) {
+        this.peekToken = token;
+        return token;
+    }
+
     // TODO: revisit this: // 
     public parseConceptStatement() {
         var stmt = new ConceptStatement(null, null);
@@ -65,7 +75,7 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
             return null;
         }
 
-        stmt.Identity = new Identifier(this.curToken.Literal);
+        stmt.Identity = new Identifier(this.currentToken.Literal);
         // TODO: Analyzer should always be handling this:
         this.diagnosticContext.declaredVariables[stmt.Identity.Value] = stmt.Identity.Value;
         this.nextToken();
@@ -81,10 +91,10 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
      * parseConceptExpression
      */
      public parseConceptExpression(precedence: number): ConceptExpression {
-        if (this.curTokenIs(Token.POUND_LBRACE)) {
+        if (this.currentTokenIs(Token.POUND_LBRACE)) {
             return this.parseConceptGraphLiteral();
 
-        } else if (this.curTokenIs(Token.POUND_LBRACKET)) {
+        } else if (this.currentTokenIs(Token.POUND_LBRACKET)) {
             return this.parseConceptSequenceLiteral();
 
         } else {
@@ -96,8 +106,8 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
      * parseConceptStructure
      */
      private parseConceptStructure(precedence: number): ConceptStructure {
-        let curTokenType = this.curToken.Type;
-        let prefix = this.prefixParseFns[curTokenType], 
+        let currentTokenType = this.currentToken.Type;
+        let prefix = this.prefixParseFns[currentTokenType], 
             leftExp: Node;
 
         leftExp = prefix && prefix();
@@ -107,7 +117,7 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
 
             if (!infix) {
                 if (!leftExp) {
-                    this.noPrefixParseFnError(curTokenType);
+                    this.noPrefixParseFnError(currentTokenType);
                     return null;
                 }
                 return leftExp as Structure<ConceptOperator, ConceptExpression>;
@@ -141,7 +151,7 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
 
         this.nextToken();
 
-        while (!this.curTokenIs(Token.RBRACKET_POUND) && !this.curTokenIs(Token.EOF)) {
+        while (!this.currentTokenIs(Token.RBRACKET_POUND) && !this.currentTokenIs(Token.EOF)) {
             conceptElements.push(this.parseConceptExpression(Precedence.LOWEST));
         }
 
@@ -180,7 +190,7 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
         let operatorExpression: ConceptExpression;
         let operator: ConceptOperator;
         //                        ---#( )#--->
-        if (this.curTokenIs(Token.POUND_LPAREN)) {
+        if (this.currentTokenIs(Token.POUND_LPAREN)) {
             this.nextToken();
 
             operatorExpression = this.parseConceptExpression(0);
