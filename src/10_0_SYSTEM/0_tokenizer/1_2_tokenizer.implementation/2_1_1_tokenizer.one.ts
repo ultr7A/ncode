@@ -284,8 +284,8 @@ export class TokenizerOne extends    AbstractTokenizer<string, TypedTokenLiteral
                 token.Literal = this.readString(this.ch);
                 break;
             case 'Ω':
-                token.Literal = "Ω";
-                token.Type = Token.EOF;
+                token = { Literal: 'Ω', Type: Token.EOF };
+               
                 break;
             default:
                 token = { Literal: '', Type: Token.ILLEGAL };
