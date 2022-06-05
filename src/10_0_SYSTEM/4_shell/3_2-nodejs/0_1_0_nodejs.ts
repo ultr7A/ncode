@@ -50,10 +50,9 @@ export const localEvaluate = function (
     tokenizer.loadSourceCode(text);
 
     p.setTokenizerOne(tokenizer);
-    p.parseProgram();
-
+    
     let program = p.parseProgram(), evaluated;
-
+    
     if (p.errors.length != 0) {
         printParserErrors(p.errors);
         return;

@@ -70,9 +70,8 @@ export abstract class AbstractParser<
     }
 
 
-
+    // (?)TODO: Deprecate ?
     public parse() {
-        console.log("AbstractParser :: parse()")
         this.reset();
         // this.nextToken();
         // this.nextToken();
@@ -80,8 +79,7 @@ export abstract class AbstractParser<
 
 
     public parseProgram() {
-        console.log("AbstractParser :: parseProgram()")
-        var Statements = [], program = new Program(Statements);
+        const Statements = [], program = new Program(Statements);
         
         this.peekToken = null; // this.tokenizer.peekToken;)
         this.doParseProgram(Statements, program);
@@ -115,10 +113,7 @@ export abstract class AbstractParser<
         for (let next = 0; next < times; next++) {
             
             while (this.peekToken == null) {
-                console.log("try reading peekToken");
                 this.peekToken = this.setPeekToken(this.tokenizer.NextToken());
- 
-                console.log("AbstractParser::peekToken is "+this.peekToken);
             }
 
             this.currentToken  = this.setCurrentToken(this.peekToken);

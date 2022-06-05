@@ -58,6 +58,7 @@ export class RuntimeOptimizer implements Optimizer {
                 )
             );
         }
+        
         return fallback();
     }
 

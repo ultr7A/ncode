@@ -32,7 +32,7 @@ export class JITCompiler {
 
 
    constructor() {
-      console.log("**** Construct new JITCompiler ****")
+      
       this.tokenizer = new TokenizerOne();
       this.parser    = new Parser();
       this.parser.setTokenizerOne(this.tokenizer);

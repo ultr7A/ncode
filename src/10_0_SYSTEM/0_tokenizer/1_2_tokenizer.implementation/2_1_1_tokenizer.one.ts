@@ -18,8 +18,6 @@ export class TokenizerOne extends    AbstractTokenizer<string, TypedTokenLiteral
 
     constructor() {
         super() 
-        console.log("** Construct new TokenizerOne **")
-
     }
 
     coordinates = {
@@ -30,7 +28,7 @@ export class TokenizerOne extends    AbstractTokenizer<string, TypedTokenLiteral
     public ch: string = "";
     public code = "";
 
-    lineNumber = 1; //TODO: Make part of CodeCoordinates?
+    lineNumber = 1; //(?)TODO: Make part of CodeCoordinates?
 
     getInputLength(): number {
         return this.code.length;
@@ -213,8 +211,7 @@ export class TokenizerOne extends    AbstractTokenizer<string, TypedTokenLiteral
                 break;
             case '-':
                 if (this.peekChar() == '>') {
-                    token.Literal = this.ch + '>';
-                    token.Type = Token.SOURCE;
+                    token = { Literal: this.ch + '>', Type: Token.SOURCE };
                     this.readChar();
                 }
                 else {
@@ -267,8 +264,7 @@ export class TokenizerOne extends    AbstractTokenizer<string, TypedTokenLiteral
                 break;
             case '<':
                 if (this.peekChar() == '-') {
-                    token.Literal = this.ch + '-';
-                    token.Type = Token.SINK;
+                    token = { Literal: this.ch + '-', Type: Token.SINK };
                     this.readChar();
                 }
                 else {
@@ -280,8 +276,7 @@ export class TokenizerOne extends    AbstractTokenizer<string, TypedTokenLiteral
                 break;
             case '"':
             case "'":
-                token.Type = Token.STRING;
-                token.Literal = this.readString(this.ch);
+                token = { Type: Token.STRING, Literal: this.readString(this.ch) };
                 break;
             case 'Ω':
                 token = { Literal: 'Ω', Type: Token.EOF };
