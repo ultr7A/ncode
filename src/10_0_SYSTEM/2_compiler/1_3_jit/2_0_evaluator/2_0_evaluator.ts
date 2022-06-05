@@ -274,13 +274,17 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
     
     private evalExpressions(exps: Expression[], env: Environment, objectContext: ClassifiedObject) {
         var result = [];
-        exps.forEach(function (e) {
+        
+        for (const idx in exps) {
+            const e = exps[idx];
+
             var evaluated = this.Eval(e, env, objectContext);
             if (isError(evaluated)) {
                 return Array();
             }
             result.push(evaluated);
-        });
+        
+        }
         return result;
     }
     

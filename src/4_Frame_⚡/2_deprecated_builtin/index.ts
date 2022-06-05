@@ -1,7 +1,7 @@
 import { ObjectType }               from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/object-type.enum.js"
 import { Matrix }                   from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/maths/matrix/index.js"
 import { Vector }                   from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/maths/vector/index.js"
-import { ArrayObject, _BuiltinFunctionObject, Float, Integer, StringObject  }
+import { ArrayObject, _BuiltinFunctionObject, Float, Integer, StringObject, BooleanObject, Hash  }
                                     from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object.js";   
 import { NULL }                     from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton.js"
 import { assertBuiltinArgs }        from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_builtin_util.js"
@@ -21,6 +21,7 @@ import { Terminal } from "./terminal.js"
 import { MATHS_   } from "./maths.js"
 import { _RegExp  } from "./regexp.js"
 import { _JSON    } from "./json.js"
+import { EObject } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
 
 
 
@@ -35,7 +36,7 @@ export const builtins = {
     "JSON":   _JSON,
     "RegExp": _RegExp,
 
-    "toFloat": new _BuiltinFunctionObject("toFloat", [], function (_, _2, _3, val) {
+    "toFloat": new _BuiltinFunctionObject("toFloat", [], function (_, _2, val) {
         if (!val || val.Type() != ObjectType.INTEGER_OBJ) {
             return newError("argument to `toFloat` must be int, got %s", val ? val.Type() : "null");
         }
@@ -46,7 +47,7 @@ export const builtins = {
         return new Integer(Date.now());
     }, null, null, true),
 
-    "print": new _BuiltinFunctionObject("print", [], function(scope, _3) {
+    "print": new _BuiltinFunctionObject("print", [], function(scope) {
         var args = [];
         for (var _i = 3; _i < arguments.length; _i++) {
             args[_i - 3] = arguments[_i];
@@ -55,11 +56,11 @@ export const builtins = {
         return NULL;
     }, null, null, true),
 
-    "colorize": new _BuiltinFunctionObject("colorize", [ObjectType.ARRAY, ObjectType.STRING], function (_, _2, _3, color, str) {
+    "colorize": new _BuiltinFunctionObject("colorize", [ObjectType.ARRAY, ObjectType.STRING], function (_, _2, color, str) {
         return systemColorRenderer(color, str);
     }),
 
-    "len": new _BuiltinFunctionObject("len", [], function (_, _2, _3, obj) {
+    "len": new _BuiltinFunctionObject("len", [], function (_, _2, obj) {
         var arg = obj, argType = arg.Type();
         switch (argType) {
             case ObjectType.ARRAY:
@@ -71,7 +72,7 @@ export const builtins = {
         }
     }, null, null, true),
 
-    "push": new _BuiltinFunctionObject("push", [], function (_, _2, _3, list, item) {
+    "push": new _BuiltinFunctionObject("push", [], function (_, _2, list, item) {
         var err = assertBuiltinArgs([list, item], 2, null, 'push', [ObjectType.ARRAY]);
         if (err) {
             return err;
@@ -80,7 +81,7 @@ export const builtins = {
         return list;
     }, null, null, true),
 
-    "pop": new _BuiltinFunctionObject("pop", [], function (_, _2, _3, list) {
+    "pop": new _BuiltinFunctionObject("pop", [], function (_, _2, list) {
         var err = assertBuiltinArgs([list], 1, null, 'pop', [ObjectType.ARRAY]);
         if (err) {
             return err;
@@ -88,7 +89,7 @@ export const builtins = {
         return list.Elements.pop();
     }, null, null, true),
 
-    "shift": new _BuiltinFunctionObject("shift", [], function (_, _2, _3, list) {
+    "shift": new _BuiltinFunctionObject("shift", [], function (_, _2, list) {
         var err = assertBuiltinArgs([list], 1, null, 'shift', [ObjectType.ARRAY]);
         if (err) {
             return err;
@@ -96,7 +97,7 @@ export const builtins = {
         return list.Elements.shift();
     }, null, null, true),
 
-    "splice": new _BuiltinFunctionObject("splice", [], function (_, _2, _3) {
+    "splice": new _BuiltinFunctionObject("splice", [], function (_, _2) {
         var args = [];
         for (var _i = 3; _i < arguments.length; _i++) {
             args[_i - 3] = arguments[_i];
@@ -112,7 +113,7 @@ export const builtins = {
         return new ArrayObject(elems);
     }, null, null, true),
 
-    "concat": new _BuiltinFunctionObject("concat", [ObjectType.ARRAY, ObjectType.ARRAY], function (_, scope = null, jsScope = null, listOne, listTwo: ArrayObject) {
+    "concat": new _BuiltinFunctionObject("concat", [ObjectType.ARRAY, ObjectType.ARRAY], function (_, scope = null, listOne, listTwo: ArrayObject) {
         var err = assertBuiltinArgs([listOne, listTwo], 1, null, 'concat', [ObjectType.ARRAY, ObjectType.ARRAY]);
         if (err) {
             return err;
@@ -120,12 +121,14 @@ export const builtins = {
         return new ArrayObject(listOne.Elements.concat(copyListElements(listTwo)));
     }, null, null, true),
 
-    "join": new _BuiltinFunctionObject("join", [], function (_, _2, _3) {
-        var args = [];
-        for (var _i = 3; _i < arguments.length; _i++) {
-            args[_i - 3] = arguments[_i];
-        }
-        var argErr = assertBuiltinArgs(args, 2, 3);
+    //TODO: make join hash-map recursive, via flag,  
+    //                         to allow 
+    //                user-defined delimiters for 
+    //                serializing un-structured data.
+    "join": new _BuiltinFunctionObject("join", [], 
+    function (_, _2, subject: EObject, delimiter: StringObject, keyValDelimiter: StringObject, recursive: BooleanObject) {
+        var args = [subject, delimiter, keyValDelimiter, recursive];
+        var argErr = assertBuiltinArgs(args, 2, 4);
         if (argErr) {
             return argErr;
         }
@@ -139,51 +142,59 @@ export const builtins = {
             if (arg1Type != ObjectType.STRING || args.length < 3 || args[2].Type() != ObjectType.STRING) {
                 return newError("first argument to `join(hashmap, string, string)` must be Hash, got join(%s, %s, %s) ", args[0].Type(), args[1] ? args[1].Type() : "null", args[2] ? args[2].Type() : "null");
             }
-            var struct = args[0], pairs = struct.Pairs;
+            var struct = args[0] as Hash, pairs = struct.Elements;
             for (var key in pairs) {
-                strArray.push(key + args[2].Inspect() + pairs[key].Value.Inspect());
+                strArray.push(key + args[2].Inspect() + pairs[key].Inspect());
             }
         }
         else {
             if (arg0Type != ObjectType.ARRAY) {
                 return newError("first argument to `join(array, string)` must be ARRAY, got %s", args[0].Type());
             }
-            var arr = args[0];
+            var arr = args[0] as ArrayObject;
             for (var si = 0, l = arr.Elements.length; si < l; si++) {
                 var element = arr.Elements[si];
                 var s = "";
-                s = element.Inspect();
+                s = element.Inspect() as string;
                 strArray.push(s);
             }
         }
-        outStr = strArray.join(args[1].Value);
+        outStr = strArray.join(delimiter.Value);
         return new StringObject(outStr);
     }, null, null, true),
 
-    "split": new _BuiltinFunctionObject("split", [], function (_, _2, _3) {
+    //TODO: make join hash-map recursive, via flag,  
+    //                         to allow 
+    //                user-defined delimiters for 
+    //                serializing un-structured data.
+    "split": new _BuiltinFunctionObject("split", [], 
+    function (_, _2, subject: EObject, delimiter: StringObject, keyValDelimiter: StringObject, recursive: BooleanObject) {
         var args = [];
-        for (var _i = 3; _i < arguments.length; _i++) {
-            args[_i - 3] = arguments[_i];
-        }
-        var argErr = assertBuiltinArgs(args, 2, 3);
+        
+        var argErr = assertBuiltinArgs(args, 2, 4);
         if (argErr) {
             return argErr;
         }
-        if (args[0].Type() != ObjectType.STRING) {
-            return newError("first argument to `split` must be STRING or HASH, got %s", args[0].Type());
+        if (subject.Type() != ObjectType.STRING) {
+            return newError("first argument to `split` must be STRING or HASH, got %s", subject.Type());
         }
-        if (args[1].Type() != ObjectType.STRING) {
-            return newError("second argument to `split` must be STRING, got %s", args[0].Type());
+        if (delimiter.Type() != ObjectType.STRING) {
+            return newError("second argument to `split` must be STRING, got %s", delimiter.Type());
         }
         if (args.length === 3) {
-            if (args[2].Type() != ObjectType.STRING) {
-                return newError("third argument to `split` must be STRING, got %s", args[0].Type());
+            if (keyValDelimiter.Type() != ObjectType.STRING) {
+                return newError("third argument to `split` must be STRING, got %s", keyValDelimiter.Type());
             }
-            var pairs = {}, kvs = args[2].Inspect() + "", ps = args[1].Inspect() + "", parsedPairs = (args[0].Inspect() + "").split(ps);
+            var pairs       = {}, 
+                kvs         = keyValDelimiter.Inspect() + "", 
+                ps          = delimiter.Inspect() + "", 
+                parsedPairs = (subject.Inspect() + "").split(ps);
+
             for (var p in parsedPairs) {
                 var keyValue = parsedPairs[p].split(kvs);
                 pairs[keyValue[0]] = keyValue[1];
             }
+
             return nativeObjToMap(pairs);
         }
         else {
@@ -196,17 +207,12 @@ export const builtins = {
         }
     }, null, null, true),
 
-    "help": new _BuiltinFunctionObject("help", [], function (_, _2, _3) {
-        var args = [];
-        for (var _i = 3; _i < arguments.length; _i++) {
-            args[_i - 3] = arguments[_i];
-        }                                  // TODO: \/ \/ \/
+    "help": new _BuiltinFunctionObject("help", [], function (_, _2, topic: StringObject) {
+                                          // TODO: \/ \/ \/
         var helpElems = [], helpStrs = []; //listAllDocs();
-        if (args.length > 1) {
-            return newError("wrong number of arguments. got=%d, want=0 or 1", args.length+"");
-        }
-        if (args.length === 1) {
-            man(args);
+        
+        if (topic) {
+            man(topic);
             return new StringObject("");
         }
         else {
