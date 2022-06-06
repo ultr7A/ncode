@@ -31,6 +31,7 @@ import { CodeData } from "../../../../01_2_Sequence_📘🌊/0_source/source-cod
 import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser.js";
 import { setToken } from "../../0_0_parser-core/0_3_set-token.js";
 import { IExpressionParser } from "../../0_0_parser-core/expression-parser.interface.js";
+import { NodeName_To_DataType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/primitive/type.enum.js";
 
 
 
@@ -913,7 +914,8 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
 
     isDataType(peek = false) {
         
-        let detector = peek ? function (t) { return this.peekTokenIs(t); } : function (t) { return this.currentTokenIs(t); };
+        let detector = peek ? (t) => this.peekTokenIs(t) : (t) => this.currentTokenIs(t);
+
         return detector(Token.LET_BOOL)
             || detector(Token.LET_INT) || detector(Token.LET_FLOAT)
             || detector(Token.LET_STRING) || detector(Token.LET_ARRAY)
@@ -942,6 +944,6 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
 
 function getDataTypeByNodeName(Value: Expression): string
 {
-    throw new Error("Function not implemented.");
+    return NodeName_To_DataType[Value.NodeName];
 }
  

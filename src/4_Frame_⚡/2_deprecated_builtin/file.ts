@@ -47,6 +47,8 @@ const fileConstructor = new _BuiltinFunctionObject(
                 
             readWholeFile(scope.Elements.resource.Inspect() + "", nodeObjects.fs).then(
                     function (data) {
+                        // TODO: supply optimizer either statically,  (if possible),  or   reference to evaluator.
+                        //      Again, It's best if the signature of BuiltinFunctionFunction can remain un-changed. 
                         applyFunction(callback, null, [new StringObject(data)], null);
                     }
             );

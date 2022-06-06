@@ -38,7 +38,7 @@ export class RuntimeOptimizer implements Optimizer {
         this.analyzer = new Analyzer();
 
         // ** DEPRECATED **
-        this.jsECSContext = new JSECSEvaluatorContext(applyFunction, evaluator.Eval);
+        this.jsECSContext = new JSECSEvaluatorContext(applyFunction, evaluator.Eval, this);
         this.unParserPlugin.setUnParser(this.unparser);
     }
 

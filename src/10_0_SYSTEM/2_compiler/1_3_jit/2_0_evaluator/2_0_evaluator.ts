@@ -154,12 +154,12 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
                 return this.evalInfixExpression((node as InfixExpression).Operator, left, right);
     
             case "CallExpression":
-                var fun = this.Eval((node as CallExpression).Function, env); //, node.Function.ObjectContext); // objectContext);
+                const fun = this.Eval((node as CallExpression).Function, env); //, node.Function.ObjectContext); // objectContext);
                 if (isError(fun)) {
                     return fun;
                 }
     
-                var args = this.evalExpressions((node as CallExpression).Values, env, objectContext);
+                const args = this.evalExpressions((node as CallExpression).Values, env, objectContext);
                 if (args.length == 1 && isError(args[0])) {
                     return args[0];
                 }
@@ -993,9 +993,19 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
 
 // UTILS:
 
-export function applyFunction(fn: FunctionObject | ClassifiedObject, env: Environment, args: EObject[], objectContext: ClassifiedObject) {
-    var fnType = fn.Type();
-    var extendedEnv, evaluated;
+export function applyFunction(
+
+    fn: FunctionObject | ClassifiedObject, 
+    
+    env: Environment, 
+    
+    args: EObject[], 
+    objectContext: ClassifiedObject
+
+) {
+    
+    const fnType = fn.Type();
+    let extendedEnv, evaluated;
     switch (fnType) {
         case "pure_function":
             evaluated = this.evalBlockStatement(
@@ -1027,13 +1037,22 @@ export function applyFunction(fn: FunctionObject | ClassifiedObject, env: Enviro
     }
 }
 
-function applyBuiltinFunction(fn: _BuiltinFunctionObject, args: EObject[], env: Environment, objectContext?: ClassifiedObject) {
+// TODO: move this into _BuiltinFunctionObject
+function applyBuiltinFunction(
+
+    fn: _BuiltinFunctionObject, 
+    args: EObject[], 
+    
+    env: Environment, 
+    objectContext?: ClassifiedObject 
+    
+) {
     const objContext = fn.ObjectContext || objectContext; 
 
     if (fn.ecsOnly) {
         return fn.Fn.apply(fn, [objContext, objContext ? objContext.builtins : null, ...args]);
     } else {
-        return fn.callFromECSRuntime(objContext, this.optimizer, args);
+        return fn.callFromECSRuntime(objContext, args);
     }
 }
 

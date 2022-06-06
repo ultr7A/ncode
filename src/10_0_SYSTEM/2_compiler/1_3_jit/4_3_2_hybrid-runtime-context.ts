@@ -1,6 +1,7 @@
 
 
 import { IBlockStatement } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
+import { Optimizer } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/optimizer"
 import { FunctionObject, DynamicFunction }  from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure.js"
 import { ClassifiedObject }                 from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object.js"
 import { Environment }                      from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment.js"
@@ -24,7 +25,7 @@ export class JSECSEvaluatorContext implements EvaluatorContext {
     applyFunction: ApplyFunctionFunction;
     evalFn: Function;
 
-    constructor(applyFunction: ApplyFunctionFunction, evalFn: Function) {
+    constructor(applyFunction: ApplyFunctionFunction, evalFn: Function, private optimizer: Optimizer) {
         this.applyFunction = applyFunction;
         this.evalFn = evalFn;
     }
