@@ -10,7 +10,7 @@ import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_liter
 import { Directional, Orientation_WXYZ } from "../../../0_0_system-structure/1_0_system-structure.js"
 import { TokenizerThree } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_4_1_tokenizer.three.js"
 
-import { Analyzer } from "../../../2_compiler/0_3_analyzer/1_3_expression-analyzer.js"
+import { Analyzer } from "../../../2_compiler/0_3_0_analyzer/1_3_expression-analyzer.js"
 import { parseProgram } from "../../0_0_parser-core/0_3_0_parse-program.js"
 import { precedences } from "../../0_0_parser-core/2_1_precedence.js"
 

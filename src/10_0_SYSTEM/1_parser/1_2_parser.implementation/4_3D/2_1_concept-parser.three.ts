@@ -6,7 +6,7 @@ import { ConceptOperator } from "../../../../03_0_Structure_🌴/1_ast/1_1_0_exp
 import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
 import { TokenizerThree } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_4_1_tokenizer.three.js"
 
-import { ConceptAnalyzer } from "../../../2_compiler/0_3_analyzer/2_3_concept-analyzer.js"
+import { ConceptAnalyzer } from "../../../2_compiler/0_3_0_analyzer/2_3_concept-analyzer.js"
 import { conceptPrecedences } from "../../0_0_parser-core/2_2_concept-precedence.js"
 
 import { PrefixParseFn, InfixParseFn } from "../../0_0_parser-core/3_0_parse-functions.js"

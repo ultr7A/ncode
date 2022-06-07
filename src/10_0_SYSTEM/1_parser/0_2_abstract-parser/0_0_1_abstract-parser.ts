@@ -9,9 +9,9 @@ import { CodeCoordinates, CodeData } from "../../../01_2_Sequence_📘🌊/0_sou
 import { Program } from "../../../03_0_Structure_🌴/1_ast/1_0_1_root.js"
 
 import { AbstractTokenizer, ITokenizer } from "../../0_tokenizer/0_1_tokenizer-core/0_2_abstract-tokenizer.js"
-import { ExpressionAnalysisDiagnosticContext } from "../../2_compiler/0_3_analyzer/0_1_analyzer-structure.js"
-import { AbstractAnalyzer } from "../../2_compiler/0_3_analyzer/0_3_abstract-analyzer.js"
-import { Analyzer } from "../../2_compiler/0_3_analyzer/1_3_expression-analyzer.js"
+import { ExpressionAnalysisDiagnosticContext } from "../../2_compiler/0_3_0_analyzer/0_1_analyzer-structure.js"
+import { AbstractAnalyzer } from "../../2_compiler/0_3_0_analyzer/0_3_abstract-analyzer.js"
+import { Analyzer } from "../../2_compiler/0_3_0_analyzer/1_3_expression-analyzer.js"
 import { IPrecedences } from "../0_0_parser-core/0_1_precedence-structure.js"
 import { Precedence } from "../0_0_parser-core/2_1_precedence.js"
 import { InfixParseFn, PrefixParseFn } from "../0_0_parser-core/3_0_parse-functions.js"

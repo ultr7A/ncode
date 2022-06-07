@@ -10,8 +10,8 @@ import { GraphEdge, GraphNode } from "../../../../03_0_Structure_🌴/1_ast/1_3_
 import { ArrayLiteral, ConceptGraphLiteral, ConceptSequenceLiteral, Identifier, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
 import { Orientation_X } from "../../../0_0_system-structure/1_0_system-structure.js"
 import { TokenizerOne } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one.js"
-import { Analyzer } from "../../../2_compiler/0_3_analyzer/1_3_expression-analyzer.js"
-import { ConceptAnalyzer } from "../../../2_compiler/0_3_analyzer/2_3_concept-analyzer.js"
+import { Analyzer } from "../../../2_compiler/0_3_0_analyzer/1_3_expression-analyzer.js"
+import { ConceptAnalyzer } from "../../../2_compiler/0_3_0_analyzer/2_3_concept-analyzer.js"
 
 import { Precedence }                   from "../../0_0_parser-core/2_1_precedence.js"
 import { conceptPrecedences }           from "../../0_0_parser-core/2_2_concept-precedence.js"

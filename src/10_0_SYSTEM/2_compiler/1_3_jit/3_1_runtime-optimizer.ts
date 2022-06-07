@@ -8,7 +8,7 @@ import { ClassifiedObject } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]
 import { Environment }      from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment.js"
 
 import { Transpiler } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/abstract-un-parser.js"
-import { Analyzer } from "../0_3_analyzer/1_3_expression-analyzer.js"
+import { Analyzer } from "../0_3_0_analyzer/1_3_expression-analyzer.js"
 import { ApplyFunctionFunction, EvalFunction } from "./0_0_jit-compiler-structure/0_3_3_eval-types"
 import { ExpressionEvaluator } from "./2_0_evaluator/2_0_evaluator.js"
 

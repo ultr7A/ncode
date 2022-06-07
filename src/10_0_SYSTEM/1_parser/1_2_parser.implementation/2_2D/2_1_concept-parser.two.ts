@@ -9,7 +9,7 @@ import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_liter
 import { Orientation_XY, Oriented } from "../../../0_0_system-structure/1_0_system-structure.js"
 import { TokenizerTwo } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_2_1_tokenizer.two.js"
 
-import { ConceptAnalyzer } from "../../../2_compiler/0_3_analyzer/2_3_concept-analyzer.js"
+import { ConceptAnalyzer } from "../../../2_compiler/0_3_0_analyzer/2_3_concept-analyzer.js"
 import { conceptPrecedences } from "../../0_0_parser-core/2_2_concept-precedence.js"
 
 import { InfixParseFn, PrefixParseFn }     from "../../0_0_parser-core/3_0_parse-functions.js"

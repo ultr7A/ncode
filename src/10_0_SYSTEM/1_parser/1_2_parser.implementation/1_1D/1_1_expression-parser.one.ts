@@ -5,7 +5,7 @@ import { STREAM_DIRECTION }         from "wrapt.co_re/dist/Domain [╍🌐╍�
 import { BuiltinGraphOperatorType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/4_graph-operators.js";
 
 
-import { Analyzer }       from "../../../2_compiler/0_3_analyzer/1_3_expression-analyzer.js"
+import { Analyzer }       from "../../../2_compiler/0_3_0_analyzer/1_3_expression-analyzer.js"
 import { Precedence, precedences }     from "../../0_0_parser-core/2_1_precedence.js"
 import { InfixParseFn, PrefixParseFn } from "../../0_0_parser-core/3_0_parse-functions.js"
 import { GraphParserOne } from "./0_2_4_graph-parser.one.js"

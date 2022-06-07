@@ -12,7 +12,7 @@ import { AbstractTokenizer, ITokenizer } from "../../../0_tokenizer/0_1_tokenize
 import { TokenizerOne } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one.js"
 
 import { TokenizerTwo } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_2_1_tokenizer.two.js"
-import { Analyzer } from "../../../2_compiler/0_3_analyzer/1_3_expression-analyzer.js"
+import { Analyzer } from "../../../2_compiler/0_3_0_analyzer/1_3_expression-analyzer.js"
 import { precedences }                 from "../../0_0_parser-core/2_1_precedence.js"
 import { InfixParseFn, PrefixParseFn } from "../../0_0_parser-core/3_0_parse-functions.js"
 import { IExpressionParser } from "../../0_0_parser-core/expression-parser.interface.js"

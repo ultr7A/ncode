@@ -5,6 +5,7 @@ import { Operator }                 from "wrapt.co_re/dist/Domain [╍🌐╍�
 import { ObjectType }               from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/object-type.enum.js"
 import { STREAM_DIRECTION }         from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum.js"
 import { Optimizer }                from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/optimizer.js"
+import { Evaluator }                from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/evaluator.js";
 
 import { ArrayObject, BooleanObject, _BuiltinFunctionObject, ClassifiedObject, ConceptObject, ErrorObject, Float, GraphObject, 
     Hash, Integer, LambdaFunction, PureFunction, ReturnValue, StreamObject, StringObject, WheelObject } 
@@ -18,9 +19,9 @@ import { copyClassifiedObject, copyHashMap, copyList, nativeBoolToBooleanEObject
 
 
 import { makeRuntimeEnvironment, RecursiveEvaluator } from "./2_4_recursive-evaluator.js"
-import { Evaluator } from "./0_1_evaluator-structure.js"
+// import evaluator...
 import { ConceptEvaluator } from "./2_2_concept-evaluator.js"
-import { Analyzer } from "../../0_3_analyzer/1_3_expression-analyzer.js"
+import { Analyzer } from "../../0_3_0_analyzer/1_3_expression-analyzer.js"
 import { JSTranspiler } from "../../../3_un-parser/2_token.unparser/2_un-parse_targets/1_1_javascript.js"
 import { RuntimeOptimizer } from "../3_1_runtime-optimizer.js"
 
@@ -995,42 +996,26 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
 // UTILS:
 
 export function applyFunction(
-
     fn: FunctionObject | ClassifiedObject, 
-    
     env: Environment, 
-    
     args: EObject[], 
     objectContext: ClassifiedObject
-
 ) {
     
     const fnType = fn.Type();
-    let extendedEnv, evaluated;
+    let evaluated;
     switch (fnType) {
         case "pure_function":
-            evaluated = this.evalBlockStatement(
-                (fn as PureFunction).Body, 
-                createPureFunctionEnv((fn as PureFunction).Parameters, args), 
-                objectContext
-            );
+            evaluated = (fn as PureFunction)
+           .evaluate(createPureFunctionEnv((fn as PureFunction).Parameters, args));
+
             return unwrapReturnValue(evaluated);
         case "function":
-            extendedEnv = extendFunctionEnv(fn as LambdaFunction, args);
-            evaluated = this.Eval((fn as LambdaFunction).Body, extendedEnv, (fn as LambdaFunction).ObjectContext);
+            evaluated = (fn as LambdaFunction)
+           .evaluate(extendFunctionEnv(fn as LambdaFunction, args));
+
             return unwrapReturnValue(evaluated);
-        // case "hash":
-        //     var constructor = fn.Constructor;
-        //     if (!constructor) {
-        //         return newError("object has no constructor");
-        //     }
-        //     if (constructor.Parameters) { // Function Literal constructor
-        //         extendedEnv = extendFunctionEnv(constructor, args);
-        //         evaluated = this.Eval(constructor.Body, extendedEnv, fn);
-        //     } else { //                      Builtin Function Constructor
-        //         evaluated = applyBuiltinFunction(constructor, args, env, fn);
-        //     }
-        //     return fn;
+            
         case "BUILTIN":
             return applyBuiltinFunction(fn as _BuiltinFunctionObject, args, env, objectContext);
         default:

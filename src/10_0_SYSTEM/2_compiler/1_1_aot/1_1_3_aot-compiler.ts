@@ -1,6 +1,5 @@
 import { Node }         from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
-import { UnParser }     from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/un-parser.js"
-import { _BuiltinFunctionObject } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object.js"
+import { DynamicFunctionEvaluator, _BuiltinFunctionObject } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object.js"
 import { Environment } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment.js"
 import { forceSingleLine } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util.js"
 import { getSourceFile, readWholeFile } from "../../../3_Operation_☀/3_util_(🔥)/4_0_io-util.js"
@@ -10,7 +9,7 @@ import { TokenizerOne } from "../../0_tokenizer/1_2_tokenizer.implementation/2_1
 import { Parser } from "../../1_parser/1_1_parser/3_1_1_parser.js"
 import { Transpiler } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/abstract-un-parser.js"
 import { localEvaluate } from "../../4_shell/3_2-nodejs/0_1_0_nodejs.js";
-import { Analyzer } from "../0_3_analyzer/1_3_expression-analyzer.js"
+import { Analyzer } from "../0_3_0_analyzer/1_3_expression-analyzer.js"
 import { applyFunction, ExpressionEvaluator } from "../1_3_jit/2_0_evaluator/2_0_evaluator.js"
 import { RuntimeOptimizer } from "../1_3_jit/3_1_runtime-optimizer.js"
 import { ModuleLinker } from "../4_2_1_module_linker/1_1_0_module-linker.js"
@@ -49,10 +48,14 @@ export class AOTCompiler extends AbstractAOTCompiler<Node, string> {
         this.tokenizer = new TokenizerOne();
         this.parser    = new Parser();
         this.analyzer  = new Analyzer();
-        this.evaluator = new ExpressionEvaluator(this.parser);
         
+        this.evaluator = new ExpressionEvaluator(this.parser);
         this.optimizer = new RuntimeOptimizer(this.unparser, applyFunction, this.evaluator);
-        _BuiltinFunctionObject.setRuntimeOptimizer(this.optimizer);
+          
+          _BuiltinFunctionObject.setRuntimeOptimizer(this.optimizer);
+          
+        // needed? (TODO: verify)
+        DynamicFunctionEvaluator.setExpressionEvaluator(this.evaluator);
 
         this.linker    = new ModuleLinker();
     }
