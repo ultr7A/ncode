@@ -1,3 +1,4 @@
+import { ParseTreeAnalysis } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta";
 import { NodeName_To_DataType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/primitive/type.enum.js";
 import { sprintf }              from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util";
 import { CallExpression, NewExpression }     from "../../../03_0_Structure_🌴/1_ast/1_1_1_expression.js";
@@ -17,18 +18,24 @@ export class   ASTTypeValidator implements  TypeValidator
             return null;
         }
 
-        const dataType = declaration.DataType;
+        const expected = declaration.DataType;
 
-        if (NodeName_To_DataType[declaration.Value.NodeName] !== dataType) {
+        if (NodeName_To_DataType[declaration.Value.NodeName] !== expected) {
             return sprintf("TypeError: Invalid DataType assigned: %s\n" +
                                "       Expected type:             %s",
-                                dataType, getDataTypeByNodeName(declaration.Value));
+                                getDataTypeByNodeName(declaration.Value), expected);
         }
     }
 
-    public validateAssignment(assignment: AssignmentStatement): string {
-        //TODO: implement
-        return null;
+    public validateAssignment(assignment: AssignmentStatement, analysis: ParseTreeAnalysis): string {
+        
+        const expected = analysis.declaredVariables[assignment.Subject.Value];
+
+        if (NodeName_To_DataType[assignment.Operand.NodeName] !== expected) {
+            return sprintf("TypeError: Invalid DataType assigned: %s\n" +
+                               "       Expected type:             %s",
+                               NodeName_To_DataType[assignment.Operand.NodeName], expected);
+        }
     }
 
     public validateCall(call: CallExpression): string {
