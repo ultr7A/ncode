@@ -193,9 +193,17 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
             leftExp = prefix && prefix();
         }
 
+        // console.log("parseExpression() ... ")
+        // console.log({
+        //     peek_token_is__NOT__SEMICOLON: !this.peekTokenIs(Token.SEMICOLON),
+        //     precedence: precedence,
+        //     peekPrecence: this.peekPrecedence()
+        // })
+        this.peekTokenIs(Token.SEMICOLON) && precedence < this.peekPrecedence()
+
         while (!this.peekTokenIs(Token.SEMICOLON) && precedence < this.peekPrecedence()) {
             let infix = this.infixParseFns[this.peekToken.Type];
-
+            
             if (!infix) {
                 if (!leftExp) {
                     this.noPrefixParseFnError(currentTokenType);
@@ -203,7 +211,7 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
                 }
 
                 return leftExp;
-            }
+            } 
             this.nextToken();
             leftExp = infix(leftExp);
         }
@@ -564,9 +572,10 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
             this.nextToken(2);
             // TODO: Analyzer should always be handling this:
             this.diagnosticContext.declaredVariables[stmt.Identity.Value] = stmt.DataType || "any";
+            
             stmt.Value = this.parseExpression(Precedence.LOWEST, pure);
         }
-
+        
         // TODO: Analyzer should always be handling this:
         this.diagnosticContext.declaredVariables[stmt.Identity.Value] = stmt.DataType
             || getDataTypeByNodeName(stmt.Value);
@@ -753,6 +762,7 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
 
 
     parseHashLiteral(): HashLiteral {
+        
         var value: Expression = null, 
             hash = new HashLiteral();
 
@@ -761,11 +771,15 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
 
             this.nextToken();
 
-            if (this.peekTokenIs(Token.STRING)) {
-                let strKey = this.parseStringLiteral();
+
+            //if (this.peekTokenIs(Token.STRING)) {
+            if (this.currentTokenIs(Token.STRING)) {
+                    let strKey = this.parseStringLiteral();
 
                 key = new Identifier(strKey.Value);
-            } else if (this.peekTokenIs(Token.IDENT)) {
+
+            // } else if (this.peekTokenIs(Token.IDENT)) {
+            } else if (this.currentTokenIs(Token.IDENT)) {
                 key = this.parseIdentifier();
             }
             

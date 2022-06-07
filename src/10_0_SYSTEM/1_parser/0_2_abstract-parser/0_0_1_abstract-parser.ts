@@ -131,6 +131,7 @@ export abstract class AbstractParser<
         if (typeof p == "number") {
             return p;
         }
+        
         return Precedence.LOWEST;
     }
     protected curPrecedence(): number {
