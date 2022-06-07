@@ -1,11 +1,11 @@
+import { EObject } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure.js";
 
-export type TypeValidationResult = string | null;
+export type      TypeValidationResult = string | null;
+export interface TypeValidator<Call, Construction, Arguments = EObject[]> {
 
-export interface TypeValidator<Declaration, Assignment, Call, Construction> {
+  //validateDeclaration( declaration:  Declaration):                    TypeValidationResult;
+  //validateAssignment(  assignment:   Assignment):                     TypeValidationResult;
+    validateCall(        call:         Call,         args?: Arguments): TypeValidationResult;
+    validateConstruction(construction: Construction, args?: Arguments): TypeValidationResult;
 
-    validateDeclaration( declaration:  Declaration):    TypeValidationResult;
-    validateAssignment(  assignment:   Assignment):     TypeValidationResult;
-    validateCall(        call:         Call):           TypeValidationResult;
-    validateConstruction(construction: Construction):   TypeValidationResult;
-    
 }
