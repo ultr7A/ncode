@@ -13,18 +13,18 @@ import { TokenizerOne } from "../../../0_tokenizer/1_2_tokenizer.implementation/
 import { modifierNames, Token, TypedTokenLiteral } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
 
 
-import { GraphOperator }           from "../../../../03_0_Structure_🌴/1_ast/1_1_0_expression-elements.js"
+import { GraphOperator }           from "../../../../03_0_Structure_🌴/1_ast_🧩/1_1_0_expression-elements.js"
 import { CallExpression, IndexExpression, InfixExpression, NewExpression, PrefixExpression, StreamExpression } 
-                                   from "../../../../03_0_Structure_🌴/1_ast/1_1_1_expression.js"
+                                   from "../../../../03_0_Structure_🌴/1_ast_🧩/1_1_1_expression.js"
 import { AssignmentStatement, ClassStatement, ExecStatement, ExpressionStatement, ForStatement, IfStatement, IndexedAssignmentStatement, LetStatement, ReturnStatement, SleepStatement, WhileStatement } 
-                                   from "../../../../03_0_Structure_🌴/1_ast/1_2_1_statement.js"
+                                   from "../../../../03_0_Structure_🌴/1_ast_🧩/1_2_1_statement.js"
 import { ArrayLiteral, BooleanLiteral, ClassLiteral, FloatLiteral, FunctionLiteral, GraphLiteral, HashLiteral, Identifier, IntegerLiteral, PureFunctionLiteral, StringLiteral } 
-                                   from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
-import { BlockStatement, Program } from "../../../../03_0_Structure_🌴/1_ast/1_0_1_root.js"
+                                   from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal.js"
+import { BlockStatement, Program } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_0_1_root.js"
 import { ClassMethod, ClassPair, ClassProperty, GraphEdge, GraphNode, HashPair }
-                                   from "../../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements.js"
+                                   from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_0_literal-elements.js"
 import { getDefaultValueNodeForDataType } 
-                                   from "../../../../03_0_Structure_🌴/1_ast/3_util_⚙/ast-util.js"
+                                   from "../../../../03_0_Structure_🌴/1_ast_🧩/3_util_⚙/ast-util.js"
 
 
 import { CodeData } from "../../../../01_2_Sequence_📘🌊/0_source/source-code.js"
@@ -32,6 +32,14 @@ import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser.
 import { setToken } from "../../0_0_parser-core/0_3_set-token.js";
 import { IExpressionParser } from "../../0_0_parser-core/expression-parser.interface.js";
 import { NodeName_To_DataType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/primitive/type.enum.js";
+import { ConceptReceiver } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_1_concept.receiver.js";
+import { MethodTransformReceiverProcedure, PropertyTransformReceiverExpression, PropertyTransformReceiverFunction, RuntimeTransformReceiverHandler, TransformReceiver } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_2_1_transform.receiver.js";
+import { ConceptProjection } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_2_concept-projection.js";
+import { ConceptProjectorSelector } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_3_concept-projector-selector.js";
+import { InstanceTransform } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_3_2_instance.transform.js";
+import { InspectionTransform } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_3_1_inspection.transform.js";
+import { ConceptTransformationExpressionAbstraction } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_5_concept-expression.abstraction.js";
+import { ConceptTransformationStatementAbstraction } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_6-concept-statement.abstraction.js";
 
 
 
@@ -951,6 +959,67 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
             // this.nextToken();
             return this.currentToken;
         }
+    }
+
+    
+    parseInstanceTransform(): InstanceTransform {
+
+        return null; // * TODO: *
+    }
+    
+    
+    parseInspectionTransform(): InspectionTransform {
+        return null;
+    }
+    
+
+    parseTransformReceiver(): TransformReceiver {
+        return null;
+    }
+
+
+
+    parsePropertyTransformReceiverExpression(): PropertyTransformReceiverExpression {
+
+        return null; // * TODO: *
+    }
+
+    parsePropertyTransformReceiverFunction(): PropertyTransformReceiverFunction {
+
+        return null; // * TODO: *
+    }
+
+    parseMethodTransformReceiverProcedure(): MethodTransformReceiverProcedure {
+
+        return null; // * TODO: *
+    }
+
+    parseRuntimeTransformReceiverHandler(): RuntimeTransformReceiverHandler {
+
+        return null; // * TODO: *
+    }
+
+    
+
+    parseConceptReceiver(): ConceptReceiver {
+
+        return null; // * TODO: *
+    }
+
+    parseConceptProjection(): ConceptProjection {
+        return null;
+    }
+
+    parseConceptProjectorSelector(): ConceptProjectorSelector {
+        return null;
+    }
+
+    parseConceptTransformationExpressionAbstraction(): ConceptTransformationExpressionAbstraction {
+        return null;
+    }
+
+    parseConceptTransformationStatementAbstraction(): ConceptTransformationStatementAbstraction {
+        return null;
     }
 
 }

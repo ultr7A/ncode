@@ -4,9 +4,9 @@ import { Expression }         from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/
 import { NodeName } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum.js"
 import { isAbstractDataType } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util.js"
 
-import { IndexExpression, CallExpression, NewExpression } from "../../../03_0_Structure_🌴/1_ast/1_1_1_expression.js"
-import { LetStatement, AssignmentStatement, IndexedAssignmentStatement, ExpressionStatement } from "../../../03_0_Structure_🌴/1_ast/1_2_1_statement.js"
-import { StringLiteral, Identifier, ArrayLiteral, HashLiteral } from "../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
+import { IndexExpression, CallExpression, NewExpression } from "../../../03_0_Structure_🌴/1_ast_🧩/1_1_1_expression.js"
+import { LetStatement, AssignmentStatement, IndexedAssignmentStatement, ExpressionStatement } from "../../../03_0_Structure_🌴/1_ast_🧩/1_2_1_statement.js"
+import { StringLiteral, Identifier, ArrayLiteral, HashLiteral } from "../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal.js"
 import { Transpiler } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/abstract-un-parser.js"
 import { UnParserPlugin } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/un-parser-plugin.js"
 

@@ -5,7 +5,7 @@ import { ConceptOperator }          from "wrapt.co_re/dist/Model [╍⬡╍ꙮ�
 import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
 
 import { TypedTokenSurface } from "../../../../01_1_ELEMENT/1_token_💧/2_2_token-surface.js"
-import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
+import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal.js"
 import { Orientation_XY, Oriented } from "../../../0_0_system-structure/1_0_system-structure.js"
 import { TokenizerTwo } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_2_1_tokenizer.two.js"
 

@@ -1,7 +1,7 @@
 import { Node } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
-import { NewExpression } from "../../../../03_0_Structure_🌴/1_ast/1_1_1_expression.js"
-import { ClassStatement, ExpressionStatement, ForStatement, IfStatement, LetStatement, SleepStatement, WhileStatement } from "../../../../03_0_Structure_🌴/1_ast/1_2_1_statement.js"
-import { ArrayLiteral, FunctionLiteral, HashLiteral, PureFunctionLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
+import { NewExpression } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_1_1_expression.js"
+import { ClassStatement, ExpressionStatement, ForStatement, IfStatement, LetStatement, SleepStatement, WhileStatement } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_2_1_statement.js"
+import { ArrayLiteral, FunctionLiteral, HashLiteral, PureFunctionLiteral } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal.js"
 import { Transpiler } from "../0_abstract-un-parser/abstract-un-parser.js"
 
 export class NativeTranspiler extends Transpiler {

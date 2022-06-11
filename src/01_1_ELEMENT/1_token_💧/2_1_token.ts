@@ -128,6 +128,13 @@ export enum Token {
     POUND_LBRACKET  = "#[",
     RBRACKET_POUND  = "]#",
 
+    // Transforms & Receivers:
+    NEGATIVE_AT = "-@", // View Transform
+    POSITIVE_AT = "+@", // Transform Receiver
+
+    NEGATIVE_POUND = "-#", // Concept Receiver
+    
+
     // Comments:
     LCOMMENT = "/*",
     RCOMMENT = "*/",

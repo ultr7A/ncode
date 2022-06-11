@@ -7,8 +7,8 @@ import { ParseTreeAnalysis }            from "wrapt.co_re/dist/Domain [╍🌐�
 import { Environment }                  from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment.js"
 
 
-import { CallExpression, IndexExpression } from "../../../../03_0_Structure_🌴/1_ast/1_1_1_expression.js"
-import { Identifier, StringLiteral }       from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
+import { CallExpression, IndexExpression } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_1_1_expression.js"
+import { Identifier, StringLiteral }       from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal.js"
 
 import { UnParserPlugin }                  from "./un-parser-plugin.js"
 

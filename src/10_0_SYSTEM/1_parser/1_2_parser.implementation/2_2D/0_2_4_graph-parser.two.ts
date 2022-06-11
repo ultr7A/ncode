@@ -6,8 +6,8 @@ import { GraphOperator }                    from "wrapt.co_re/dist/Model [╍⬡
 
 import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
 import { TypedTokenSurface } from "../../../../01_1_ELEMENT/1_token_💧/2_2_token-surface.js"
-import { GraphEdge, GraphNode } from "../../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements.js"
-import { ConceptGraphLiteral, GraphLiteral, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
+import { GraphEdge, GraphNode } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_0_literal-elements.js"
+import { ConceptGraphLiteral, GraphLiteral, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal.js"
 import { Orientation_XY } from "../../../0_0_system-structure/1_0_system-structure.js"
 
 

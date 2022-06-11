@@ -6,7 +6,7 @@ import { GraphOperator }                 from "wrapt.co_re/dist/Model [╍⬡╍
 
 import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
 import { TypedTokenVolume } from "../../../../01_1_ELEMENT/1_token_💧/2_4_token-volume.js"
-import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
+import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal.js"
 import { Directional, Orientation_WXYZ } from "../../../0_0_system-structure/1_0_system-structure.js"
 import { TokenizerThree } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_4_1_tokenizer.three.js"
 

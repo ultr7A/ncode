@@ -1,8 +1,8 @@
 import { ObjectType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/object-type.enum.js"
 import { NodeName } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum.js"
-import { CallExpression, IndexExpression, NewExpression } from "../../../../03_0_Structure_🌴/1_ast/1_1_1_expression.js"
-import { ClassStatement, ExpressionStatement, ForStatement, IfStatement, LetStatement, SleepStatement, WhileStatement } from "../../../../03_0_Structure_🌴/1_ast/1_2_1_statement.js"
-import { ArrayLiteral, FunctionLiteral, HashLiteral, Identifier, IntegerLiteral, PureFunctionLiteral, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
+import { CallExpression, IndexExpression, NewExpression } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_1_1_expression.js"
+import { ClassStatement, ExpressionStatement, ForStatement, IfStatement, LetStatement, SleepStatement, WhileStatement } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_2_1_statement.js"
+import { ArrayLiteral, FunctionLiteral, HashLiteral, Identifier, IntegerLiteral, PureFunctionLiteral, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal.js"
 import { Transpiler } from "../0_abstract-un-parser/abstract-un-parser.js"
 
 /**

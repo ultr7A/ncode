@@ -1,9 +1,9 @@
 import { ParseTreeAnalysis } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta";
 import { NodeName_To_DataType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/primitive/type.enum.js";
 import { sprintf }              from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util";
-import { CallExpression, NewExpression }     from "../../../03_0_Structure_🌴/1_ast/1_1_1_expression.js";
-import { AssignmentStatement, LetStatement } from "../../../03_0_Structure_🌴/1_ast/1_2_1_statement.js";
-import { getDataTypeByNodeName }             from "../../../03_0_Structure_🌴/1_ast/3_util_⚙/ast-util.js";
+import { CallExpression, NewExpression }     from "../../../03_0_Structure_🌴/1_ast_🧩/1_1_1_expression.js";
+import { AssignmentStatement, LetStatement } from "../../../03_0_Structure_🌴/1_ast_🧩/1_2_1_statement.js";
+import { getDataTypeByNodeName }             from "../../../03_0_Structure_🌴/1_ast_🧩/3_util_⚙/ast-util.js";
 import { TypeValidator } from "./0_1_type-validator.js";
 
 export class   ASTTypeValidator implements  TypeValidator

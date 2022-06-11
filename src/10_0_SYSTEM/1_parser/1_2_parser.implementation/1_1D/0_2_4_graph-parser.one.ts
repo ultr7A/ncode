@@ -4,8 +4,8 @@ import { AbstractOperator, Node, Expression, IGraphEdge, IGraphNode }
 import { GraphOperator }    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements.js"
 
                  import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
-import { Pair } from "../../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements.js"
-import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal.js"
+import { Pair } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_0_literal-elements.js"
+import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal.js"
 import { Oriented, Orientation_X } from "../../../0_0_system-structure/1_0_system-structure.js"
 
 

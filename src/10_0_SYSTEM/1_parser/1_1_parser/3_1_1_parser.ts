@@ -6,7 +6,7 @@ import { ExpressionParserOne }   from "../1_2_parser.implementation/1_1D/1_1_exp
 
 import { AbstractToken }    from "../../../01_1_ELEMENT/1_token_💧/0_1_token-structure.js"
 import { Token }            from "../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
-import { Program } from "../../../03_0_Structure_🌴/1_ast/1_0_1_root.js"
+import { Program } from "../../../03_0_Structure_🌴/1_ast_🧩/1_0_1_root.js"
 
 
  

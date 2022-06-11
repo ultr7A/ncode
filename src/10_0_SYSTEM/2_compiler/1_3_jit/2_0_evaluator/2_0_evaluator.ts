@@ -25,16 +25,16 @@ import { Analyzer } from "../../0_3_0_analyzer/1_3_expression-analyzer.js"
 import { JSTranspiler } from "../../../3_un-parser/2_token.unparser/2_un-parse_targets/1_1_javascript.js"
 import { RuntimeOptimizer } from "../3_1_runtime-optimizer.js"
 
-import { BlockStatement, Program }  from "../../../../03_0_Structure_🌴/1_ast/1_0_1_root.js"
+import { BlockStatement, Program }  from "../../../../03_0_Structure_🌴/1_ast_🧩/1_0_1_root.js"
 import {    AssignmentStatement, ClassStatement, ConceptStatement, ExecStatement, ExpressionStatement, 
             ForStatement,   IfStatement, IndexedAssignmentStatement, LetStatement, ReturnStatement, 
             SleepStatement, WhileStatement } 
-                                    from "../../../../03_0_Structure_🌴/1_ast/1_2_1_statement";
+                                    from "../../../../03_0_Structure_🌴/1_ast_🧩/1_2_1_statement";
 import { CallExpression, IndexExpression, InfixExpression, NewExpression, PrefixExpression, StreamExpression } 
-                                    from "../../../../03_0_Structure_🌴/1_ast/1_1_1_expression";
+                                    from "../../../../03_0_Structure_🌴/1_ast_🧩/1_1_1_expression";
 import {    BooleanLiteral, ClassLiteral, ConceptSequenceLiteral, GraphLiteral, Identifier, IntegerLiteral, 
             FloatLiteral, StringLiteral, HashLiteral, MobiusLiteral, WheelLiteral, ArrayLiteral } 
-                                    from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
+                                    from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal";
 
 
 import { evaluateSourceFile, printNativeString } from "../../../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util.js"
@@ -43,6 +43,10 @@ import { builtins } from "../../../../4_Frame_⚡/2_deprecated_builtin/index.js"
 import { nodeObjects } from "../../../../4_Frame_⚡/4_io/1_file-system/2_compatibility.js"
 import { readWholeFile } from "../../../../3_Operation_☀/3_util_(🔥)/4_0_io-util.js"
 import { Parser } from "../../../1_parser/1_1_parser/3_1_1_parser.js";
+import { MethodTransformReceiverProcedure, PropertyTransformReceiverExpression, PropertyTransformReceiverFunction } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_2_1_transform.receiver.js";
+import { ConceptReceiver } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_1_concept.receiver.js";
+import { ConceptProjection } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_2_concept-projection.js";
+import { ConceptProjectorSelector } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_3_concept-projector-selector.js";
 
 
 
@@ -985,6 +989,41 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
         return new Integer(-value);
     }
 
+
+    // TODO:
+    // called from EObject.Inspect()
+    public evalViewTransform() {
+
+    }
+
+
+
+    private evalPropertyTransformReceiverExpression(receiver: PropertyTransformReceiverExpression): void {
+
+
+    }
+
+    private evalPropertyTransformReceiverFunction(receiver: PropertyTransformReceiverFunction): void {
+
+    }
+
+    private evalMethodTransformReceiverProcedure(receiver: MethodTransformReceiverProcedure): void {
+
+    }
+
+    private evalConceptReceiver(receiver: ConceptReceiver, object: FunctionObject | ClassifiedObject) {
+
+    }
+
+    
+    
+    private evalConceptProjection(projection: ConceptProjection): void {
+
+    }
+
+    private evalConceptProjectorSelector(selector: ConceptProjectorSelector): void {
+
+    }
 
 
 
