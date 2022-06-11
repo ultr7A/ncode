@@ -1,6 +1,7 @@
 import { DynamicFunction } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
 import { ClassLiteral } from "./1_3_1_literal";
 import { ConceptProjectorSelector } from "./2_4_3_concept-projector-selector";
+import { ConceptTransform } from "./2_4_4_concept.transform";
 
 /**
  Concept-Projection:
@@ -28,14 +29,19 @@ import { ConceptProjectorSelector } from "./2_4_3_concept-projector-selector";
 export class ConceptProjection {
   
     private projectorSelector: ConceptProjectorSelector; 
+    private conceptTransform: ConceptTransform;
 
 
     public apply(node: ClassLiteral | DynamicFunction): void {
-
+        // TODO!
     }
 
     public setConceptProjectoSelector(selectorProjector: ConceptProjectorSelector): void {
         this.projectorSelector = selectorProjector;
+    }
+
+    public setConceptTransform(transform: ConceptTransform) {
+        this.conceptTransform = transform;
     }
 
 }
