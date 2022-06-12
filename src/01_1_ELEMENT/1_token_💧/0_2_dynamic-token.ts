@@ -1,6 +1,6 @@
-import { CodeData, CodeCoordinates, SourceCode } from "../../01_2_Sequence_📘🌊/0_source/source-code.js"
-import { Orientation_Type, Oriented } from "../../10_0_SYSTEM/0_0_system-structure/1_0_system-structure.js"
-import { AbstractToken } from "./0_1_token-structure.js"
+import { Orientation_Type, Oriented } from "../../10_0_SYSTEM/0_0_system-structure/1_0_system-structure.js";
+import { AbstractToken } from "./0_1_token-structure.js";
+import { CodeData, CodeCoordinates, SourceCode } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/source/source-code.js"
 
 export  type  TokenMatcher  =           TokenMatcherConstant |
                                         TokenMatcherRegExp   |

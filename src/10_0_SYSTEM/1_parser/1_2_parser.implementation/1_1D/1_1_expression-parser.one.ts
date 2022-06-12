@@ -3,7 +3,8 @@ import { Node, Expression, Statement, Value, FunctionNode }
 import { Operator }                 from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators.js";
 import { STREAM_DIRECTION }         from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum.js";
 import { BuiltinGraphOperatorType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/4_graph-operators.js";
-
+import { NodeName_To_DataType }     from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/primitive/type.enum.js";
+import { CodeData }                 from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/source/source-code";
 
 import { Analyzer }       from "../../../2_compiler/0_3_0_analyzer/1_3_expression-analyzer.js"
 import { Precedence, precedences }     from "../../0_0_parser-core/2_1_precedence.js"
@@ -27,11 +28,9 @@ import { getDefaultValueNodeForDataType }
                                    from "../../../../03_0_Structure_🌴/1_ast_🧩/3_util_⚙/ast-util.js"
 
 
-import { CodeData } from "../../../../01_2_Sequence_📘🌊/0_source/source-code.js"
 import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser.js";
 import { setToken } from "../../0_0_parser-core/0_3_set-token.js";
 import { IExpressionParser } from "../../0_0_parser-core/expression-parser.interface.js";
-import { NodeName_To_DataType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/primitive/type.enum.js";
 import { ConceptReceiver } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_1_concept.receiver.js";
 import { MethodTransformReceiverProcedure, PropertyTransformReceiverExpression, PropertyTransformReceiverFunction, RuntimeTransformReceiverHandler, TransformReceiver } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_2_1_transform.receiver.js";
 import { ConceptProjection } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_2_concept-projection.js";
@@ -40,6 +39,7 @@ import { InstanceTransform } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_
 import { InspectionTransform } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_3_1_inspection.transform.js";
 import { ConceptTransformationExpressionAbstraction } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_5_concept-expression.abstraction.js";
 import { ConceptTransformationStatementAbstraction } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_6-concept-statement.abstraction.js";
+
 
 
 

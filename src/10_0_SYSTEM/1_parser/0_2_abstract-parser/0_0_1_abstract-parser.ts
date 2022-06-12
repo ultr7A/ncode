@@ -1,11 +1,11 @@
 import { ParseTreeAnalysis }                          from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta.js"
 import { Operator }                                   from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators.js"
+import { CodeData }                                   from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/source/source-code.js"
 import { Node, Expression, Statement, FunctionNode }  from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
-import { sprintf }           from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util.js"
+import { sprintf }                                    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util.js"
 
 import { AbstractToken } from "../../../01_1_ELEMENT/1_token_💧/0_1_token-structure.js"
 import { Token } from "../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
-import { CodeCoordinates, CodeData } from "../../../01_2_Sequence_📘🌊/0_source/source-code.js"
 import { Program } from "../../../03_0_Structure_🌴/1_ast_🧩/1_0_1_root.js"
 
 import { AbstractTokenizer, ITokenizer } from "../../0_tokenizer/0_1_tokenizer-core/0_2_abstract-tokenizer.js"

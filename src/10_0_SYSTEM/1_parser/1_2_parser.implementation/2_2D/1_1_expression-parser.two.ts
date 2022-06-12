@@ -1,10 +1,10 @@
 import { Operator }      from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators.js"
+import { CodeData }      from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/source/source-code.js"
 import { Node, Expression, Statement }    from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
 import { GraphOperator } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements.js"
 
 import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
 import { TypedTokenSurface } from "../../../../01_1_ELEMENT/1_token_💧/2_2_token-surface.js"
-import { CodeData } from "../../../../01_2_Sequence_📘🌊/0_source/source-code.js"
 import { Program } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_0_1_root.js"
 import { StringLiteral } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal.js"
 import { Orientation_XY, Oriented } from "../../../0_0_system-structure/1_0_system-structure.js"

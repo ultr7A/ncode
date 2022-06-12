@@ -1,4 +1,4 @@
-import { CodeData, CodeDataType } from "../../../01_2_Sequence_📘🌊/0_source/source-code.js"
+import { CodeData, CodeDataType } from  "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/source/source-code.js";
 import { NodeJSObjects } from "../../../4_Frame_⚡/4_io/1_file-system/2_compatibility.js"
 import { Orientation_WXYZ } from "../../0_0_system-structure/1_0_system-structure.js"
 import { TokenizerOne } from "../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one.js"

@@ -1,4 +1,4 @@
-import { CodeData } from "../../01_2_Sequence_📘🌊/0_source/source-code.js"
+import { CodeData } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/source/source-code.js"
 import { Orientation_One } from "../../10_0_SYSTEM/0_0_system-structure/1_0_system-structure.js"
 import { AbstractToken } from "./0_1_token-structure.js"
 import { DynamicToken, ITokenPattern }  from "./0_2_dynamic-token.js"
