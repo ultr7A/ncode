@@ -5,6 +5,8 @@ import { STREAM_DIRECTION }         from "wrapt.co_re/dist/Domain [╍🌐╍�
 import { BuiltinGraphOperatorType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/4_graph-operators.js";
 import { NodeName_To_DataType }     from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/primitive/type.enum.js";
 import { CodeData }                 from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/source/source-code";
+import { ModuleImport }             from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/module/module-import.js";
+import { ModuleExport }             from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/module/module-export.js";
 
 import { Analyzer }       from "../../../2_compiler/0_3_0_analyzer/1_3_expression-analyzer.js"
 import { Precedence, precedences }     from "../../0_0_parser-core/2_1_precedence.js"
@@ -31,14 +33,14 @@ import { getDefaultValueNodeForDataType }
 import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser.js";
 import { setToken } from "../../0_0_parser-core/0_3_set-token.js";
 import { IExpressionParser } from "../../0_0_parser-core/expression-parser.interface.js";
-import { ConceptReceiver } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_1_concept.receiver.js";
+import { ConceptReceiver }     from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_1_concept.receiver.js";
 import { MethodTransformReceiverProcedure, PropertyTransformReceiverExpression, PropertyTransformReceiverFunction, RuntimeTransformReceiverHandler, TransformReceiver } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_2_1_transform.receiver.js";
-import { ConceptProjection } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_2_concept-projection.js";
+import { ConceptProjection }   from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_2_concept-projection.js";
 import { ConceptProjectorSelector } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_3_concept-projector-selector.js";
-import { InstanceTransform } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_3_2_instance.transform.js";
+import { InstanceTransform }   from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_3_2_instance.transform.js";
 import { InspectionTransform } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_3_1_inspection.transform.js";
 import { ConceptTransformationExpressionAbstraction } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_5_concept-expression.abstraction.js";
-import { ConceptTransformationStatementAbstraction } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_6-concept-statement.abstraction.js";
+import { ConceptTransformationStatementAbstraction }  from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_6-concept-statement.abstraction.js";
 
 
 
@@ -420,6 +422,10 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
                     return this.parseForStatement();
                 case Token.SLEEP:
                     return this.parseSleepStatement();
+                case Token.IMPORT:
+                    return this.parseImportStatement();
+                case Token.EXPORT:
+                    return this.parseExportStatement();
                 default:
                     return this.parseExpressionStatement();
             }
@@ -973,10 +979,11 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
     }
     
 
+
+
     parseTransformReceiver(): TransformReceiver {
         return null;
     }
-
 
 
     parsePropertyTransformReceiverExpression(): PropertyTransformReceiverExpression {
@@ -1001,6 +1008,7 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
 
     
 
+    
     parseConceptReceiver(): ConceptReceiver {
 
         return null; // * TODO: *
@@ -1022,6 +1030,24 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
         return null;
     }
 
+
+
+
+    parseImportStatement(): ModuleImport {
+        const moduleImport = new ModuleImport();
+        
+        moduleImport.Identity = new Identifier("");
+        moduleImport.Value = new StringLiteral("");
+        return moduleImport;
+    }
+
+    parseExportStatement(): ModuleExport {
+        const moduleImport = new ModuleExport();
+        
+        moduleImport.Identity = new Identifier("");
+        moduleImport.Value = new StringLiteral("");
+        return moduleImport;
+    }
 }
 
 

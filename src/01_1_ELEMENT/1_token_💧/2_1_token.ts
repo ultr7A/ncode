@@ -160,6 +160,7 @@ export enum Token {
     RETURN = "return",
     EXEC   = "exec",
     IMPORT = "import",
+    EXPORT = "export",
     NEW    = "new",
     //     Data-structure declarations:
     CONCEPT   = "concept",

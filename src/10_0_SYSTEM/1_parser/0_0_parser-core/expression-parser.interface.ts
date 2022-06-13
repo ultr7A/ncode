@@ -1,4 +1,6 @@
 import { Node, Statement, Expression, FunctionNode } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js";
+import { ModuleImport } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/module/module-import.js"
+import { ModuleExport } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/module/module-export.js"
 import { GraphOperator }                       from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements.js";
 
 import { Token } from "../../../01_1_ELEMENT/1_token_💧/2_1_token.js";
@@ -78,4 +80,7 @@ export interface IExpressionParser {
 
     parseConceptTransformationExpressionAbstraction(): ConceptTransformationExpressionAbstraction;
     parseConceptTransformationStatementAbstraction(): ConceptTransformationStatementAbstraction;
+
+    parseImportStatement(): ModuleImport;
+    parseExportStatement(): ModuleExport;
 }
