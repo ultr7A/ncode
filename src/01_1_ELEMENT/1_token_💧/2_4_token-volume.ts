@@ -1,5 +1,5 @@
-import { AbstractToken, VectorToken } from "./0_1_token-structure";
-import { Token } from "./2_1_token";
+import { AbstractToken, VectorToken } from "./0_1_token-structure.js"
+import { Token } from "./2_1_token.js"
 
 /**
  * 

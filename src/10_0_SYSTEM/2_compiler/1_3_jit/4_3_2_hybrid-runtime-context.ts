@@ -1,18 +1,23 @@
 
 
-import { IBlockStatement } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { FunctionObject, DynamicFunction }  from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
-import { ClassifiedObject }                 from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
-import { Environment }                      from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
-import { ecsObjectToNativeObject, nativeListToArray, nativeObjToClassifiedObject, nativeValueToECSValue } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
+import { IBlockStatement } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
+import { Optimizer } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/optimizer"
+import { FunctionObject, DynamicFunction }  from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure.js"
+import { ClassifiedObject }                 from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object.js"
+import { Environment }                      from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment.js"
+import { ecsObjectToNativeObject, nativeListToArray, nativeObjToClassifiedObject, nativeValueToECSValue } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util.js"
 
-import { LetStatement } from "../../../03_0_Structure_🌴/1_ast/1_2_1_statement";
-import { builtins } from "../../../4_Frame_⚡/2_builtin";
-import { ApplyFunctionFunction } from "./0_0_jit-compiler-structure/0_3_3_eval-types";
-import { EvaluatorContext } from "./0_0_jit-compiler-structure/0_3_4_evaluator-context-type";
+import { LetStatement } from "../../../03_0_Structure_🌴/1_ast_🧩/1_2_1_statement.js"
+import { builtins } from "../../../4_Frame_⚡/2_deprecated_builtin/index.js"
+import { ApplyFunctionFunction } from "./0_0_jit-compiler-structure/0_3_3_eval-types.js"
+import { EvaluatorContext } from "./0_0_jit-compiler-structure/0_3_4_evaluator-context-type.js"
 
 
-
+/**
+ * 
+ *     DEPRECATED
+ * 
+ */
 export class JSECSEvaluatorContext implements EvaluatorContext {
     
     program: IBlockStatement;
@@ -20,7 +25,7 @@ export class JSECSEvaluatorContext implements EvaluatorContext {
     applyFunction: ApplyFunctionFunction;
     evalFn: Function;
 
-    constructor(applyFunction: ApplyFunctionFunction, evalFn: Function) {
+    constructor(applyFunction: ApplyFunctionFunction, evalFn: Function, private optimizer: Optimizer) {
         this.applyFunction = applyFunction;
         this.evalFn = evalFn;
     }

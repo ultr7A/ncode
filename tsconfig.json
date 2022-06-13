@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "ESNext",
+
+      "moduleResolution": "node",
+      
+      "esModuleInterop": true,
+      
+      "noResolve": false,
+      "noImplicitAny": false,
+      "sourceMap": true,
+      "declaration": true,
+      
+      "preserveConstEnums":true,
+      "allowSyntheticDefaultImports": false,
+      "experimentalDecorators": true,
+      "types": [
+        "jest",
+        "node"
+      ],
+      "rootDir": "./src",
+      "outDir":  "./dist"
+    }
+  }

@@ -1,14 +1,14 @@
 
 
 import { Node, Expression, AbstractOperator, IGraphNode, IGraphEdge } 
-                                            from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { GraphOperator }                    from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements";
+                                            from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { GraphOperator }                    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements.js"
 
-import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token";
-import { TypedTokenSurface } from "../../../../01_1_ELEMENT/1_token_💧/2_2_token-surface";
-import { GraphEdge, GraphNode } from "../../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements";
-import { ConceptGraphLiteral, GraphLiteral, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
-import { Orientation_XY } from "../../../0_0_system-structure/1_0_system-structure";
+import { Token } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
+import { TypedTokenSurface } from "../../../../01_1_ELEMENT/1_token_💧/2_2_token-surface.js"
+import { GraphEdge, GraphNode } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_0_literal-elements.js"
+import { ConceptGraphLiteral, GraphLiteral, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal.js"
+import { Orientation_XY } from "../../../0_0_system-structure/1_0_system-structure.js"
 
 
 export class GraphParserTwo  <
@@ -20,7 +20,7 @@ export class GraphParserTwo  <
 
 constructor(
     private readonly nextToken: () => TypedTokenSurface,
-    private readonly curTokenIs: (token: Token) => boolean,
+    private readonly currentTokenIs: (token: Token) => boolean,
 
     private readonly parseGraphNode: (nodes: IGraphNode<GraphKeyType, GraphNodeType>[]) => IGraphNode<GraphKeyType, GraphNodeType>,
 
@@ -43,11 +43,11 @@ constructor(
         this.nextToken(); // skip initial `-` or `->` or `<-`
 
         // if (direction === "left") {
-        //     while(this.curTokenIs(Token.MINUS) && !this.curTokenIs(Token.EOF)) {
+        //     while(this.currentTokenIs(Token.MINUS) && !this.currentTokenIs(Token.EOF)) {
         //         this.nextToken();
         //     }
         // } else {
-        //     while(!(this.curTokenIs(Token.GT) || this.curTokenIs(Token.SOURCE)) && !this.curTokenIs(Token.EOF)) {
+        //     while(!(this.currentTokenIs(Token.GT) || this.currentTokenIs(Token.SOURCE)) && !this.currentTokenIs(Token.EOF)) {
         //         this.nextToken();
         //     }
         // }

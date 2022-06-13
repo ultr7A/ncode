@@ -1,24 +1,24 @@
+import { ConceptSequenceOperator } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/2_concept-operators.js"
 import { Node, ConceptExpression, InfixStructure, Structure, ConceptStructure, Value, IGraphNode } 
-                            from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { PrimitiveConcept } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/2_concept-operators";
-import { ConceptOperator }  from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements";
+                            from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { ConceptOperator }  from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/syntax/1_1_0_expression-elements.js"
 
-import { Token, TypedTokenLiteral } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token";
-import { PrefixConceptExpression } from "../../../../03_0_Structure_🌴/1_ast/1_1_1_expression";
-import { ConceptStatement } from "../../../../03_0_Structure_🌴/1_ast/1_2_1_statement";
-import { GraphEdge, GraphNode } from "../../../../03_0_Structure_🌴/1_ast/1_3_0_literal-elements";
-import { ArrayLiteral, ConceptGraphLiteral, ConceptSequenceLiteral, Identifier, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
-import { Orientation_X } from "../../../0_0_system-structure/1_0_system-structure";
-import { TokenizerOne } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one";
-import { Analyzer } from "../../../2_compiler/0_3_analyzer/1_3_expression-analyzer";
-import { ConceptAnalyzer } from "../../../2_compiler/0_3_analyzer/2_3_concept-analyzer";
+import { Token, TypedTokenLiteral } from "../../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
+import { PrefixConceptExpression } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_1_1_expression.js"
+import { ConceptStatement } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_2_1_statement.js"
+import { GraphEdge, GraphNode } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_0_literal-elements.js"
+import { ArrayLiteral, ConceptGraphLiteral, ConceptSequenceLiteral, Identifier, StringLiteral } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal.js"
+import { Orientation_X } from "../../../0_0_system-structure/1_0_system-structure.js"
+import { TokenizerOne } from "../../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one.js"
+import { Analyzer } from "../../../2_compiler/0_3_0_analyzer/1_3_expression-analyzer.js"
+import { ConceptAnalyzer } from "../../../2_compiler/0_3_0_analyzer/2_3_concept-analyzer.js"
 
-import { Precedence }                   from "../../0_0_parser-core/2_1_precedence";
-import { conceptPrecedences }           from "../../0_0_parser-core/2_2_concept-precedence";
-import { InfixParseFn, PrefixParseFn }  from "../../0_0_parser-core/3_0_parse-functions";
+import { Precedence }                   from "../../0_0_parser-core/2_1_precedence.js"
+import { conceptPrecedences }           from "../../0_0_parser-core/2_2_concept-precedence.js"
+import { InfixParseFn, PrefixParseFn }  from "../../0_0_parser-core/3_0_parse-functions.js"
 
-import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser";
-import { GraphParserOne } from "./0_2_4_graph-parser.one";
+import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser.js"
+import { GraphParserOne } from "./0_2_4_graph-parser.one.js"
 
 /**
  * 
@@ -28,8 +28,8 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
     public analyzer:    ConceptAnalyzer;
     public graphParser: GraphParserOne  <ConceptOperator, ConceptExpression>;
 
-    public curToken:  TypedTokenLiteral;
-    public peekToken: TypedTokenLiteral;
+    public currentToken:  TypedTokenLiteral = null;
+    public peekToken: TypedTokenLiteral = null;
 
     public prefixParseFns = {} as Partial<{ [prefixToken in Token]: PrefixParseFn<ConceptExpression, Node> }>;
     public infixParseFns  = {} as Partial<{ [infixToken  in Token]:  InfixParseFn<ConceptExpression, Node> }>;
@@ -42,7 +42,7 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
         // Init GraphParser:
         this.graphParser = new GraphParserOne<ConceptOperator, ConceptExpression, IGraphNode<StringLiteral, any>>(
             this.nextToken,
-            this.curTokenIs,
+            this.currentTokenIs,
             this.parseConceptGraphLiteralNode,
             this.parseConceptGraphLiteralEdge
         );
@@ -58,6 +58,16 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
 
     }
 
+    public setCurrentToken(token) {
+        this.currentToken = token;
+        return token;
+    }
+
+    public setPeekToken(token) {
+        this.peekToken = token;
+        return token;
+    }
+
     // TODO: revisit this: // 
     public parseConceptStatement() {
         var stmt = new ConceptStatement(null, null);
@@ -65,7 +75,7 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
             return null;
         }
 
-        stmt.Identity = new Identifier(this.curToken.Literal);
+        stmt.Identity = new Identifier(this.currentToken.Literal);
         // TODO: Analyzer should always be handling this:
         this.diagnosticContext.declaredVariables[stmt.Identity.Value] = stmt.Identity.Value;
         this.nextToken();
@@ -81,10 +91,10 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
      * parseConceptExpression
      */
      public parseConceptExpression(precedence: number): ConceptExpression {
-        if (this.curTokenIs(Token.POUND_LBRACE)) {
+        if (this.currentTokenIs(Token.POUND_LBRACE)) {
             return this.parseConceptGraphLiteral();
 
-        } else if (this.curTokenIs(Token.POUND_LBRACKET)) {
+        } else if (this.currentTokenIs(Token.POUND_LBRACKET)) {
             return this.parseConceptSequenceLiteral();
 
         } else {
@@ -96,8 +106,8 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
      * parseConceptStructure
      */
      private parseConceptStructure(precedence: number): ConceptStructure {
-        let curTokenType = this.curToken.Type;
-        let prefix = this.prefixParseFns[curTokenType], 
+        let currentTokenType = this.currentToken.Type;
+        let prefix = this.prefixParseFns[currentTokenType], 
             leftExp: Node;
 
         leftExp = prefix && prefix();
@@ -107,7 +117,7 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
 
             if (!infix) {
                 if (!leftExp) {
-                    this.noPrefixParseFnError(curTokenType);
+                    this.noPrefixParseFnError(currentTokenType);
                     return null;
                 }
                 return leftExp as Structure<ConceptOperator, ConceptExpression>;
@@ -141,7 +151,7 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
 
         this.nextToken();
 
-        while (!this.curTokenIs(Token.RBRACKET_POUND) && !this.curTokenIs(Token.EOF)) {
+        while (!this.currentTokenIs(Token.RBRACKET_POUND) && !this.currentTokenIs(Token.EOF)) {
             conceptElements.push(this.parseConceptExpression(Precedence.LOWEST));
         }
 
@@ -180,7 +190,7 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
         let operatorExpression: ConceptExpression;
         let operator: ConceptOperator;
         //                        ---#( )#--->
-        if (this.curTokenIs(Token.POUND_LPAREN)) {
+        if (this.currentTokenIs(Token.POUND_LPAREN)) {
             this.nextToken();
 
             operatorExpression = this.parseConceptExpression(0);
@@ -188,7 +198,7 @@ export class ConceptParserOne extends AbstractParser<TypedTokenLiteral, Node, Co
             this.nextToken(2);
             this.graphParser.parseDirectionalGraphEdge(direction);
         } else {
-            operatorExpression = new Identifier(PrimitiveConcept.SequenceOperator.PROJECT);
+            operatorExpression = new Identifier(ConceptSequenceOperator.PROJECT);
             operator = new ConceptOperator(operatorExpression, 0); 
         }
 

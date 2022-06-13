@@ -1,10 +1,10 @@
-import { Environment } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
+import { Environment } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment.js"
 
-import { TokenizerOne } from "../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one";
-import { Parser } from "../../1_parser/1_1_parser/3_1_1_parser";
-import { ExpressionEvaluator } from "../../2_compiler/1_3_jit/2_0_evaluator/2_0_evaluator";
-import { printParserErrors } from "../3_1-shell-util/3_1-shell-util";
-import { Translator } from "./0_4_translator";
+import { TokenizerOne } from "../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one.js"
+import { Parser } from "../../1_parser/1_1_parser/3_1_1_parser.js"
+import { ExpressionEvaluator } from "../../2_compiler/1_3_jit/2_0_evaluator/2_0_evaluator.js"
+import { printParserErrors } from "../3_1-shell-util/3_1-shell-util.js"
+import { Translator } from "./0_4_translator.js"
 
 
 var lang = new Translator();
@@ -48,9 +48,11 @@ export const localEvaluate = function (
     evaluator: ExpressionEvaluator
 ) {
     tokenizer.loadSourceCode(text);
-    p.parseProgram();
-    let program = p.parseProgram(), evaluated;
 
+    p.setTokenizerOne(tokenizer);
+    
+    let program = p.parseProgram(), evaluated;
+    
     if (p.errors.length != 0) {
         printParserErrors(p.errors);
         return;

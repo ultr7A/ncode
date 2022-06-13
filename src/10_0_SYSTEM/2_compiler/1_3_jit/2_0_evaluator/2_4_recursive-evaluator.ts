@@ -1,11 +1,11 @@
-import { InspectionType } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
-import { Environment } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
-import { forceSingleLine } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util";
-import { Program } from "../../../../03_0_Structure_🌴/1_ast/1_0_1_root";
+import { InspectionType } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure.js"
+import { Environment } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment.js"
+import { forceSingleLine } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util.js"
+import { Program } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_0_1_root.js"
 
-import { Parser }       from "../../../1_parser/1_1_parser/3_1_1_parser";
-import { EvalFunction, EvalProgramFunction } from "../0_0_jit-compiler-structure/0_3_3_eval-types";
-import { ExpressionEvaluator } from "./2_0_evaluator";
+import { Parser }       from "../../../1_parser/1_1_parser/3_1_1_parser.js"
+import { EvalFunction, EvalProgramFunction } from "../0_0_jit-compiler-structure/0_3_3_eval-types.js"
+import { ExpressionEvaluator } from "./2_0_evaluator.js"
 
 
 
@@ -84,6 +84,6 @@ export class RecursiveEvaluator {
 }
 
 
-export function makeRuntimeEnvironment(evaluator: ExpressionEvaluator) { //evalFunction: EvalFunction, evalProgram: EvalProgramFunction) {
-    return new RecursiveEvaluator(new Parser(), evaluator);
+export function makeRuntimeEnvironment(evaluator: ExpressionEvaluator, parser: Parser) { //evalFunction: EvalFunction, evalProgram: EvalProgramFunction) {
+    return new RecursiveEvaluator(parser, evaluator);
 };

@@ -1,46 +1,52 @@
 import { ConceptExpression, Expression, FunctionNode, IIdentifier, Node }  
-                                    from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { ParseTreeAnalysis }        from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/4_0_0_meta";
-import { Operator }                 from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators";
-import { ObjectType }               from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/object-type.enum";
-import { STREAM_DIRECTION }         from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum";
-import { Optimizer }                from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/system/optimizer";
+                                    from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
+import { ParseTreeAnalysis }        from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta.js"
+import { Operator }                 from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators.js"
+import { ObjectType }               from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/object-type.enum.js"
+import { STREAM_DIRECTION }         from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum.js"
+import { Optimizer }                from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/optimizer.js"
+import { Evaluator }                from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/evaluator.js";
 
-import { ArrayObject, BooleanObject, BuiltinFunctionObject, ClassifiedObject, ConceptObject, ErrorObject, Float, GraphObject, 
+import { ArrayObject, BooleanObject, _BuiltinFunctionObject, ClassifiedObject, ConceptObject, ErrorObject, Float, GraphObject, 
     Hash, Integer, LambdaFunction, PureFunction, ReturnValue, StreamObject, StringObject, WheelObject } 
-                                                    from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
-import { TRUE, FALSE, NULL }                        from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton";
+                                                    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object.js";
+import { TRUE, FALSE, NULL }                        from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_1_object.singleton.js"
 
-import { Environment, NewEnclosedEnvironment }      from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
-import { EObject, FunctionObject, InMemoryScalar }  from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure";
+import { Environment, NewEnclosedEnvironment }      from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment.js"
+import { EObject, FunctionObject, InMemoryScalar }  from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/0_1_object-structure.js"
 import { copyClassifiedObject, copyHashMap, copyList, nativeBoolToBooleanEObject, newError } 
-                                                    from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util";
+                                                    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/3_0_object-util.js";
 
 
-import { makeRuntimeEnvironment, RecursiveEvaluator } from "./2_4_recursive-evaluator";
-import { Evaluator } from "./0_1_evaluator-structure";
-import { ConceptEvaluator } from "./2_2_concept-evaluator";
-import { Analyzer } from "../../0_3_analyzer/1_3_expression-analyzer";
-import { JSTranspiler } from "../../../3_un-parser/2_token.unparser/2_un-parse_targets/1_1_javascript";
-import { RuntimeOptimizer } from "../3_1_runtime-optimizer";
+import { makeRuntimeEnvironment, RecursiveEvaluator } from "./2_4_recursive-evaluator.js"
+// import evaluator...
+import { ConceptEvaluator } from "./2_2_concept-evaluator.js"
+import { Analyzer } from "../../0_3_0_analyzer/1_3_expression-analyzer.js"
+import { JSTranspiler } from "../../../3_un-parser/2_token.unparser/2_un-parse_targets/1_1_javascript.js"
+import { RuntimeOptimizer } from "../3_1_runtime-optimizer.js"
 
-import { BlockStatement, Program }  from "../../../../03_0_Structure_🌴/1_ast/1_0_1_root";
+import { BlockStatement, Program }  from "../../../../03_0_Structure_🌴/1_ast_🧩/1_0_1_root.js"
 import {    AssignmentStatement, ClassStatement, ConceptStatement, ExecStatement, ExpressionStatement, 
             ForStatement,   IfStatement, IndexedAssignmentStatement, LetStatement, ReturnStatement, 
             SleepStatement, WhileStatement } 
-                                    from "../../../../03_0_Structure_🌴/1_ast/1_2_1_statement";
+                                    from "../../../../03_0_Structure_🌴/1_ast_🧩/1_2_1_statement";
 import { CallExpression, IndexExpression, InfixExpression, NewExpression, PrefixExpression, StreamExpression } 
-                                    from "../../../../03_0_Structure_🌴/1_ast/1_1_1_expression";
+                                    from "../../../../03_0_Structure_🌴/1_ast_🧩/1_1_1_expression";
 import {    BooleanLiteral, ClassLiteral, ConceptSequenceLiteral, GraphLiteral, Identifier, IntegerLiteral, 
             FloatLiteral, StringLiteral, HashLiteral, MobiusLiteral, WheelLiteral, ArrayLiteral } 
-                                    from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
+                                    from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal";
 
 
-import { evaluateSourceFile, printNativeString } from "../../../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util";
+import { evaluateSourceFile, printNativeString } from "../../../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util.js"
 
-import { builtins } from "../../../../4_Frame_⚡/2_builtin";
-import { nodeObjects } from "../../../../4_Frame_⚡/4_io/1_file-system/2_compatibility";
-import { readWholeFile } from "../../../../3_Operation_☀/3_util_(🔥)/4_0_io-util";
+import { builtins } from "../../../../4_Frame_⚡/2_deprecated_builtin/index.js"
+import { nodeObjects } from "../../../../4_Frame_⚡/4_io/1_file-system/2_compatibility.js"
+import { readWholeFile } from "../../../../3_Operation_☀/3_util_(🔥)/4_0_io-util.js"
+import { Parser } from "../../../1_parser/1_1_parser/3_1_1_parser.js";
+import { MethodTransformReceiverProcedure, PropertyTransformReceiverExpression, PropertyTransformReceiverFunction } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_2_1_transform.receiver.js";
+import { ConceptReceiver } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_1_concept.receiver.js";
+import { ConceptProjection } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_2_concept-projection.js";
+import { ConceptProjectorSelector } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_3_concept-projector-selector.js";
 
 
 
@@ -50,19 +56,21 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
     private embeddedInterpreter: RecursiveEvaluator;
     private conceptEvaluator:    ConceptEvaluator;
 
-    constructor() {
+    constructor(private parser: Parser) {
         this.optimizer = new RuntimeOptimizer(new JSTranspiler(), applyFunction, this);
         this.analyzer  = new Analyzer();
 
-        this.embeddedInterpreter = makeRuntimeEnvironment(this);
+        this.embeddedInterpreter = makeRuntimeEnvironment(this, parser);
     }
 
     private optimizedEvalProgram(program: Program, env: Environment) {
         var analysis = this.analyzer.analyzeParseTree(program);
-        return this.optimizer.optimizedEvaluate(analysis, program, env, function () { return this.evalProgram(program, env); });
+        return this.optimizer.optimizedEvaluate(analysis, program, env, () => this.evalProgram(program, env) );
     }
 
     public Eval(node: Node, env: Environment, objectContext?: ClassifiedObject, analysis?: ParseTreeAnalysis): EObject {
+        // console.log("Evaluate node /  (Evaluator :: Eval) ");
+        
         if (!!!node) {
             return;
         }
@@ -71,8 +79,14 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
         switch (node.NodeName) {
             // Statements
             case "Program":
-                // console.log(JSON.stringify(node, null, 2));
-                return this.optimizer.optimizedEvaluate(analysis, (node as BlockStatement), env, function () { return this.evalProgram(node, env); });
+                //console.log(JSON.stringify(node, null, 2));
+        
+                return this.optimizer.optimizedEvaluate(
+                                                            analysis, 
+                                                            (node as BlockStatement), 
+                                                            env, 
+                                                            () =>  this.evalProgram(node as Program, env)  
+                                                       );
             //evalProgram(node, env);
             case "BlockStatement":
                 return this.evalBlockStatement((node as BlockStatement), env, objectContext);
@@ -146,12 +160,12 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
                 return this.evalInfixExpression((node as InfixExpression).Operator, left, right);
     
             case "CallExpression":
-                var fun = this.Eval((node as CallExpression).Function, env); //, node.Function.ObjectContext); // objectContext);
+                const fun = this.Eval((node as CallExpression).Function, env); //, node.Function.ObjectContext); // objectContext);
                 if (isError(fun)) {
                     return fun;
                 }
     
-                var args = this.evalExpressions((node as CallExpression).Values, env, objectContext);
+                const args = this.evalExpressions((node as CallExpression).Values, env, objectContext);
                 if (args.length == 1 && isError(args[0])) {
                     return args[0];
                 }
@@ -233,9 +247,12 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
     public evalProgram(program: Program, env: Environment) {
         var result;
         var statements = program.Values;
+
         for (var s = 0, l = statements.length; s < l; s++) {
             var stmt = statements[s];
+
             result = this.Eval(stmt, env);
+
             if (!!result && result.Message) {
                 return result;
             }
@@ -263,13 +280,17 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
     
     private evalExpressions(exps: Expression[], env: Environment, objectContext: ClassifiedObject) {
         var result = [];
-        exps.forEach(function (e) {
+        
+        for (const idx in exps) {
+            const e = exps[idx];
+
             var evaluated = this.Eval(e, env, objectContext);
             if (isError(evaluated)) {
                 return Array();
             }
             result.push(evaluated);
-        });
+        
+        }
         return result;
     }
     
@@ -477,7 +498,7 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
             var pairType = pairs[p].Value.Type();
             if (pairType == ObjectType.BUILTIN || pairType == ObjectType.FUNCTION) {
                 // console.log("setting object context", instance);
-                ((pairs[p].Value as LambdaFunction | BuiltinFunctionObject).ObjectContext) = instance;
+                ((pairs[p].Value as LambdaFunction | _BuiltinFunctionObject).ObjectContext) = instance;
             }
         }
     }
@@ -619,7 +640,7 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
         var stream = new StreamObject(se.Direction, transforms, source, sink, "");
         // if the source is a builtin,
         if (source.Type() == "BUILTIN" && se.Direction == STREAM_DIRECTION.READ) { // a host event handler has to be added
-            applyBuiltinFunction(source as BuiltinFunctionObject, [
+            applyBuiltinFunction(source as _BuiltinFunctionObject, [
                 transforms.length
                     ? transforms[0] // if there is a stream transform chain, pass the event data to it.
                     : sink // if there are no transformations, connect the source and sink directly with an event handler.
@@ -969,6 +990,41 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
     }
 
 
+    // TODO:
+    // called from EObject.Inspect()
+    public evalViewTransform() {
+
+    }
+
+
+
+    private evalPropertyTransformReceiverExpression(receiver: PropertyTransformReceiverExpression): void {
+
+
+    }
+
+    private evalPropertyTransformReceiverFunction(receiver: PropertyTransformReceiverFunction): void {
+
+    }
+
+    private evalMethodTransformReceiverProcedure(receiver: MethodTransformReceiverProcedure): void {
+
+    }
+
+    private evalConceptReceiver(receiver: ConceptReceiver, object: FunctionObject | ClassifiedObject) {
+
+    }
+
+    
+    
+    private evalConceptProjection(projection: ConceptProjection): void {
+
+    }
+
+    private evalConceptProjectorSelector(selector: ConceptProjectorSelector): void {
+
+    }
+
 
 
 }
@@ -978,47 +1034,50 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
 
 // UTILS:
 
-export function applyFunction(fn: FunctionObject | ClassifiedObject, env: Environment, args: EObject[], objectContext: ClassifiedObject) {
-    var fnType = fn.Type();
-    var extendedEnv, evaluated;
+export function applyFunction(
+    fn: FunctionObject | ClassifiedObject, 
+    env: Environment, 
+    args: EObject[], 
+    objectContext: ClassifiedObject
+) {
+    
+    const fnType = fn.Type();
+    let evaluated;
     switch (fnType) {
         case "pure_function":
-            evaluated = this.evalBlockStatement(
-                (fn as PureFunction).Body, 
-                createPureFunctionEnv((fn as PureFunction).Parameters, args), 
-                objectContext
-            );
+            evaluated = (fn as PureFunction)
+           .evaluate(createPureFunctionEnv((fn as PureFunction).Parameters, args));
+
             return unwrapReturnValue(evaluated);
         case "function":
-            extendedEnv = extendFunctionEnv(fn as LambdaFunction, args);
-            evaluated = this.Eval((fn as LambdaFunction).Body, extendedEnv, (fn as LambdaFunction).ObjectContext);
+            evaluated = (fn as LambdaFunction)
+           .evaluate(extendFunctionEnv(fn as LambdaFunction, args));
+
             return unwrapReturnValue(evaluated);
-        // case "hash":
-        //     var constructor = fn.Constructor;
-        //     if (!constructor) {
-        //         return newError("object has no constructor");
-        //     }
-        //     if (constructor.Parameters) { // Function Literal constructor
-        //         extendedEnv = extendFunctionEnv(constructor, args);
-        //         evaluated = this.Eval(constructor.Body, extendedEnv, fn);
-        //     } else { //                      Builtin Function Constructor
-        //         evaluated = applyBuiltinFunction(constructor, args, env, fn);
-        //     }
-        //     return fn;
+            
         case "BUILTIN":
-            return applyBuiltinFunction(fn as BuiltinFunctionObject, args, env, objectContext);
+            return applyBuiltinFunction(fn as _BuiltinFunctionObject, args, env, objectContext);
         default:
             return newError("not a function: %s", fn.Type());
     }
 }
 
-function applyBuiltinFunction(fn: BuiltinFunctionObject, args: EObject[], env: Environment, objectContext?: ClassifiedObject) {
+// TODO: move this into _BuiltinFunctionObject
+function applyBuiltinFunction(
+
+    fn: _BuiltinFunctionObject, 
+    args: EObject[], 
+    
+    env: Environment, 
+    objectContext?: ClassifiedObject 
+    
+) {
     const objContext = fn.ObjectContext || objectContext; 
 
     if (fn.ecsOnly) {
         return fn.Fn.apply(fn, [objContext, objContext ? objContext.builtins : null, ...args]);
     } else {
-        return fn.callFromECSRuntime(objContext, this.optimizer, args);
+        return fn.callFromECSRuntime(objContext, args);
     }
 }
 

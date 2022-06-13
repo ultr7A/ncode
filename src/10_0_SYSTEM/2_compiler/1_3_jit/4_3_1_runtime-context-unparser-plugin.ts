@@ -1,14 +1,14 @@
 
-import { ParseTreeAnalysis }  from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/4_0_0_meta";
-import { Expression }         from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { NodeName } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum";
-import { isAbstractDataType } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util";
+import { ParseTreeAnalysis }  from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta.js"
+import { Expression }         from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
+import { NodeName } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum.js"
+import { isAbstractDataType } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util.js"
 
-import { IndexExpression, CallExpression, NewExpression } from "../../../03_0_Structure_🌴/1_ast/1_1_1_expression";
-import { LetStatement, AssignmentStatement, IndexedAssignmentStatement, ExpressionStatement } from "../../../03_0_Structure_🌴/1_ast/1_2_1_statement";
-import { StringLiteral, Identifier, ArrayLiteral, HashLiteral } from "../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
-import { Transpiler } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/abstract-un-parser";
-import { UnParserPlugin } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/un-parser-plugin";
+import { IndexExpression, CallExpression, NewExpression } from "../../../03_0_Structure_🌴/1_ast_🧩/1_1_1_expression.js"
+import { LetStatement, AssignmentStatement, IndexedAssignmentStatement, ExpressionStatement } from "../../../03_0_Structure_🌴/1_ast_🧩/1_2_1_statement.js"
+import { StringLiteral, Identifier, ArrayLiteral, HashLiteral } from "../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal.js"
+import { Transpiler } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/abstract-un-parser.js"
+import { UnParserPlugin } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/un-parser-plugin.js"
 
 
 /**

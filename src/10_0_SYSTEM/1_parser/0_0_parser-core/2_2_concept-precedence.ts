@@ -1,5 +1,5 @@
-import { PrimitiveConcept } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/2_concept-operators";
-const  { StructureOperator, SequenceOperator, OperatorOperator } = PrimitiveConcept; 
+import { ConceptOperatorOperator, ConceptOperatorType, ConceptSequenceOperator, ConceptStructureOperator } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/2_concept-operators.js"
+; 
 
 
 export enum ConceptPrecedence {
@@ -39,74 +39,74 @@ export enum ConceptPrecedence {
  * 
  ****************************************/
 
-export const conceptPrecedenceMapping: { [key in ConceptPrecedence]: PrimitiveConcept.OperatorType[] } = {
+export const conceptPrecedenceMapping: { [key in ConceptPrecedence]: ConceptOperatorType[] } = {
     [ConceptPrecedence.LOWEST          ]: [
-        SequenceOperator.PROJECT, 
-        SequenceOperator.EXTEND,
-        SequenceOperator.SUBTRACT,
+        ConceptSequenceOperator.PROJECT, 
+        ConceptSequenceOperator.EXTEND,
+        ConceptSequenceOperator.SUBTRACT,
     ],
 
     [ConceptPrecedence.PREPOSITION     ]: [
-        StructureOperator.OF,
-        StructureOperator.AS,
-        StructureOperator.FOR,
-        StructureOperator.THROUGH,
-        StructureOperator.BETWEEN,
+        ConceptStructureOperator.OF,
+        ConceptStructureOperator.AS,
+        ConceptStructureOperator.FOR,
+        ConceptStructureOperator.THROUGH,
+        ConceptStructureOperator.BETWEEN,
     ],
     [ConceptPrecedence.LOGICAL         ]: [
-        StructureOperator.AND,
-        StructureOperator.OR,
-        StructureOperator.NOT,
-        StructureOperator.IS,
-        StructureOperator.HAS,
+        ConceptStructureOperator.AND,
+        ConceptStructureOperator.OR,
+        ConceptStructureOperator.NOT,
+        ConceptStructureOperator.IS,
+        ConceptStructureOperator.HAS,
     ],
     [ConceptPrecedence.SUBORDINATE_CONJ]: [
-        StructureOperator.WHAT,
-        StructureOperator.WHERE,
-        StructureOperator.WHEN,
-        StructureOperator.HOW,
-        StructureOperator.WHY,
+        ConceptStructureOperator.WHAT,
+        ConceptStructureOperator.WHERE,
+        ConceptStructureOperator.WHEN,
+        ConceptStructureOperator.HOW,
+        ConceptStructureOperator.WHY,
     ],
     [ConceptPrecedence.IMPERATIVE      ]: [
-        OperatorOperator.WILL,
-        OperatorOperator.DO,
-        OperatorOperator.DOES,
-        OperatorOperator.MAKE,
-        OperatorOperator.ADD,
-        OperatorOperator.REMOVE,
-        OperatorOperator.READ,
-        OperatorOperator.WRITE,
+        ConceptOperatorOperator.WILL,
+        ConceptOperatorOperator.DO,
+        ConceptOperatorOperator.DOES,
+        ConceptOperatorOperator.MAKE,
+        ConceptOperatorOperator.ADD,
+        ConceptOperatorOperator.REMOVE,
+        ConceptOperatorOperator.READ,
+        ConceptOperatorOperator.WRITE,
 
-        SequenceOperator.FIND,
-        SequenceOperator.SORT,
-        SequenceOperator.TRANSFORM,
-        SequenceOperator.AGGREGATE,
-        SequenceOperator.GROUP,
+        ConceptSequenceOperator.FIND,
+        ConceptSequenceOperator.SORT,
+        ConceptSequenceOperator.TRANSFORM,
+        ConceptSequenceOperator.AGGREGATE,
+        ConceptSequenceOperator.GROUP,
     ],
     [ConceptPrecedence.ARTICLE         ]: [
-        StructureOperator.A,
-        StructureOperator.THE,
+        ConceptStructureOperator.A,
+        ConceptStructureOperator.THE,
     ],
     [ConceptPrecedence.DETERMINER      ]: [
-        StructureOperator.S,
-        StructureOperator.ALL,
-        StructureOperator.SOME,
-        StructureOperator.NO,
-        StructureOperator.EACH,
-        StructureOperator.EVERY,
-        StructureOperator.PART
+        ConceptStructureOperator.S,
+        ConceptStructureOperator.ALL,
+        ConceptStructureOperator.SOME,
+        ConceptStructureOperator.NO,
+        ConceptStructureOperator.EACH,
+        ConceptStructureOperator.EVERY,
+        ConceptStructureOperator.PART
     ],
 };
 
 
 export const conceptPrecedences 
     = Object.keys(conceptPrecedenceMapping)
-            .map((precedenceLevel: string): [ConceptPrecedence, PrimitiveConcept.OperatorType[]] => {   
+            .map((precedenceLevel: string): [ConceptPrecedence, ConceptOperatorType[]] => {   
                 const level = precedenceLevel as unknown as number as ConceptPrecedence;
 
                 return [level, conceptPrecedenceMapping[level]];
             })
-            .reduce((previous, current: [ConceptPrecedence, PrimitiveConcept.OperatorType[]], array) => {
+            .reduce((previous, current: [ConceptPrecedence, ConceptOperatorType[]], array) => {
                                             
                 for (const idx in current[1]) {
                     previous[current[1][idx]] = current[0];

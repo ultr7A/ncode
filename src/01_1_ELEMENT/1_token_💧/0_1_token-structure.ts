@@ -1,4 +1,4 @@
-import { Token } from "./2_1_token";
+import { Token } from "./2_1_token.js"
 
 export interface AbstractToken {
     Type: string;

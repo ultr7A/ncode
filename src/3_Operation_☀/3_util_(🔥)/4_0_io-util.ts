@@ -1,9 +1,9 @@
-import { ObjectType } from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/object-type.enum";
-import { Hash } from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_object";
+import { ObjectType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/object-type.enum.js"
+import { Hash } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_0_1_object.js"
 
-import { platformSpecificCall } from "./2_platform-utils";
-import { readWholeFileNode } from "./4_1_node-io-util";
-import { printToDocument, readFileFromLocalStorage } from "./4_2_browser-io-util";
+import { platformSpecificCall } from "./2_platform-utils.js"
+import { readWholeFileNode } from "./4_1_node-io-util.js"
+import { printToDocument, readFileFromLocalStorage } from "./4_2_browser-io-util.js"
 
 
 export function readWholeFile(path, fs, relativeToScript = true): Promise<string> {

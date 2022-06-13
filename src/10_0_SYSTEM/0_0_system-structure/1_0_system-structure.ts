@@ -1,4 +1,4 @@
-import { Token } from "../../01_1_ELEMENT/1_token_💧/2_1_token";
+import { Token } from "../../01_1_ELEMENT/1_token_💧/2_1_token.js"
 
 
 

@@ -1,13 +1,11 @@
-import { TypedTokenSurface, TokenSurface } from "../../../01_1_ELEMENT/1_token_💧/2_2_token-surface";
-import { AbstractTokenizer } from "../0_1_tokenizer-core/0_2_abstract-tokenizer";
+import { TypedTokenSurface, TokenSurface } from "../../../01_1_ELEMENT/1_token_💧/2_2_token-surface.js"
+import { AbstractTokenizer, ITokenizer } from "../0_1_tokenizer-core/0_2_abstract-tokenizer.js"
 
 /**
  * 
  */
-export class TokenizerTwo extends AbstractTokenizer<
-                                        [number, number], string[], 
-                                        string, TypedTokenSurface
-                                > 
+export class TokenizerTwo extends    AbstractTokenizer<string, TypedTokenSurface> 
+                          implements ITokenizer       <[number, number], string[], string, TypedTokenSurface>
 {
 
     public ch = "";

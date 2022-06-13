@@ -1,20 +1,23 @@
-import { ParseTreeAnalysis }                          from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/4_0_0_meta";
-import { Operator }                                   from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators";
-import { Node, Expression, Statement, FunctionNode }  from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { sprintf }           from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util";
+import { ParseTreeAnalysis }                          from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta.js"
+import { Operator }                                   from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators.js"
+import { CodeData }                                   from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/source/source-code.js"
+import { Node, Expression, Statement, FunctionNode }  from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
+import { sprintf }                                    from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util.js"
 
-import { AbstractToken } from "../../../01_1_ELEMENT/1_token_💧/0_1_token-structure";
-import { Token } from "../../../01_1_ELEMENT/1_token_💧/2_1_token";
-import { CodeCoordinates, CodeData } from "../../../01_2_Sequence_📘🌊/0_source/source-code";
-import { Program } from "../../../03_0_Structure_🌴/1_ast/1_0_1_root";
+import { AbstractToken } from "../../../01_1_ELEMENT/1_token_💧/0_1_token-structure.js"
+import { Token } from "../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
+import { Program } from "../../../03_0_Structure_🌴/1_ast_🧩/1_0_1_root.js"
 
-import { AbstractTokenizer } from "../../0_tokenizer/0_1_tokenizer-core/0_2_abstract-tokenizer";
-import { ExpressionAnalysisDiagnosticContext } from "../../2_compiler/0_3_analyzer/0_1_analyzer-structure";
-import { AbstractAnalyzer } from "../../2_compiler/0_3_analyzer/0_3_abstract-analyzer";
-import { Analyzer } from "../../2_compiler/0_3_analyzer/1_3_expression-analyzer";
-import { IPrecedences } from "../0_0_parser-core/0_1_precedence-structure";
-import { Precedence } from "../0_0_parser-core/2_1_precedence";
-import { InfixParseFn, PrefixParseFn } from "../0_0_parser-core/3_0_parse-functions";
+import { AbstractTokenizer, ITokenizer } from "../../0_tokenizer/0_1_tokenizer-core/0_2_abstract-tokenizer.js"
+import { ExpressionAnalysisDiagnosticContext } from "../../2_compiler/0_3_0_analyzer/0_1_analyzer-structure.js"
+import { AbstractAnalyzer } from "../../2_compiler/0_3_0_analyzer/0_3_abstract-analyzer.js"
+import { Analyzer } from "../../2_compiler/0_3_0_analyzer/1_3_expression-analyzer.js"
+import { IPrecedences } from "../0_0_parser-core/0_1_precedence-structure.js"
+import { Precedence } from "../0_0_parser-core/2_1_precedence.js"
+import { InfixParseFn, PrefixParseFn } from "../0_0_parser-core/3_0_parse-functions.js"
+import { ExpressionParserOne } from "../1_2_parser.implementation/1_1D/1_1_expression-parser.one.js"
+import { ExpressionParserTwo } from "../1_2_parser.implementation/2_2D/1_1_expression-parser.two.js"
+import { ExpressionParserThree } from "../1_2_parser.implementation/4_3D/1_1_expression-parser.three.js"
 
 
 
@@ -30,48 +33,55 @@ export abstract class AbstractParser<
                 AnalyzerType       extends AbstractAnalyzer<ExpressionNodeType, ParseTreeAnalysis, any> = Analyzer
              > {
 
-    protected curToken:  TokenObject;
+    protected subClass: ExpressionParserOne | ExpressionParserTwo | ExpressionParserThree;
+
+    protected currentToken:  TokenObject;
     protected peekToken: TokenObject;
     protected errors = [] as string[];
-    //TODO: move analyzer logic out of ParserOne and into AbstractAnalyzer<>:
-    protected analyzer?: AnalyzerType;
 
     abstract prefixParseFns: Partial<{ [key in Token]: PrefixParseFn<ExpressionNodeType, OutputNodeType> }>;
     abstract infixParseFns:  Partial<{ [key in Token]:  InfixParseFn<ExpressionNodeType, OutputNodeType> }>;
                 
     abstract doParseProgram(statements: Statement[], program: Program): void;
-
+    abstract setCurrentToken(token);
+    abstract setPeekToken(token);
 
     diagnosticContext: ParseTreeAnalysis;
 
 
 
     constructor(
-            protected tokenizer:  AbstractTokenizer<CodeCoordinates, CodeData, string, TokenObject>, 
-            protected precedence: IPrecedences
+            protected tokenizer:  AbstractTokenizer<CodeData,TokenObject>, // & ITokenizer<CodeCoordinates, CodeData>, 
+            protected precedence: IPrecedences,
     ) {
         this.precedence = precedence;
         this.reset();
     }
 
+    public setSubClass(parser: any) {
+        this.subClass = parser;
+    }
+
     public reset(): void {
         this.errors = [];
-        this.curToken = null;
-        this.peekToken = null;
+        this.currentToken = this.setCurrentToken(null);
+        this.peekToken = this.setPeekToken(null);
         this.resetDiagnosticContext();
     }
 
 
-
+    // (?)TODO: Deprecate ?
     public parse() {
         this.reset();
-        this.nextToken();
-        this.nextToken();
+        // this.nextToken();
+        // this.nextToken();
     }
 
 
     public parseProgram() {
-        var Statements = [], program = new Program(Statements);
+        const Statements = [], program = new Program(Statements);
+        
+        this.peekToken = null; // this.tokenizer.peekToken;)
         this.doParseProgram(Statements, program);
         // console.log(JSON.stringify(this.diagnosticContext, null, 2));
         // console.log(JSON.stringify(program, null, 2));
@@ -84,20 +94,31 @@ export abstract class AbstractParser<
 
     // Reading tokens:
     //      No disintegration:
-    protected peekTokenIs(t: Token): boolean {
+    public peekTokenIs(t: Token): boolean {
         return this.peekToken.Type == t;
     }
-    protected curTokenIs (t: Token): boolean {
-        return this.curToken.Type == t;
+    /** Idea:
+     * 
+     * What if there were channels, or  'class selectors',
+     *         instead of access modifiers.. ?
+     */
+    public currentTokenIs (t: Token): boolean {
+        return this.currentToken.Type == t;
     }
-    protected curTokenIsAnyOf(t: string[]): boolean {
-        return t.includes(this.curToken.Type);
+    protected currentTokenIsAnyOf(t: string[]): boolean {
+        return t.includes(this.currentToken.Type);
     }
     //      Traversing tokens:
-    protected nextToken(times = 1): void {
+    public nextToken(times = 1): void {
         for (let next = 0; next < times; next++) {
-            this.curToken  = this.peekToken;
-            this.peekToken = this.tokenizer.NextToken() // as unknown as TokenObject; // TODO: why isn't this statically compatible?
+            
+            while (this.peekToken == null) {
+                this.peekToken = this.setPeekToken(this.tokenizer.NextToken());
+            }
+
+            this.currentToken  = this.setCurrentToken(this.peekToken);
+            this.peekToken = this.setPeekToken(this.tokenizer.NextToken()) // as unknown as TokenObject; // TODO: why isn't this statically compatible?
+        
         }   
     }
 
@@ -110,10 +131,11 @@ export abstract class AbstractParser<
         if (typeof p == "number") {
             return p;
         }
+        
         return Precedence.LOWEST;
     }
     protected curPrecedence(): number {
-        const p = this.precedence[this.curToken.Type];
+        const p = this.precedence[this.currentToken.Type];
 
         if (typeof p == "number") {
             return p;
@@ -135,11 +157,11 @@ export abstract class AbstractParser<
 
     // Parser configuration:
     protected registerPrefix(tokenType: string, fn: PrefixParseFn<ExpressionNodeType>) {
-        this.prefixParseFns[tokenType] = fn;
+        this.prefixParseFns[tokenType] = fn.bind(this.subClass);
     }
 
     protected registerInfix(tokenType: string, fn: InfixParseFn<ExpressionNodeType, OutputNodeType>) {
-        this.infixParseFns[tokenType] = fn;
+        this.infixParseFns[tokenType] = fn.bind(this.subClass);
     }
 
 

@@ -1,4 +1,4 @@
-import { printNativeString } from "../../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util";
+import { printNativeString } from "../../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util.js"
 
 export function printParserErrors(errors) {
     //console.error(MONKEY_FACE)
@@ -11,7 +11,12 @@ export function printParserErrors(errors) {
 
 export function introMessage() {
     //printNativeString(null, null, convolvrLogo);
-    printNativeString(null, "╔═════╗");
-    printNativeString(null, '║ ECS ║ Type help(); for documentation. ');
-    printNativeString(null, "╚═════╝");
+    printNativeString(null, " ╔═══════════╗");
+    printNativeString(null, ' ║ wrapt.org ║  ** Interactive Mode **');
+    printNativeString(null, " ╚═══════════╝");
+    printNativeString(null, "  ");
+    printNativeString(null, "                   Call help()           ");
+    printNativeString(null, "                   for API documentation.");
+    printNativeString(null, "");
+
 }

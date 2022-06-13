@@ -1,16 +1,16 @@
 
-import { Node, Expression, Statement }  from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { NodeName }                     from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum";
-import { UnParser }                     from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/system/un-parser";
-import { ParseTreeAnalysis }            from "wrapt.co_re/lib/Domain [╍🌐╍🧭╍]/4_0_0_meta";
+import { Node, Expression, Statement }  from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
+import { NodeName }                     from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum.js"
+import { UnParser }                     from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/un-parser.js"
+import { ParseTreeAnalysis }            from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta.js"
 
-import { Environment }                  from "wrapt.co_re/lib/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment";
+import { Environment }                  from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment.js"
 
 
-import { CallExpression, IndexExpression } from "../../../../03_0_Structure_🌴/1_ast/1_1_1_expression";
-import { Identifier, StringLiteral }       from "../../../../03_0_Structure_🌴/1_ast/1_3_1_literal";
+import { CallExpression, IndexExpression } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_1_1_expression.js"
+import { Identifier, StringLiteral }       from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal.js"
 
-import { UnParserPlugin }                  from "./un-parser-plugin";
+import { UnParserPlugin }                  from "./un-parser-plugin.js"
 
 
 
