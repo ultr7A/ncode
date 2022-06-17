@@ -7,11 +7,14 @@ import { ExpressionParserOne }   from "../1_2_parser.implementation/1_1D/1_1_exp
 import { AbstractToken }    from "../../../01_1_ELEMENT/1_token_💧/0_1_token-structure.js"
 import { Token }            from "../../../01_1_ELEMENT/1_token_💧/2_1_token.js"
 import { Program } from "../../../03_0_Structure_🌴/1_ast_🧩/1_0_1_root.js"
+import { ModuleLinker } from "../../2_compiler/4_2_1_module_linker/1_1_0_module-linker.js"
 
 
  
 export class Parser { 
  
+    constructor(public linker: ModuleLinker, private workingPath = "") {}
+
     public diagnosticContext: ParseTreeAnalysis;
     public currentState: AbstractParser = null;
     
@@ -19,8 +22,9 @@ export class Parser {
     private tokenizerOne: TokenizerOne = null;
 
 
-    public setTokenizerOne(tokenizer: TokenizerOne): void {
+    public setTokenizerOne(tokenizer: TokenizerOne): Parser {
         this.tokenizerOne = tokenizer;
+        return this;
     }
 
     public transition(event: Token): AbstractParser<AbstractToken> {
@@ -51,8 +55,10 @@ export class Parser {
                 (() => {
                     console.log("Initializing new TokenizerOne");
                     return new TokenizerOne()
-                })()
-            );
+                })(),
+                this.workingPath
+            )
+            .setModuleLinker(this.linker);
     }
 
 }

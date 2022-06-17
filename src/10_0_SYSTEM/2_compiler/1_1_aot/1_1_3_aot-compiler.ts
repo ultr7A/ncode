@@ -46,7 +46,10 @@ export class AOTCompiler extends AbstractAOTCompiler<Node, string> {
         super();     
 
         this.tokenizer = new TokenizerOne();
-        this.parser    = new Parser();
+
+        this.linker    = new ModuleLinker();
+
+        this.parser    = new Parser(this.linker);
         this.analyzer  = new Analyzer();
         
         this.evaluator = new ExpressionEvaluator(this.parser);
@@ -57,7 +60,6 @@ export class AOTCompiler extends AbstractAOTCompiler<Node, string> {
         // needed? (TODO: verify)
         DynamicFunctionEvaluator.setExpressionEvaluator(this.evaluator);
 
-        this.linker    = new ModuleLinker();
     }
 
 

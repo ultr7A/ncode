@@ -1,0 +1,9 @@
+{
+
+    "name":   "hello-module",
+    "author": "Jeremy Evans<ultr7a@gmail.com>"
+    version: [1,0,0],
+
+    dependencies: {}
+
+}

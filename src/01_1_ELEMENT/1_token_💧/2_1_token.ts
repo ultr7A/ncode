@@ -211,16 +211,27 @@ export enum Modifier {
     PURE      = 6
 };
 
-export const keywords = {
-    "pure":   Token.PURE,
-    "fn":     Token.FUNCTION,
+export const declarations = {
     "let":    Token.LET,
     "const":  Token.CONST,
+    
+    "pure":   Token.PURE,
+
+    "class":     Token.CLASS,
+    "concept":   Token.CONCEPT,
+    "interface": Token.INTERFACE,
+}
+
+export const keywords = {
+    "fn":     Token.FUNCTION,
+
     "if":     Token.IF,
     "else":   Token.ELSE,
     "return": Token.RETURN,
+
     "true":   Token.TRUE,
     "false":  Token.FALSE,
+
     "for":    Token.FOR,
     "sleep":  Token.SLEEP,
     "exec":   Token.EXEC,
@@ -228,12 +239,11 @@ export const keywords = {
     "while":  Token.WHILE,
     "typeof": Token.TYPEOF,
     "new":    Token.NEW,
-    "class":     Token.CLASS,
-    "concept":   Token.CONCEPT,
-    "interface": Token.INTERFACE,
+    ...declarations,
     "private": Token.PRIVATE,
     "static":  Token.STATIC,
     "final":   Token.FINAL,
+    
     "boolean":  Token.LET_BOOL,
     "int":      Token.LET_INT,
     "float":    Token.LET_FLOAT,

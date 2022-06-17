@@ -47,11 +47,8 @@ export const builtins = {
         return new Integer(Date.now());
     }, null, null, true),
 
-    "print": new _BuiltinFunctionObject("print", [], function(scope) {
-        var args = [];
-        for (var _i = 3; _i < arguments.length; _i++) {
-            args[_i - 3] = arguments[_i];
-        }
+    "print": new _BuiltinFunctionObject("print", [], function(scope, _, ...args:EObject[]) {
+        
         println( scope, args);
         return NULL;
     }, null, null, true),

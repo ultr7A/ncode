@@ -1,0 +1,12 @@
+import { cylinder }        from "./shapes/clyinder.wr";
+import { cube }            from "./shapes/cube.wr";
+import { triangularPrism } from "./shapes/triangular-prism.rw";
+
+array cyl   = cylinder;
+array box   = cube;
+array prism = triangularPrism;
+
+print("the_earth_it_self__directly :: main.wr [");
+print(cyl, box, prism);
+print("]");
+

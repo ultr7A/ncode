@@ -33,14 +33,19 @@ import { getDefaultValueNodeForDataType }
 import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser.js";
 import { setToken } from "../../0_0_parser-core/0_3_set-token.js";
 import { IExpressionParser } from "../../0_0_parser-core/expression-parser.interface.js";
-import { ConceptReceiver }     from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_1_concept.receiver.js";
-import { MethodTransformReceiverProcedure, PropertyTransformReceiverExpression, PropertyTransformReceiverFunction, RuntimeTransformReceiverHandler, TransformReceiver } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_2_1_transform.receiver.js";
-import { ConceptProjection }   from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_2_concept-projection.js";
-import { ConceptProjectorSelector } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_3_concept-projector-selector.js";
-import { InstanceTransform }   from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_3_2_instance.transform.js";
-import { InspectionTransform } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_3_1_inspection.transform.js";
+import { ConceptReceiver }         from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_1_concept.receiver.js";
+import { MethodTransformReceiverProcedure, PropertyTransformReceiverExpression, PropertyTransformReceiverFunction, RuntimeTransformReceiverHandler, TransformReceiver } 
+                                   from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_2_1_transform.receiver.js";
+import { ConceptProjection }       from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_2_concept-projection.js";
+import { ConceptProjectorSelector }from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_3_concept-projector-selector.js";
+import { InstanceTransform }       from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_3_2_instance.transform.js";
+import { InspectionTransform }     from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_3_1_inspection.transform.js";
 import { ConceptTransformationExpressionAbstraction } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_5_concept-expression.abstraction.js";
 import { ConceptTransformationStatementAbstraction }  from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_6-concept-statement.abstraction.js";
+import { ModuleLinker } from "../../../2_compiler/4_2_1_module_linker/1_1_0_module-linker.js";
+import { Parser } from "../../1_1_parser/3_1_1_parser.js";
+import { Module } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/module/module";
+import { sprintf } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util";
 
 
 
@@ -59,7 +64,17 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
     public prefixParseFns = {} as Partial<{ [token in Token]: PrefixParseFn<Expression, Node> }>;
     public infixParseFns  = {} as Partial<{ [token in Token]:  InfixParseFn<Expression, Node> }>;
 
-    
+    private moduleLinker: ModuleLinker;
+    private sourceFile = "main"
+    private get sourceFilePath() {
+        return this.sourcePath + this.sourceFile;
+    } 
+
+    public setModuleLinker(moduleLinker: ModuleLinker): ExpressionParserOne {
+        this.moduleLinker = moduleLinker;
+        return this;
+    }
+
     public setCurrentToken(token) {
         this.currentToken = token;
         return token;
@@ -70,7 +85,7 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
         return token;
     }
 
-    constructor(tokenizer: TokenizerOne) {
+    constructor(tokenizer: TokenizerOne, public sourcePath = "") {
         super(tokenizer, precedences);
         super.setSubClass(this);
         
@@ -1036,17 +1051,84 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
     parseImportStatement(): ModuleImport {
         const moduleImport = new ModuleImport();
         
+        
+        
         moduleImport.Identity = new Identifier("");
-        moduleImport.Value = new StringLiteral("");
+        
+        if (!this.expectPeek(Token.IDENT)) {    
+            this.errors.push("Identifier was not supplied to ModuleImport::Identity");
+            return null;
+        } 
+
+        this.nextToken();
+        moduleImport.Identity.Value = this.parseIdentifier().Value;
+        
+        this.nextToken();
+        moduleImport.Value = this.parseStringLiteral();
+        
+        const absolutePath = this.moduleLinker.getAbsolutePath(this.sourcePath, moduleImport.Value.Value + "");
+
+        if (! this.moduleLinker
+                  .isModuleRegistered(absolutePath) 
+        ) {
+            
+            this.moduleLinker.readFile(moduleImport.Value.Value+"").then((fileData) => {
+
+                                                        // Parser should get absolute directory, not file..
+                const ast = new Parser(this.moduleLinker, absolutePath)
+                            .setTokenizerOne((new TokenizerOne())
+                                                .loadSourceCode(fileData)
+                                            )
+                            .parseProgram();
+
+
+                const ___module___ = new Module(); 
+
+                ___module___.AST_RAW = ast;
+
+                this.moduleLinker.registerModule(
+                    absolutePath,
+                    ___module___
+                );
+                
+            });
+            
+        }
+
         return moduleImport;
     }
 
     parseExportStatement(): ModuleExport {
-        const moduleImport = new ModuleExport();
+        const moduleExport          = new ModuleExport();
+
+        this.nextToken();
+
+        if (!ModuleLinker.supportedDeclarations.includes(this.currentToken.Literal)
+            &&
+            !this.isDataType(false)) {
+            this.errors.push(sprintf(
+                    "parseExportStatment:  second token did not match: %s",
+                    ModuleLinker.supportedDeclarations.join(", ")
+                )
+            );
+        }
+
+        this.nextToken();
+
+
+        moduleExport.Identity = this.parseIdentifier();//new Identifier("");
+
+        this.nextToken();
+
+        moduleExport.Value =  this.parseStringLiteral(); //new StringLiteral("");
         
-        moduleImport.Identity = new Identifier("");
-        moduleImport.Value = new StringLiteral("");
-        return moduleImport;
+        this.moduleLinker.registerModuleExport(
+            this.sourcePath, 
+            moduleExport.Value.Value + "", 
+            moduleExport
+        );
+        
+        return moduleExport;
     }
 }
 

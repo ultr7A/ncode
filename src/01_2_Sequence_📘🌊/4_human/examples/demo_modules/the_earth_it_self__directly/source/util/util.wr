@@ -1,0 +1,22 @@
+/** export function createMesh() { */
+export function createMesh = fn(int sides, float width, float length) {
+    array verticies = [];
+
+    for (y, [0, 1]) {
+        for (x, sides) {
+            float angle = (x / sides) * Math.PI * 2;
+            push(verticies, [Math.sin(x) * 50, Math.cos(x) * 50, y * 100.0]);
+        }
+    }
+
+    return verticies;
+};
+
+export function neon = fn() {
+    return [0,1,1];
+};
+
+/** export _private_function__for_some_reason() {  */
+function _private_function__for_some_reason = fn() {
+
+}

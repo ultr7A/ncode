@@ -1,6 +1,5 @@
 # npm package
 dist
-bin
 # Logs
 logs
 *.log

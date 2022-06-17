@@ -40,7 +40,7 @@ export class TokenizerOne extends    AbstractTokenizer<string, TypedTokenLiteral
         }
     }
 
-    loadSourceCode(input: string): void {
+    loadSourceCode(input: string): TokenizerOne {
         this.coordinates.position = 0;
         this.coordinates.readPosition = 0;
         this.lineNumber = 1;
@@ -48,6 +48,8 @@ export class TokenizerOne extends    AbstractTokenizer<string, TypedTokenLiteral
 
         this.code = input;
         this.readChar();
+
+        return this;
     };
 
     peekChar(): string {
