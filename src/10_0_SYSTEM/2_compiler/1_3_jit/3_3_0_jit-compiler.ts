@@ -36,17 +36,20 @@ export class JITCompiler {
    constructor() {
       
       this.tokenizer = new TokenizerOne();
+
       this.linker = new ModuleLinker();
       this.parser    = new Parser(this.linker);
       this.parser.setTokenizerOne(this.tokenizer);
 
       this.analyzer  = new Analyzer();
       this.unparser  = new JSTranspiler();
+      
       this.environment = new Environment();
 
       this.evaluator = new ExpressionEvaluator(this.parser);
       this.optimizer = new RuntimeOptimizer(this.unparser, applyFunction, this.evaluator);
-      
+      this.evaluator.setOptimizer(this.optimizer);
+        
       _BuiltinFunctionObject.setRuntimeOptimizer(this.optimizer);
       DynamicFunctionEvaluator.setExpressionEvaluator(this.evaluator);
    }

@@ -47,6 +47,7 @@ export const localEvaluate = function (
     replPlugins, 
     evaluator: ExpressionEvaluator
 ) {
+    console.log("** localEvaluate **", text, unparseTarget);
     tokenizer.loadSourceCode(text);
 
     p.setTokenizerOne(tokenizer);

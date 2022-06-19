@@ -17,11 +17,16 @@ export function readWholeFile(path, fs, relativeToScript = true): Promise<string
 
 //TODO: make into platform specific call
 export function getSourceFile(path: string, readWholeFile: (path: string, fs) => void, fs): Promise<string> {
-    var resource = new Promise(function (resolve, reject) { 
-         
-    return resolve(null); });
+    // console.log("getSourceFile arguments: ", path, readWholeFile);
+    var resource = new Promise(
+            function (resolve, reject) { 
+                return resolve(null); 
+            }
+        );
+
     // needs to be platform specific-call
     if (path.indexOf("://") === -1) {
+        // console.log("** readWholeFile arguments: ", path, fs);
         return readWholeFile(path, fs) as unknown as Promise<string>;
     }
     return resource as Promise<string>;

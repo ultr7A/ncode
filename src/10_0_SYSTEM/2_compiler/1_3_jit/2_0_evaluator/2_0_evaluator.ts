@@ -56,11 +56,15 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
     private embeddedInterpreter: RecursiveEvaluator;
     private conceptEvaluator:    ConceptEvaluator;
 
-    constructor(private parser: Parser) {
-        this.optimizer = new RuntimeOptimizer(new JSTranspiler(), applyFunction, this);
+    constructor(private parser: Parser, optimizer?: RuntimeOptimizer) {
+        this.optimizer = optimizer; 
         this.analyzer  = new Analyzer();
 
         this.embeddedInterpreter = makeRuntimeEnvironment(this, parser);
+    }
+
+    public setOptimizer(optimizer: RuntimeOptimizer): void {
+        this.optimizer = optimizer;
     }
 
     private optimizedEvalProgram(program: Program, env: Environment) {

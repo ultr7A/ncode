@@ -4,6 +4,7 @@ import { JITCompiler } from "../2_compiler/1_3_jit/3_3_0_jit-compiler.js";
 import { SocketShell } from "./1_2-shell-implementations/0_socket-shell.js";
 import { LinearShell } from "./1_2-shell-implementations/1_linear-shell.js";
 import { CosmicShell } from "./1_2-shell-implementations/4_cosmic-shell.js";
+import { initNodeObjects } from "./3_2-nodejs/0_1_1_nodejs.js";
 
 export class Shell {
 
@@ -14,8 +15,12 @@ export class Shell {
 
         if (args.length > 0 && (args[0] as string).match(/[\/\\a-zA-Z\.\-]+/)) {
             console.log("** Using AOTCompiler **");
+            
             compiler = new AOTCompiler();
             
+            initNodeObjects(nodeObjects);
+            compiler.compile("js", args[0]);
+
         } else { 
 
             compiler = new JITCompiler();

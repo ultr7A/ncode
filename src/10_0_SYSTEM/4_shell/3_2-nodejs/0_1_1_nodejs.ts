@@ -18,10 +18,9 @@ export function makeCLIRepl(
     replPlugins, 
     evaluator: ExpressionEvaluator
 ) {
-    nodeObjects.fs = fs;
-    nodeObjects.Buffer = Buffer;
-    nodeObjects.process = process;
-   
+    
+    initNodeObjects(nodeObjects);
+
     return function (args) {
 
             introMessage();
@@ -37,4 +36,11 @@ export function makeCLIRepl(
                                         evaluator
                             )       );
     };
+}
+
+
+export function initNodeObjects(nodeObjects): void {
+    nodeObjects.fs = fs;
+    nodeObjects.Buffer = Buffer;
+    nodeObjects.process = process;
 }

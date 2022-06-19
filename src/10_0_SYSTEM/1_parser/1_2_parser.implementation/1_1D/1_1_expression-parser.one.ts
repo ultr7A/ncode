@@ -7,6 +7,10 @@ import { NodeName_To_DataType }     from "wrapt.co_re/dist/Domain [╍🌐╍�
 import { CodeData }                 from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/source/source-code";
 import { ModuleImport }             from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/module/module-import.js";
 import { ModuleExport }             from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/module/module-export.js";
+import { Module }                   from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/module/module.js";
+
+import { sprintf }                  from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util.js";
+
 
 import { Analyzer }       from "../../../2_compiler/0_3_0_analyzer/1_3_expression-analyzer.js"
 import { Precedence, precedences }     from "../../0_0_parser-core/2_1_precedence.js"
@@ -44,9 +48,6 @@ import { ConceptTransformationExpressionAbstraction } from "../../../../03_0_Str
 import { ConceptTransformationStatementAbstraction }  from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_6-concept-statement.abstraction.js";
 import { ModuleLinker } from "../../../2_compiler/4_2_1_module_linker/1_1_0_module-linker.js";
 import { Parser } from "../../1_1_parser/3_1_1_parser.js";
-import { Module } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/module/module";
-import { sprintf } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/util/1_ubiquitous-util";
-
 
 
 
@@ -1066,7 +1067,10 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
         this.nextToken();
         moduleImport.Value = this.parseStringLiteral();
         
-        const absolutePath = this.moduleLinker.getAbsolutePath(this.sourcePath, moduleImport.Value.Value + "");
+        const absolutePath = this.moduleLinker.getAbsolutePath(
+                this.sourcePath, 
+                moduleImport.Value.Value + ""
+        );
 
         if (! this.moduleLinker
                   .isModuleRegistered(absolutePath) 

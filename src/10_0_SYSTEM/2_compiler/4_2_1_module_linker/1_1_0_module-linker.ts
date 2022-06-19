@@ -3,7 +3,7 @@ import { ModuleImport } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/module
 import { Module }  from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/module/module.js";
 import { CodeData } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/source/source-code";
 import { IBlockStatement, Statement } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
-import { NodeName } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum";
+import { NodeName } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_2_2_structure-implementation.enum.js";
 import { declarations } from "../../../01_1_ELEMENT/1_token_💧/2_1_token.js";
 import { BlockStatement } from "../../../03_0_Structure_🌴/1_ast_🧩/1_0_1_root.js";
 import { CallExpression, IndexExpression } from "../../../03_0_Structure_🌴/1_ast_🧩/1_1_1_expression.js";

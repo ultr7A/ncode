@@ -8,6 +8,7 @@ import { nodeObjects } from "../../../4_Frame_⚡/4_io/1_file-system/2_compatibi
 import { TokenizerOne } from "../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one.js"
 import { Parser } from "../../1_parser/1_1_parser/3_1_1_parser.js"
 import { Transpiler } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/abstract-un-parser.js"
+import { JSTranspiler } from "../../3_un-parser/2_token.unparser/2_un-parse_targets/1_1_javascript.js"
 import { localEvaluate } from "../../4_shell/3_2-nodejs/0_1_0_nodejs.js";
 import { Analyzer } from "../0_3_0_analyzer/1_3_expression-analyzer.js"
 import { applyFunction, ExpressionEvaluator } from "../1_3_jit/2_0_evaluator/2_0_evaluator.js"
@@ -37,10 +38,17 @@ export class AOTCompiler extends AbstractAOTCompiler<Node, string> {
     public parser:      Parser;
     public optimizer:   RuntimeOptimizer;
     public analyzer:    Analyzer;
-    public unparser:    Transpiler;
+    public _unparser:    Transpiler;
     public evaluator:   ExpressionEvaluator;
     public linker:      ModuleLinker
     
+    public get unparser() {
+        return this._unparser;
+    }
+
+    public set unparser(unparser: Transpiler) {
+        this._unparser = unparser;
+    }
 
     constructor() {
         super();     
@@ -48,13 +56,15 @@ export class AOTCompiler extends AbstractAOTCompiler<Node, string> {
         this.tokenizer = new TokenizerOne();
 
         this.linker    = new ModuleLinker();
-
         this.parser    = new Parser(this.linker);
+        
         this.analyzer  = new Analyzer();
+        this.unparser  = new JSTranspiler();
         
         this.evaluator = new ExpressionEvaluator(this.parser);
         this.optimizer = new RuntimeOptimizer(this.unparser, applyFunction, this.evaluator);
-          
+        this.evaluator.setOptimizer(this.optimizer);
+
           _BuiltinFunctionObject.setRuntimeOptimizer(this.optimizer);
           
         // needed? (TODO: verify)
@@ -69,13 +79,15 @@ export class AOTCompiler extends AbstractAOTCompiler<Node, string> {
 
     public compile(targetLanguage: string, entryPointFile: string, replPlugins: Record<string, any> = {}): Promise<void> {
         const env = new Environment();
-            
-        return getSourceFile(entryPointFile, readWholeFile, nodeObjects.fs).then(function (data) {
-            localEvaluate(forceSingleLine(data), targetLanguage, this.tokenizer, 
-            this.parser, 
-            env, 
-            replPlugins, 
-            this.evaluator);
+        const cwd = process.cwd();
+        console.log("try to getSourceFile at: ", cwd+"/"+entryPointFile);
+        return getSourceFile(cwd+"/"+entryPointFile, readWholeFile, nodeObjects.fs).then(function (data) {
+            console.log("getSourceFile: ", data);
+            // localEvaluate(forceSingleLine(data), targetLanguage, this.tokenizer, 
+            // this.parser, 
+            // env, 
+            // replPlugins, 
+            // this.evaluator);
         }).catch(function (err) { console.log(err); });
     }
 

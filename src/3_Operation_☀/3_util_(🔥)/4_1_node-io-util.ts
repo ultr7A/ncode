@@ -47,6 +47,7 @@ export function readWholeFileNode(path, fs): Promise<string> {
                 });
             }
             else {
+                console.log("Error: nodeObjects not supplied to readWholeFileNode")
                 resolve("not implemented");
             }
         });

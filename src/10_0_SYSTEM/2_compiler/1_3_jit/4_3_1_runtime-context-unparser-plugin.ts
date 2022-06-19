@@ -257,6 +257,11 @@ export class JSECSContextPlugin extends UnParserPlugin {
     }
 
     public setUnParser(unparser) {
+        if (!unparser) {
+            return;
+            console.log("ctx plugin :: setUnParser called with null!")
+        }
+        
         this.unparser = unparser;
         this.callIndex = unparser.callIndex;
         this.callBuiltinIndex = unparser.callBuiltinIndex;
