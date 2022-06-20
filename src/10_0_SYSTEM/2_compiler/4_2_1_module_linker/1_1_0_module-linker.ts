@@ -62,6 +62,15 @@ export class ModuleLinker implements ILinker<Module<any>> {
         return workingPath + relativePath;
     }
 
+    public getModules(): { [modulePath: string]: Module<any> } {
+        return this.environment.modules;
+    }
+
+    public getBundle(): string {
+        return this.environment.bundle;
+    }
+    
+
     private getModuleNameKey(modulePath: string): string {
         return modulePath.split("/").pop();
     }

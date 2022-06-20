@@ -9,7 +9,8 @@ import { TokenizerOne } from "../../0_tokenizer/1_2_tokenizer.implementation/2_1
 import { Parser } from "../../1_parser/1_1_parser/3_1_1_parser.js"
 import { Transpiler } from "../../3_un-parser/2_token.unparser/0_abstract-un-parser/abstract-un-parser.js"
 import { JSTranspiler } from "../../3_un-parser/2_token.unparser/2_un-parse_targets/1_1_javascript.js"
-import { localEvaluate } from "../../4_shell/3_2-nodejs/0_1_0_nodejs.js";
+import { printParserErrors } from "../../4_shell/3_1-shell-util/3_1-shell-util.js"
+import { localEvaluate, unparseWithConfig } from "../../4_shell/3_2-nodejs/0_1_0_nodejs.js";
 import { Analyzer } from "../0_3_0_analyzer/1_3_expression-analyzer.js"
 import { applyFunction, ExpressionEvaluator } from "../1_3_jit/2_0_evaluator/2_0_evaluator.js"
 import { RuntimeOptimizer } from "../1_3_jit/3_1_runtime-optimizer.js"
@@ -80,14 +81,36 @@ export class AOTCompiler extends AbstractAOTCompiler<Node, string> {
     public compile(targetLanguage: string, entryPointFile: string, replPlugins: Record<string, any> = {}): Promise<void> {
         const env = new Environment();
         const cwd = process.cwd();
-        console.log("try to getSourceFile at: ", cwd+"/"+entryPointFile);
+        
         return getSourceFile(cwd+"/"+entryPointFile, readWholeFile, nodeObjects.fs).then(function (data) {
-            console.log("getSourceFile: ", data);
+            
+            this.parser.loadSourceCode(data);
+            
+            let program = this.parser.parseProgram(), evaluated;
+            
+            if (this.parser.errors.length != 0) {
+                printParserErrors(this.parser.errors);
+                return;
+            }
+            console.log("getSourceFile: program = ", program);
             // localEvaluate(forceSingleLine(data), targetLanguage, this.tokenizer, 
-            // this.parser, 
-            // env, 
-            // replPlugins, 
-            // this.evaluator);
+           
+            const parseResult = this.parser.getParseResult();
+
+            // Link and tansform modules, to allow bundling:
+
+            
+            // Transpile module code:
+            /** 
+            const outputBundle = unparseWithConfig(
+                program,
+                this.parser,
+                targetLanguage,
+                replPlugins
+            );
+            **/
+
+
         }).catch(function (err) { console.log(err); });
     }
 

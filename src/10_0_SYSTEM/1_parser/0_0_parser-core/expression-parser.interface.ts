@@ -17,9 +17,13 @@ import { ConceptProjection }        from "../../../03_0_Structure_🌴/1_ast_�
 import { ConceptProjectorSelector } from "../../../03_0_Structure_🌴/1_ast_🧩/2_4_3_concept-projector-selector.js";
 import { ConceptTransformationExpressionAbstraction } from "../../../03_0_Structure_🌴/1_ast_🧩/2_4_5_concept-expression.abstraction.js";
 import { ConceptTransformationStatementAbstraction } from "../../../03_0_Structure_🌴/1_ast_🧩/2_4_6-concept-statement.abstraction.js";
+import { ParseResult } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta";
 
 
 export interface IExpressionParser {
+
+    getParseResult(): ParseResult;
+
     parseStatement():   Statement;
     parseExpression(precedence: number, declaration: boolean): Expression;
     parsePrefixExpression(): Node 

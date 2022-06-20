@@ -1,5 +1,5 @@
 import { Environment } from "wrapt.co_re/dist/Model [╍⬡╍ꙮ╍▦╍]/object/1_4_0_environment.js"
-
+import { Node } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept.js"
 import { TokenizerOne } from "../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one.js"
 import { Parser } from "../../1_parser/1_1_parser/3_1_1_parser.js"
 import { ExpressionEvaluator } from "../../2_compiler/1_3_jit/2_0_evaluator/2_0_evaluator.js"
@@ -59,21 +59,7 @@ export const localEvaluate = function (
         return;
     }
     if (unparseTarget) {
-        if (replPlugins && replPlugins.transpilers) {
-            let unparsers = replPlugins.transpilers;
-
-            for (let tPlugin in unparsers) {
-                lang.loadTranspiler(tPlugin, unparsers[tPlugin]);
-            }
-        }
-        let unparser = lang.getTranspiler(unparseTarget);
-
-        if (unparser) {
-            console.log(unparser.transpile(program, null, p.diagnosticContext));
-        }
-        else {
-            console.error("Missing compiler language support plugin: " + unparseTarget);
-        }
+        unparseWithConfig(program, p, unparseTarget, replPlugins);
     }
     else {
         evaluated = evaluator.Eval(program, env, null, p.diagnosticContext);
@@ -85,3 +71,26 @@ export const localEvaluate = function (
         }
     }
 };
+
+export function unparseWithConfig(
+    program:       Node, 
+    parser:        Parser, 
+    unparseTarget: string = "js",    
+    replPlugins:   any
+) {
+    if (replPlugins && replPlugins.transpilers) {
+        let unparsers = replPlugins.transpilers;
+
+        for (let tPlugin in unparsers) {
+            lang.loadTranspiler(tPlugin, unparsers[tPlugin]);
+        }
+    }
+    let unparser = lang.getTranspiler(unparseTarget);
+
+    if (unparser) {
+        return unparser.transpile(program, null, parser.diagnosticContext);
+    }
+    else {
+        console.error("Missing compiler language support plugin: " + unparseTarget);
+    }
+}

@@ -1,4 +1,4 @@
-import { Node, Expression, Statement, Value, FunctionNode } 
+import { Node, Expression, Statement, Value, FunctionNode, IBlockStatement } 
                                     from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
 import { Operator }                 from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators.js";
 import { STREAM_DIRECTION }         from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum.js";
@@ -48,6 +48,7 @@ import { ConceptTransformationExpressionAbstraction } from "../../../../03_0_Str
 import { ConceptTransformationStatementAbstraction }  from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_6-concept-statement.abstraction.js";
 import { ModuleLinker } from "../../../2_compiler/4_2_1_module_linker/1_1_0_module-linker.js";
 import { Parser } from "../../1_1_parser/3_1_1_parser.js";
+import { ParseResult } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta";
 
 
 
@@ -65,11 +66,23 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
     public prefixParseFns = {} as Partial<{ [token in Token]: PrefixParseFn<Expression, Node> }>;
     public infixParseFns  = {} as Partial<{ [token in Token]:  InfixParseFn<Expression, Node> }>;
 
+    
+    private program: IBlockStatement;
+
     private moduleLinker: ModuleLinker;
     private sourceFile = "main"
     private get sourceFilePath() {
         return this.sourcePath + this.sourceFile;
     } 
+
+    public getParseResult(): ParseResult {
+        return {
+            tree: this.program,
+            modules: this.moduleLinker.getModules(),
+            analysis: this.analyzer.analyzeParseTree(this.program),
+            errors: this.errors,
+        }
+    }
 
     public setModuleLinker(moduleLinker: ModuleLinker): ExpressionParserOne {
         this.moduleLinker = moduleLinker;
@@ -186,6 +199,8 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
             }
             this.nextToken();
         }
+
+        this.program = program;
     }
 
 
