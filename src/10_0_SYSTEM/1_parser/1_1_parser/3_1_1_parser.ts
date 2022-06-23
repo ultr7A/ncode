@@ -1,4 +1,5 @@
-import { ParseTreeAnalysis } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta.js"
+import { ParseResult, ParseTreeAnalysis } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta.js"
+import { CodeData }          from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/source/source-code.js"
 
 import { TokenizerOne }          from "../../0_tokenizer/1_2_tokenizer.implementation/2_1_1_tokenizer.one.js"
 import { AbstractParser }        from "../0_2_abstract-parser/0_0_1_abstract-parser.js"
@@ -34,6 +35,19 @@ export class Parser {
     public get errors() {
         return this.currentState.Errors();
     }
+
+    public loadSourceCode(data: CodeData): void {
+        //if(this.currentState["loadSourceCode"]) {
+            (this.currentState as ExpressionParserOne).loadSourceCode(data);
+        //}
+    }
+
+    public getParseResult(): ParseResult {
+        // if (this.currentState["getParseResult"]) {
+            return (this.currentState as ExpressionParserOne).getParseResult()
+        // }
+    }
+
 
     public parseProgram(): Program {
         this.initializeCurrentState();

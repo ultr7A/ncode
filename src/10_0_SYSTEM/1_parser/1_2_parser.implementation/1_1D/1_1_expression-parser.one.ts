@@ -751,6 +751,20 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
         return lit;
     }
 
+    public parseFunctionLiteralWithExistingParams(_, returnType, pure, params: [Identifier[], string[]] ) {
+        
+        const lit = pure
+            ? new PureFunctionLiteral(returnType, params[1], params[0], null)
+            : new FunctionLiteral(returnType, params[1], params[0], null);
+        
+        if (!this.expectPeek(Token.LBRACE)) {
+            return null;
+        }
+
+        lit.Consequence = this.parseBlockStatement(pure);
+        return lit;
+    }
+
     public parsePureFunctionLiteral(_, returnType: string): PureFunctionLiteral {
         returnType = this.parseDataType(true)?.Literal;
         this.nextToken();
@@ -850,9 +864,9 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
 
     parseClassLiteral(): ClassLiteral {
         const clazz = new ClassLiteral(new ArrayLiteral(), new ArrayLiteral());    
-        
-        while (!this.peekTokenIs(Token.RBRACE)) {
-            this.nextToken();
+        //this.nextToken();
+            
+        while (!this.currentTokenIs(Token.RBRACE)) {
             
             const modifiers: number[] = this.parseModifiers();
             const dataType: string = this.parseDataType(false)?.Literal ?? "";
@@ -861,21 +875,25 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
             // this.nextToken();
             // check if ClassMethod or ClassProperty
             if (this.peekTokenIs(Token.ASSIGN)) {
-                this.nextToken();
+                //this.nextToken();
 
                 const element = new ClassProperty(dataType, modifiers);
 
                 element.Value = this.parseExpression(Precedence.LOWEST, false);
                 clazz.Left.Values.push(new ClassPair<ClassProperty>(key, element));
 
-            } else if (this.expectPeek(Token.LPAREN)) {
-                this.nextToken();
-
+            } else if (this.peekTokenIs(Token.LPAREN)) {
+                //this.nextToken();
                 const element = new ClassMethod(dataType, modifiers);
 
-                element.Value = this.parseFunctionLiteral(null, dataType, false) as FunctionLiteral;
+                // Parse parameters:
+                const parametersAndTypes = this.parseFunctionParameters();
+
+                // refactor to use this.parseFunctionLiteralWithExistingParams
+                element.Value = this.parseFunctionLiteralWithExistingParams(null, dataType, false, parametersAndTypes) as FunctionLiteral;
                 clazz.Right.Values.push(new ClassPair<ClassMethod>(key, element));
             }
+            this.nextToken();
         }
 
         if (!this.expectPeek(Token.RBRACE)) { return null; }

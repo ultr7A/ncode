@@ -16,6 +16,7 @@ import { applyFunction, ExpressionEvaluator } from "../1_3_jit/2_0_evaluator/2_0
 import { RuntimeOptimizer } from "../1_3_jit/3_1_runtime-optimizer.js"
 import { ModuleLinker } from "../4_2_1_module_linker/1_1_0_module-linker.js"
 import { AbstractAOTCompiler } from "./0_0_aot-compiler-structure/0_2_1_abstract-aot-compiler.js"
+import { AOTBundler } from "./1_1_4_aot-bundler.js"
 
 /* ******************************************************* *
  * 
@@ -81,22 +82,22 @@ export class AOTCompiler extends AbstractAOTCompiler<Node, string> {
     public compile(targetLanguage: string, entryPointFile: string, replPlugins: Record<string, any> = {}): Promise<void> {
         const env = new Environment();
         const cwd = process.cwd();
-        
-        return getSourceFile(cwd+"/"+entryPointFile, readWholeFile, nodeObjects.fs).then(function (data) {
+        const bundler = new AOTBundler();
+
+        return getSourceFile(cwd+"/"+entryPointFile, readWholeFile, nodeObjects.fs).then((data) => {
             
             this.parser.loadSourceCode(data);
-            
-            let program = this.parser.parseProgram(), evaluated;
+            this.parser.parseProgram();
             
             if (this.parser.errors.length != 0) {
                 printParserErrors(this.parser.errors);
                 return;
             }
-            console.log("getSourceFile: program = ", program);
             // localEvaluate(forceSingleLine(data), targetLanguage, this.tokenizer, 
            
             const parseResult = this.parser.getParseResult();
-
+            console.log("getSourceFile: parseResult = ", parseResult);
+            
             // Link and tansform modules, to allow bundling:
 
             
