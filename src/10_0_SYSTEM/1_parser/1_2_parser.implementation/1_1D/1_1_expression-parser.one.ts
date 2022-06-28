@@ -3,7 +3,7 @@ import { Node, Expression, Statement, Value, FunctionNode, IBlockStatement }
 import { Operator }                 from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators.js";
 import { STREAM_DIRECTION }         from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum.js";
 import { BuiltinGraphOperatorType } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/4_graph-operators.js";
-import { NodeName_To_DataType }     from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/primitive/type.enum.js";
+import { DataType, NodeName_To_DataType }     from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/primitive/type.enum.js";
 import { CodeData }                 from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/source/source-code";
 import { ModuleImport }             from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/module/module-import.js";
 import { ModuleExport }             from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/module/module-export.js";
@@ -33,22 +33,16 @@ import { ClassMethod, ClassPair, ClassProperty, GraphEdge, GraphNode, HashPair }
 import { getDefaultValueNodeForDataType } 
                                    from "../../../../03_0_Structure_🌴/1_ast_🧩/3_util_⚙/ast-util.js"
 
-
+import { IExpressionParser } from "../../0_0_parser-core/0_4_expression.parser.interface.js";
 import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser.js";
-import { setToken } from "../../0_0_parser-core/0_3_set-token.js";
-import { IExpressionParser } from "../../0_0_parser-core/expression-parser.interface.js";
-import { ConceptReceiver }         from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_1_concept.receiver.js";
-import { MethodTransformReceiverProcedure, PropertyTransformReceiverExpression, PropertyTransformReceiverFunction, RuntimeTransformReceiverHandler, TransformReceiver } 
-                                   from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_2_1_transform.receiver.js";
-import { ConceptProjection }       from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_2_concept-projection.js";
-import { ConceptProjectorSelector }from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_3_concept-projector-selector.js";
+
 import { InstanceTransform }       from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_3_2_instance.transform.js";
 import { InspectionTransform }     from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_3_1_inspection.transform.js";
-import { ConceptTransformationExpressionAbstraction } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_5_concept-expression.abstraction.js";
-import { ConceptTransformationStatementAbstraction }  from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_6-concept-statement.abstraction.js";
 import { ModuleLinker } from "../../../2_compiler/4_2_1_module_linker/1_1_0_module-linker.js";
 import { Parser } from "../../1_1_parser/3_1_1_parser.js";
 import { ParseResult } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta";
+import { TransformReceiverParserOne } from "./1_2_transform-receiver.parser.one.js";
+import { ConceptProjectionParserOne } from "./1_3_concept-projection.parser.one.js";
 
 
 
@@ -66,7 +60,10 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
     public prefixParseFns = {} as Partial<{ [token in Token]: PrefixParseFn<Expression, Node> }>;
     public infixParseFns  = {} as Partial<{ [token in Token]:  InfixParseFn<Expression, Node> }>;
 
-    
+    private transformReceiverParser: TransformReceiverParserOne;
+    private conceptProjectionParser: ConceptProjectionParserOne;
+
+
     private program: IBlockStatement;
 
     private moduleLinker: ModuleLinker;
@@ -418,6 +415,9 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
 
 
     public parseStatement(): Statement {
+        console.log("parseStatement :: ", {
+            currentToken: this.currentToken
+        });
         if (this.currentToken.Type == Token.IDENT && this.peekTokenIs(Token.ASSIGN)) {
             return this.parseAssignmentStatement();
         }
@@ -662,15 +662,16 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
         return stmt;
     }
 
-    public parseBlockStatement(isPureFunction = false) {
+    public parseBlockStatement(isPureFunction = false, initialNextToken = true) {
         const  block              = new BlockStatement();
         let    hasReturnStatement = false,
                errors             = [] as string[];
 
         block.Values = [];
-        this.nextToken();
-
+        initialNextToken && this.nextToken();
+        console.log(" ** parseBlockStatement ** ")
         while (!this.currentTokenIs(Token.RBRACE) && !this.currentTokenIs(Token.EOF)) {
+            console.log("** parseBlockStatement :: [loop started] ** ")
             var stmt = this.parseStatement();
             if (stmt.NodeName == "ExpressionStatement") {
                 if ((stmt as ExpressionStatement).Operand == null) {
@@ -687,8 +688,14 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
             }
 
             if (stmt != null) {
+                console.log(" ** parseBlockStatement :: [stmt added] **")
                 block.Values.push(stmt);
             }
+
+            this.nextToken();
+        }
+
+        if (this.currentTokenIs(Token.RBRACE)) {
             this.nextToken();
         }
 
@@ -862,44 +869,95 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
         return hash;
     }
 
+
+
+
     parseClassLiteral(): ClassLiteral {
         const clazz = new ClassLiteral(new ArrayLiteral(), new ArrayLiteral());    
         //this.nextToken();
-            
-        while (!this.currentTokenIs(Token.RBRACE)) {
-            
+        console.log("** Parsing ClassLiteral **");
+        console.log({
+            currentToken: this.currentToken,
+            peekToken: this.peekToken
+        });
+
+        while (!this.peekTokenIs(Token.RBRACE) && !this.currentTokenIs(Token.EOF)) {
+            console.log("** Checking for things in ClassLiteral **");
+            console.log("currentToken:"+ this.currentToken + ", " + "peekToken: "+ this.peekToken);
+    
             const modifiers: number[] = this.parseModifiers();
-            const dataType: string = this.parseDataType(false)?.Literal ?? "";
-            let key: Identifier = this.parseIdentifier();
             
+            
+            let dataType = "" as DataType;
+            
+            if (this.peekTokenIs(Token.IDENT)) {
+                console.log("peekToken is Identifier", this.peekTokenIs(Token.IDENT))
+                dataType = (this.parseDataType(false)?.Literal ?? "") as DataType;
+            }
+
+            let key: Identifier = this.parseIdentifier();
+
+            this.nextToken();                   
             // this.nextToken();
             // check if ClassMethod or ClassProperty
+     
+             
             if (this.peekTokenIs(Token.ASSIGN)) {
-                //this.nextToken();
+                this.nextToken();
 
-                const element = new ClassProperty(dataType, modifiers);
-
-                element.Value = this.parseExpression(Precedence.LOWEST, false);
-                clazz.Left.Values.push(new ClassPair<ClassProperty>(key, element));
+                console.log("___ ** Found ClassProperty **");
+                console.log("currentToken:"+ this.currentToken + ", " + "peekToken: "+ this.peekToken);
+        
+                clazz.Left.Values.push(this.parseClassProperty(key, dataType, modifiers));
+        
 
             } else if (this.peekTokenIs(Token.LPAREN)) {
-                //this.nextToken();
-                const element = new ClassMethod(dataType, modifiers);
-
-                // Parse parameters:
-                const parametersAndTypes = this.parseFunctionParameters();
-
-                // refactor to use this.parseFunctionLiteralWithExistingParams
-                element.Value = this.parseFunctionLiteralWithExistingParams(null, dataType, false, parametersAndTypes) as FunctionLiteral;
-                clazz.Right.Values.push(new ClassPair<ClassMethod>(key, element));
+            
+                console.log("___ ** Found ClassMethod **");
+                console.log("currentToken:"+ this.currentToken + ", " + "peekToken: "+ this.peekToken);
+        
+                clazz.Right.Values.push(this.parseClassMethod(key, dataType, modifiers));
+                
             }
-            this.nextToken();
+            
+
+            // this.nextToken();
         }
 
         if (!this.expectPeek(Token.RBRACE)) { return null; }
 
         return clazz;
     }
+
+
+    private parseClassProperty(key: Identifier, dataType: DataType, modifiers: number[]) {
+        //this.nextToken();
+
+        const element = new ClassProperty(dataType, modifiers);
+
+        element.Value = this.parseExpression(Precedence.LOWEST, false);
+        return new ClassPair<ClassProperty>(key, element);
+
+    }
+
+    private parseClassMethod(key: Identifier, dataType: DataType, modifiers: number[]) {
+        //this.nextToken();
+        const element = new ClassMethod(dataType, modifiers);
+
+        // Parse parameters:
+        const parametersAndTypes = this.parseFunctionParameters();
+            
+        // refactor to use this.parseFunctionLiteralWithExistingParams
+        element.Value = this.parseFunctionLiteralWithExistingParams(
+                                        null, dataType, false, parametersAndTypes, 
+                            ) as FunctionLiteral;
+
+        console.log("parseClassMethod :: < element.value = %v >".replace("%v", element.Value+""));
+        return new ClassPair<ClassMethod>(key, element);
+    }
+
+
+
 
     parseFunctionParameters(): [Identifier[], string[]] {
         var identifiers = [], types = [];
@@ -1030,54 +1088,54 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
 
 
 
-    parseTransformReceiver(): TransformReceiver {
-        return null;
-    }
+    // parseTransformReceiver(): TransformReceiver {
+    //     return null;
+    // }
 
 
-    parsePropertyTransformReceiverExpression(): PropertyTransformReceiverExpression {
+    // parsePropertyTransformReceiverExpression(): PropertyTransformReceiverExpression {
 
-        return null; // * TODO: *
-    }
+    //     return null; // * TODO: *
+    // }
 
-    parsePropertyTransformReceiverFunction(): PropertyTransformReceiverFunction {
+    // parsePropertyTransformReceiverFunction(): PropertyTransformReceiverFunction {
 
-        return null; // * TODO: *
-    }
+    //     return null; // * TODO: *
+    // }
 
-    parseMethodTransformReceiverProcedure(): MethodTransformReceiverProcedure {
+    // parseMethodTransformReceiverProcedure(): MethodTransformReceiverProcedure {
 
-        return null; // * TODO: *
-    }
+    //     return null; // * TODO: *
+    // }
 
-    parseRuntimeTransformReceiverHandler(): RuntimeTransformReceiverHandler {
+    // parseRuntimeTransformReceiverHandler(): RuntimeTransformReceiverHandler {
 
-        return null; // * TODO: *
-    }
-
-    
+    //     return null; // * TODO: *
+    // }
 
     
-    parseConceptReceiver(): ConceptReceiver {
 
-        return null; // * TODO: *
-    }
+    
+    // parseConceptReceiver(): ConceptReceiver {
 
-    parseConceptProjection(): ConceptProjection {
-        return null;
-    }
+    //     return null; // * TODO: *
+    // }
 
-    parseConceptProjectorSelector(): ConceptProjectorSelector {
-        return null;
-    }
+    // parseConceptProjection(): ConceptProjection {
+    //     return null;
+    // }
 
-    parseConceptTransformationExpressionAbstraction(): ConceptTransformationExpressionAbstraction {
-        return null;
-    }
+    // parseConceptProjectorSelector(): ConceptProjectorSelector {
+    //     return null;
+    // }
 
-    parseConceptTransformationStatementAbstraction(): ConceptTransformationStatementAbstraction {
-        return null;
-    }
+    // parseConceptTransformationExpressionAbstraction(): ConceptTransformationExpressionAbstraction {
+    //     return null;
+    // }
+
+    // parseConceptTransformationStatementAbstraction(): ConceptTransformationStatementAbstraction {
+    //     return null;
+    // }
 
 
 

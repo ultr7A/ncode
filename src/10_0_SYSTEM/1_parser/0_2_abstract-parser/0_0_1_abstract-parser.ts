@@ -111,14 +111,17 @@ export abstract class AbstractParser<
     //      Traversing tokens:
     public nextToken(times = 1): void {
         for (let next = 0; next < times; next++) {
-            
+        
             while (this.peekToken == null) {
                 this.peekToken = this.setPeekToken(this.tokenizer.NextToken());
             }
 
             this.currentToken  = this.setCurrentToken(this.peekToken);
             this.peekToken = this.setPeekToken(this.tokenizer.NextToken()) // as unknown as TokenObject; // TODO: why isn't this statically compatible?
-        
+            // console.log({
+            //     currentToken: JSON.stringify(this.currentToken),
+            //     peekToken: JSON.stringify(this.peekToken)
+            // })
         }   
     }
 

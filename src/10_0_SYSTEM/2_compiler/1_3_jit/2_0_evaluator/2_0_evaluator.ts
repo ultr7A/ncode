@@ -83,7 +83,7 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
         switch (node.NodeName) {
             // Statements
             case "Program":
-                //console.log(JSON.stringify(node, null, 2));
+                console.log(JSON.stringify(node, null, 2));
         
                 return this.optimizer.optimizedEvaluate(
                                                             analysis, 

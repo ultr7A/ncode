@@ -11,13 +11,8 @@ import { Identifier, BooleanLiteral, IntegerLiteral, FloatLiteral, PureFunctionL
                                     from "../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal.js";
 import { MethodTransformReceiverProcedure, PropertyTransformReceiverExpression, PropertyTransformReceiverFunction, RuntimeTransformReceiverHandler, TransformReceiver } from "../../../03_0_Structure_🌴/1_ast_🧩/1_3_2_1_transform.receiver.js";
 import { InspectionTransform } from "../../../03_0_Structure_🌴/1_ast_🧩/1_3_3_1_inspection.transform.js";
-import { InstanceTransform } from "../../../03_0_Structure_🌴/1_ast_🧩/1_3_3_2_instance.transform.js";
-import { ConceptReceiver }          from "../../../03_0_Structure_🌴/1_ast_🧩/2_4_1_concept.receiver.js";
-import { ConceptProjection }        from "../../../03_0_Structure_🌴/1_ast_🧩/2_4_2_concept-projection";
-import { ConceptProjectorSelector } from "../../../03_0_Structure_🌴/1_ast_🧩/2_4_3_concept-projector-selector.js";
-import { ConceptTransformationExpressionAbstraction } from "../../../03_0_Structure_🌴/1_ast_🧩/2_4_5_concept-expression.abstraction.js";
-import { ConceptTransformationStatementAbstraction } from "../../../03_0_Structure_🌴/1_ast_🧩/2_4_6-concept-statement.abstraction.js";
-import { ParseResult } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta";
+import { InstanceTransform }   from "../../../03_0_Structure_🌴/1_ast_🧩/1_3_3_2_instance.transform.js";
+import { ParseResult }  from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta";
 
 
 export interface IExpressionParser {
@@ -71,19 +66,6 @@ export interface IExpressionParser {
 
     parseInstanceTransform(): InstanceTransform;
     parseInspectionTransform(): InspectionTransform;
-
-    parseTransformReceiver():                   TransformReceiver;
-    parsePropertyTransformReceiverExpression(): PropertyTransformReceiverExpression;
-    parsePropertyTransformReceiverFunction():   PropertyTransformReceiverFunction;
-    parseMethodTransformReceiverProcedure():    MethodTransformReceiverProcedure;
-    parseRuntimeTransformReceiverHandler():     RuntimeTransformReceiverHandler;
-
-    parseConceptReceiver():          ConceptReceiver;
-    parseConceptProjection():        ConceptProjection;
-    parseConceptProjectorSelector(): ConceptProjectorSelector;
-
-    parseConceptTransformationExpressionAbstraction(): ConceptTransformationExpressionAbstraction;
-    parseConceptTransformationStatementAbstraction(): ConceptTransformationStatementAbstraction;
 
     parseImportStatement(): ModuleImport;
     parseExportStatement(): ModuleExport;

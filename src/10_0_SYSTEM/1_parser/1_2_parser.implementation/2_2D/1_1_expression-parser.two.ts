@@ -15,7 +15,6 @@ import { TokenizerTwo } from "../../../0_tokenizer/1_2_tokenizer.implementation/
 import { Analyzer } from "../../../2_compiler/0_3_0_analyzer/1_3_expression-analyzer.js"
 import { precedences }                 from "../../0_0_parser-core/2_1_precedence.js"
 import { InfixParseFn, PrefixParseFn } from "../../0_0_parser-core/3_0_parse-functions.js"
-import { IExpressionParser } from "../../0_0_parser-core/expression-parser.interface.js"
 import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser.js"
 import { GraphParserTwo } from "./0_2_4_graph-parser.two.js"
 
