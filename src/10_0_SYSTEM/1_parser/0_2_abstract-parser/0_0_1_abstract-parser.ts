@@ -92,6 +92,7 @@ export abstract class AbstractParser<
         this.diagnosticContext = new ExpressionAnalysisDiagnosticContext();
     }
 
+    
     // Reading tokens:
     //      No disintegration:
     public peekTokenIs(t: Token): boolean {
@@ -108,6 +109,9 @@ export abstract class AbstractParser<
     protected currentTokenIsAnyOf(t: string[]): boolean {
         return t.includes(this.currentToken.Type);
     }
+
+
+
     //      Traversing tokens:
     public nextToken(times = 1): void {
         for (let next = 0; next < times; next++) {
@@ -156,6 +160,25 @@ export abstract class AbstractParser<
             return false;
         }
     }
+    protected expectCurrent(t: Token): boolean {
+        if (this.currentTokenIs(t)) {
+            return true;
+        } 
+        else {
+            this.currentError(t);
+            return false;
+        }
+    }
+    
+    protected expectAnyOf(t: Token[]): boolean {
+        if (t.some(token => this.currentTokenIs(token))) {
+            return true;
+        } 
+        else {
+            this.currentError(t.join(" | "));
+            return false;
+        }
+    }
 
 
     // Parser configuration:
@@ -179,6 +202,12 @@ export abstract class AbstractParser<
 
         this.parseError(msg);
     }
+    protected currentError(expectedType: string): void {
+        var msg = sprintf("expected current token to be %s, got %s instead", expectedType, this.peekToken.Type);
+
+        this.parseError(msg);
+    }
+
     protected noPrefixParseFnError(t: string): void {
         var msg = "no prefix parse function for " + t + " found";
 

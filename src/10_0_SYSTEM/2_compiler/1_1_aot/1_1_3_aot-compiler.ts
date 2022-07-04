@@ -14,7 +14,7 @@ import { localEvaluate, unparseWithConfig } from "../../4_shell/3_2-nodejs/0_1_0
 import { Analyzer } from "../0_3_0_analyzer/1_3_expression-analyzer.js"
 import { applyFunction, ExpressionEvaluator } from "../1_3_jit/2_0_evaluator/2_0_evaluator.js"
 import { RuntimeOptimizer } from "../1_3_jit/3_1_runtime-optimizer.js"
-import { ModuleLinker } from "../4_2_1_module_linker/1_1_0_module-linker.js"
+import { ModuleLinker } from "../4_2_1_module-linker/1_1_0_module-linker.js"
 import { AbstractAOTCompiler } from "./0_0_aot-compiler-structure/0_2_1_abstract-aot-compiler.js"
 import { AOTBundler } from "./1_1_4_aot-bundler.js"
 

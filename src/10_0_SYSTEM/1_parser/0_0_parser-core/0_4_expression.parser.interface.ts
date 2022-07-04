@@ -62,7 +62,7 @@ export interface IExpressionParser {
     
     isDataType(peek: boolean);
     isCustomDataType();
-    parseDataType(peek: boolean);
+    parseDataType(peek: boolean, nextToken: boolean);
 
     parseInstanceTransform(): InstanceTransform;
     parseInspectionTransform(): InspectionTransform;

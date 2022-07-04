@@ -38,7 +38,7 @@ import { AbstractParser } from "../../0_2_abstract-parser/0_0_1_abstract-parser.
 
 import { InstanceTransform }       from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_3_2_instance.transform.js";
 import { InspectionTransform }     from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_3_1_inspection.transform.js";
-import { ModuleLinker } from "../../../2_compiler/4_2_1_module_linker/1_1_0_module-linker.js";
+import { ModuleLinker } from "../../../2_compiler/4_2_1_module-linker/1_1_0_module-linker.js";
 import { Parser } from "../../1_1_parser/3_1_1_parser.js";
 import { ParseResult } from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta";
 import { TransformReceiverParserOne } from "./1_2_transform-receiver.parser.one.js";
@@ -204,12 +204,12 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
 
     parseModifiers(): number[] {
         let modifiers = [], 
-            modifier = modifierNames.indexOf(this.currentToken.Type as Token);
+            modifier = modifierNames.indexOf(this.currentToken.Literal as Token);
         
         while (modifier > -1) {
             modifiers.push(modifier);
             this.nextToken();
-            modifier = modifierNames.indexOf(this.currentToken.Type as Token);
+            modifier = modifierNames.indexOf(this.currentToken.Literal as Token);
         }
 
         return modifiers;
@@ -296,7 +296,7 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
     public parseGroupedExpression(): Expression {
         this.nextToken();
         let exp = this.parseExpression(Precedence.LOWEST);
-        if (!this.expectPeek(Token.RPAREN)) {
+        if (!this.expectCurrent(Token.RPAREN)) {
             return null;
         }
         return exp;
@@ -308,18 +308,25 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
         return exp;
     }
 
+
+
+
+
+
     public parseNewExpression(): NewExpression {
         var exp = new NewExpression(null);
 
-        if (!this.expectPeek(Token.IDENT)) {
+        this.nextToken();
+
+        if (!this.expectAnyOf([Token.IDENT, Token.FUNCTION])) {
             return null;
         }
 
         let constructorFunction: FunctionNode | Identifier;
 
-        if (this.peekTokenIs(Token.IDENT)) {
+        if (this.currentTokenIs(Token.IDENT)) {
             constructorFunction = this.parseIdentifier();
-        } else if (this.peekTokenIs(Token.FUNCTION)) {
+        } else if (this.currentTokenIs(Token.FUNCTION)) {
             constructorFunction = this.parseFunctionLiteral(null, null, false);
         } else {
             this.parseError("NewExpression must specify constructor, as Identifier or FunctionLiteral");
@@ -329,6 +336,11 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
         exp.Value = this.parseCallExpression(constructorFunction);
         return exp;
     }
+
+
+
+
+
 
     public parseIndexExpression(left: Expression): Node {
         let exp: IndexExpression | IndexedAssignmentStatement = null;
@@ -415,9 +427,11 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
 
 
     public parseStatement(): Statement {
+        
         console.log("parseStatement :: ", {
             currentToken: this.currentToken
         });
+        
         if (this.currentToken.Type == Token.IDENT && this.peekTokenIs(Token.ASSIGN)) {
             return this.parseAssignmentStatement();
         }
@@ -587,6 +601,7 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
     }
 
     public parseAssignmentStatement() {
+        console.trace("parseAssignmentStatement! ", this.currentToken);
         var stmt = new AssignmentStatement(new Identifier(this.currentToken.Literal), null);
 
         if (!this.expectPeek(Token.ASSIGN)) {
@@ -633,21 +648,43 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
     }
 
     public parseClassStatement() {
+        
+        console.log("___ ** parseClassStatement [1/4] **");
+        console.log("currentToken:"+ this.currentToken.Literal + ", " + "peekToken: "+ this.peekToken.Literal);
+
         var stmt = new ClassStatement(null, null);
 
         if (!this.expectPeek(Token.IDENT)) {
             return null;
         }
         stmt.Identity = new Identifier(this.currentToken.Literal);
+        console.log("___ ** parseClassStatement [2/4] <--After setting stmt.Identity  **");
+        console.log("currentToken:"+ this.currentToken.Literal + ", " + "peekToken: "+ this.peekToken.Literal);
+
         // TODO: Analyzer should always be handling this:
         this.diagnosticContext.declaredVariables[stmt.Identity.Value] = stmt.Identity.Value;
         this.nextToken();
-        
+        console.log("___ ** parseClassStatement [3/4] <--After nextToken()  **");
+        console.log("currentToken:"+ this.currentToken.Literal + ", " + "peekToken: "+ this.peekToken.Literal);
+
         stmt.Value = this.parseClassLiteral();
+
+        console.log("___ ** parseClassStatement [4/5] <--After parseClassLiteral()  **");
+        console.log("currentToken:"+ this.currentToken.Literal + ", " + "peekToken: "+ this.peekToken.Literal);
 
         if (this.peekTokenIs(Token.SEMICOLON)) {
             this.nextToken();
+       
+       
+            console.log("___ ** parseClassStatement [5/5] <--After nextToken()  **");
+            console.log("currentToken:"+ this.currentToken.Literal + ", " + "peekToken: "+ this.peekToken.Literal);
+    
+
         }
+
+
+       
+
 
         return stmt;
     }
@@ -773,7 +810,7 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
     }
 
     public parsePureFunctionLiteral(_, returnType: string): PureFunctionLiteral {
-        returnType = this.parseDataType(true)?.Literal;
+        returnType = this.parseDataType(true, true)?.Literal;
         this.nextToken();
         return this.parseFunctionLiteral(null, returnType, true) as PureFunctionLiteral;
     }
@@ -875,66 +912,80 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
     parseClassLiteral(): ClassLiteral {
         const clazz = new ClassLiteral(new ArrayLiteral(), new ArrayLiteral());    
         //this.nextToken();
-        console.log("** Parsing ClassLiteral **");
-        console.log({
-            currentToken: this.currentToken,
-            peekToken: this.peekToken
-        });
 
-        while (!this.peekTokenIs(Token.RBRACE) && !this.currentTokenIs(Token.EOF)) {
-            console.log("** Checking for things in ClassLiteral **");
-            console.log("currentToken:"+ this.currentToken + ", " + "peekToken: "+ this.peekToken);
-    
-            const modifiers: number[] = this.parseModifiers();
+        while (!this.peekTokenIs(Token.RBRACE) && !this.currentTokenIs(Token.EOF)) { 
             
-            
-            let dataType = "" as DataType;
-            
-            if (this.peekTokenIs(Token.IDENT)) {
-                console.log("peekToken is Identifier", this.peekTokenIs(Token.IDENT))
-                dataType = (this.parseDataType(false)?.Literal ?? "") as DataType;
-            }
+            this.nextToken(); // peekToken was "public"
 
-            let key: Identifier = this.parseIdentifier();
-
-            this.nextToken();                   
-            // this.nextToken();
+            let { modifiers, dataType, key } =  this.parseClassElementSignature()
+                // key is '{'  brace-bracket for some reason!?
+                
+            this.nextToken();// peekToken was "("                  
+            
             // check if ClassMethod or ClassProperty
-     
              
-            if (this.peekTokenIs(Token.ASSIGN)) {
-                this.nextToken();
-
-                console.log("___ ** Found ClassProperty **");
-                console.log("currentToken:"+ this.currentToken + ", " + "peekToken: "+ this.peekToken);
-        
+            if (this.currentTokenIs(Token.ASSIGN)) {
+                
                 clazz.Left.Values.push(this.parseClassProperty(key, dataType, modifiers));
         
 
-            } else if (this.peekTokenIs(Token.LPAREN)) {
-            
-                console.log("___ ** Found ClassMethod **");
-                console.log("currentToken:"+ this.currentToken + ", " + "peekToken: "+ this.peekToken);
-        
+            } else if (this.currentTokenIs(Token.LPAREN)) {
+                
                 clazz.Right.Values.push(this.parseClassMethod(key, dataType, modifiers));
                 
             }
-            
 
-            // this.nextToken();
+            console.log("...parseClassLiteral:",
+                        "Left.Values: ", JSON.stringify(clazz.Left.Values, null, 2),
+                        "Right.Values: ", JSON.stringify(clazz.Right.Values, null, 2),
+            );
         }
-
-        if (!this.expectPeek(Token.RBRACE)) { return null; }
 
         return clazz;
     }
 
+
+    /**
+     * 
+     * Parse a class property or method signature:
+     * 
+     * public static void illuminateTheCosmos() { ... }
+     * \___________/ \__/ \_________________/ 
+     *       |        |           |
+     *   Modifiers  DataType     Key
+     *       +        1           1
+     */
+
+    private parseClassElementSignature() {
+        console.log("parseClassElement");
+        const modifiers: number[] = this.parseModifiers();
+            
+            
+        let dataType = "" as DataType;
+        
+        if (this.peekTokenIs(Token.IDENT)) {
+            //console.log("peekToken is Identifier", this.peekTokenIs(Token.IDENT))
+            dataType = (this.parseDataType(false, false)?.Literal ?? "") as DataType;
+            this.nextToken();
+        }
+
+        
+
+        let key: Identifier = this.parseIdentifier();
+
+        return {
+            modifiers,
+            dataType,
+            key
+        } 
+    }
 
     private parseClassProperty(key: Identifier, dataType: DataType, modifiers: number[]) {
         //this.nextToken();
 
         const element = new ClassProperty(dataType, modifiers);
 
+        this.nextToken();
         element.Value = this.parseExpression(Precedence.LOWEST, false);
         return new ClassPair<ClassProperty>(key, element);
 
@@ -964,7 +1015,7 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
 
         if (this.peekTokenIs(Token.RPAREN)) {
             this.nextToken();
-            return [identifiers, types];
+            return [identifiers, types]; 
         }
         this.nextToken();
         if (this.isDataType()) {
@@ -1015,7 +1066,7 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
         }
 
         this.nextToken();
-        list.push(this.parseExpression(Precedence.LOWEST));
+        list.push(this.parseExpression(Precedence.LOWEST)); // undefined pushed when no args
 
         while (this.peekTokenIs(delimiter)) {
             this.nextToken();
@@ -1023,7 +1074,7 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
             list.push(this.parseExpression(Precedence.LOWEST));
         }
 
-        if (!this.expectPeek(end)) { return null; }
+        if (!this.expectCurrent(end)) { return null; }
         return list;
     }   
 
@@ -1051,7 +1102,7 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
         
         let detector = peek ? (t) => this.peekTokenIs(t) : (t) => this.currentTokenIs(t);
 
-        return detector(Token.LET_BOOL)
+        return detector(Token.LET_BOOL)|| detector(Token.LET_VOID)
             || detector(Token.LET_INT) || detector(Token.LET_FLOAT)
             || detector(Token.LET_STRING) || detector(Token.LET_ARRAY)
             || detector(Token.LET_OBJECT) || detector(Token.LET_FUNCTION)
@@ -1064,10 +1115,10 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
             || firstChar > 122; // anything except special characters and lower-case
     }
 
-    parseDataType(peek: boolean) {
+    parseDataType(peek: boolean, nextToken: boolean) {
         if (this.isDataType(peek)) {
             //if (!this.peekTokenIs(Token.COLON)) {
-                this.nextToken();
+                nextToken && this.nextToken();
             //}
             // this.nextToken();
             return this.currentToken;

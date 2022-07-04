@@ -7,13 +7,13 @@
     
     //
     "editor.mouseWheelZoom": true,
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 2,
     "editor.fontFamily": "'Jetbrains Mono', 'Source Code Pro', 'Droid Sans Mono', 'monospace', monospace",
     "workbench.colorTheme": "Freshcut (rainglow)",
     "editor.lineHeight": 0.9,
     "editor.letterSpacing": 1,
-    "editor.fontWeight": "300",
+    "editor.fontWeight": "200",
     "editor.fontSize": 12,
     "workbench.preferredDarkColorTheme": "Default Light+",
-    "editor.minimap.enabled": false,
+    "editor.minimap.enabled": true,
 }

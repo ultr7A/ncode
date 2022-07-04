@@ -11,7 +11,7 @@ import { ExpressionStatement, IndexedAssignmentStatement, LetStatement } from ".
 import { FunctionLiteral, Identifier, StringLiteral } from "../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal.js";
 import { readWholeFile } from "../../../3_Operation_☀/3_util_(🔥)/4_0_io-util.js";
 import { nodeObjects } from "../../../4_Frame_⚡/4_io/1_file-system/2_compatibility.js";
-import { ILinker }                 from "./0_0_1_module-linker-structure.js";
+import { ILinker }                 from "../0_0_compiler-structure/0_0_1_module-linker-structure.js";
 import { ModuleLinkerEnvironment } from "./1_4_0_module-linker-environment.js";
 
 /* ************************************ *

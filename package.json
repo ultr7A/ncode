@@ -56,6 +56,6 @@
     },
     "dependencies": {
         "meta.gl": "^0.1.22",
-        "wrapt.co_re": "^1.1.63"
+        "wrapt.co_re": "^1.1.64"
     }
 }

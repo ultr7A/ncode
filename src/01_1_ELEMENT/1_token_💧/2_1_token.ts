@@ -141,6 +141,7 @@ export enum Token {
 
     // Keywords:
     //     Declaring Identifiers:
+    LET_VOID     = "void",
     LET_BOOL     = "boolean",
     LET_INT      = "int",
     LET_FLOAT    = "float",
@@ -244,6 +245,7 @@ export const keywords = {
     "static":  Token.STATIC,
     "final":   Token.FINAL,
     
+    "void":     Token.LET_VOID,
     "boolean":  Token.LET_BOOL,
     "int":      Token.LET_INT,
     "float":    Token.LET_FLOAT,
