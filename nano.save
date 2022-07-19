@@ -1,5 +1,0 @@
-private superClass: AbstractParser;
-
-    public setSuperClass(abstractParser: AbstractParser) {
-        this.superClass = abstractParser;
-    }

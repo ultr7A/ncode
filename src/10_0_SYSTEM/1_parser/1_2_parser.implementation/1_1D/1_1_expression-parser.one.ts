@@ -428,10 +428,6 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
 
     public parseStatement(): Statement {
         
-        console.log("parseStatement :: ", {
-            currentToken: this.currentToken
-        });
-        
         if (this.currentToken.Type == Token.IDENT && this.peekTokenIs(Token.ASSIGN)) {
             return this.parseAssignmentStatement();
         }
@@ -700,16 +696,32 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
     }
 
     public parseBlockStatement(isPureFunction = false, initialNextToken = true) {
+
         const  block              = new BlockStatement();
         let    hasReturnStatement = false,
                errors             = [] as string[];
 
         block.Values = [];
         initialNextToken && this.nextToken();
-        console.log(" ** parseBlockStatement ** ")
-        while (!this.currentTokenIs(Token.RBRACE) && !this.currentTokenIs(Token.EOF)) {
-            console.log("** parseBlockStatement :: [loop started] ** ")
-            var stmt = this.parseStatement();
+
+
+        if (this.peekTokenIs(   Token.RBRACE) ) {
+            this.nextToken();
+        }
+
+        while 
+        (
+            !this.currentTokenIs(Token.RBRACE) && 
+            !this.currentTokenIs(Token.EOF   )
+        ) 
+        {
+            
+            const stmt = this.parseStatement();
+            
+            if (stmt == null) {
+                continue;
+            }
+
             if (stmt.NodeName == "ExpressionStatement") {
                 if ((stmt as ExpressionStatement).Operand == null) {
                     continue;
@@ -720,15 +732,10 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
                                          ? [hasReturnStatement, errors] 
                                          : this.analyzer.analyzeReturnStatement(stmt, isPureFunction);
 
-            if (errors.length) {
-                this.errors.push(...errors);
-            }
+            
+            if (errors.length) {    this.errors.push(...errors);    }
 
-            if (stmt != null) {
-                console.log(" ** parseBlockStatement :: [stmt added] **")
-                block.Values.push(stmt);
-            }
-
+            block.Values.push(stmt);   
             this.nextToken();
         }
 
@@ -737,9 +744,11 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
         }
 
         if (isPureFunction && !hasReturnStatement) {
+
             this.errors.push("pure function must have a return statement");
             return null;
         }
+
         return block;
     }
 
@@ -935,10 +944,10 @@ export class ExpressionParserOne extends     AbstractParser // AbstractExpressio
                 
             }
 
-            console.log("...parseClassLiteral:",
-                        "Left.Values: ", JSON.stringify(clazz.Left.Values, null, 2),
-                        "Right.Values: ", JSON.stringify(clazz.Right.Values, null, 2),
-            );
+            // console.log("...parseClassLiteral:",
+            //             "Left.Values: ", JSON.stringify(clazz.Left.Values, null, 2),
+            //             "Right.Values: ", JSON.stringify(clazz.Right.Values, null, 2),
+            //);
         }
 
         return clazz;

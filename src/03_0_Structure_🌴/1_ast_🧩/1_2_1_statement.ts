@@ -64,13 +64,18 @@ export class ClassStatement implements DataStructureDeclaration {
 /**  
  * /T\          Concept
  * is           : :
- *              a               [abstract [structure, sequence, operator or graph]]
+ *              an              [abstract [structure, sequence, operator or graph]]
  *              
  *              of              
  *                              : :
  *                              /T\             [abstract expressions]
  *                                              connected
- *                              by              [abstract operators]
+ *                              by              [abstract operators]  
+ *                              - - - - - - - - - -                             
+ *                              ^^^
+ * 
+ *                              How 
+ *                              are             [abstract operators] used in ConceptProjection? 
  *                              -------------------
  *              -------------------
  * ----------------

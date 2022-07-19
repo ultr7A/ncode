@@ -24,7 +24,7 @@ import { ConceptTransform } from "./2_4_4_concept.transform";
 
     To make this pattern more accessible, and  allow rapid prototyping,
     TransformReceiver(s) can let you physically play around with the concept-chain 
-    (or concept graph, i guess,  if there's multiple outputs)
+    (or concept graph, if there's multiple outputs)
  */
 export class ConceptProjection {
   

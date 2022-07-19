@@ -2,9 +2,10 @@ import { ConceptExpression, Expression, FunctionNode, IIdentifier, Node }
                                     from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/0_1_0_structure-concept";
 import { ParseTreeAnalysis }        from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/4_0_0_meta.js"
 import { Operator }                 from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/0_operation-types_🔍/1_primitive-operators.js"
-import { ObjectType }               from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/object-type.enum.js"
+import { ObjectType }               from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/object-type.enum.js";
+import { ConstructableObjectType }  from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/object/constructable-object.type.js";
 import { STREAM_DIRECTION }         from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/syntax/stream-direction.enum.js"
-import { Optimizer }                from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/optimizer.js"
+import { Optimizer }                from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/optimizer.js";
 import { Evaluator }                from "wrapt.co_re/dist/Domain [╍🌐╍🧭╍]/system/evaluator.js";
 
 import { ArrayObject, BooleanObject, _BuiltinFunctionObject, ClassifiedObject, ConceptObject, ErrorObject, Float, GraphObject, 
@@ -35,18 +36,20 @@ import { CallExpression, IndexExpression, InfixExpression, NewExpression, Prefix
 import {    BooleanLiteral, ClassLiteral, ConceptSequenceLiteral, GraphLiteral, Identifier, IntegerLiteral, 
             FloatLiteral, StringLiteral, HashLiteral, MobiusLiteral, WheelLiteral, ArrayLiteral } 
                                     from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_1_literal";
-
+import { ConceptReceiver }          from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_1_concept.receiver.js";
+import { ConceptProjection }        from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_2_concept-projection.js";
+import { ConceptProjectorSelector } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_3_concept-projector-selector.js";
+                                    
 
 import { evaluateSourceFile, printNativeString } from "../../../../3_Operation_☀/3_util_(🔥)/4_2_browser-io-util.js"
+import { readWholeFile }                         from "../../../../3_Operation_☀/3_util_(🔥)/4_0_io-util.js"
 
-import { builtins } from "../../../../4_Frame_⚡/2_deprecated_builtin/index.js"
+
+import { builtins }    from "../../../../4_Frame_⚡/2_deprecated_builtin/index.js"
 import { nodeObjects } from "../../../../4_Frame_⚡/4_io/1_file-system/2_compatibility.js"
-import { readWholeFile } from "../../../../3_Operation_☀/3_util_(🔥)/4_0_io-util.js"
+
 import { Parser } from "../../../1_parser/1_1_parser/3_1_1_parser.js";
 import { MethodTransformReceiverProcedure, PropertyTransformReceiverExpression, PropertyTransformReceiverFunction } from "../../../../03_0_Structure_🌴/1_ast_🧩/1_3_2_1_transform.receiver.js";
-import { ConceptReceiver } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_1_concept.receiver.js";
-import { ConceptProjection } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_2_concept-projection.js";
-import { ConceptProjectorSelector } from "../../../../03_0_Structure_🌴/1_ast_🧩/2_4_3_concept-projector-selector.js";
 
 
 
@@ -164,16 +167,8 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
                 return this.evalInfixExpression((node as InfixExpression).Operator, left, right);
     
             case "CallExpression":
-                const fun = this.Eval((node as CallExpression).Function, env); //, node.Function.ObjectContext); // objectContext);
-                if (isError(fun)) {
-                    return fun;
-                }
-    
-                const args = this.evalExpressions((node as CallExpression).Values, env, objectContext);
-                if (args.length == 1 && isError(args[0])) {
-                    return args[0];
-                }
-                return applyFunction(fun, env, args, objectContext);
+                
+                return this.evalCallExpression(node as CallExpression, env, objectContext);
     
             case "IndexExpression":
                 left = this.Eval((node as IndexExpression).Left, env, objectContext);
@@ -217,7 +212,7 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
                 }
                 return new ArrayObject(elements);
             case "Identifier":
-                return this.evalIdentifier(node, env, objectContext);
+                return this.evalIdentifier((node as Identifier), env, objectContext);
             case "HashLiteral":
                 return this.evalHashLiteral((node as HashLiteral), env);
             case "ClassLiteral":
@@ -463,13 +458,30 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
                 return newError("unknown operator: %s %s %s", left.Type(), operator, right.Type());
         }
     }
+
+
+
+
     
+
     private evalNewExpression(ne: NewExpression, env: Environment, objectContext: ClassifiedObject) {
-        var classData = this.evalIdentifier(ne.Value, env, objectContext);
-        var classType = classData.Type();
+        
+        let classData: ConstructableObjectType = this.Eval(ne.Value, env, objectContext) as ConstructableObjectType;
+        
+        if (ne.Value.NodeName == "Identifier") {
+            classData = this.evalIdentifier((ne.Value as Identifier), env, objectContext);
+        
+        } else if (ne.Value.NodeName == "CallExpression") {
+            classData = this.evalCallExpression((ne.Value as CallExpression), env, objectContext) as ConstructableObjectType;
+
+        }
+
+
+        let classType = classData.Type();
     
         if (classType == ObjectType.CLASSIFIED_OBJECT) {
-            var instance = copyClassifiedObject(classData);
+            
+            let instance = copyClassifiedObject(classData as ClassifiedObject);
             
             if (ne.Value.NodeName === "Identifier") {
                 instance.Constructor = instance.Methods[(ne.Value as Identifier).Value].Value;
@@ -483,18 +495,24 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
             this.bindContextToMethods(instance);
     
             return instance;
-        }
-        else if (classType == ObjectType.HASH) {
-            return copyHashMap(classData);
-        }  
-        else if (classType == ObjectType.ARRAY) {
-            return copyList(classData);
-        }
-        else {
+
+        } else if (classType == ObjectType.HASH) {
+            return copyHashMap((classData as Hash));
+
+        } else if (classType == ObjectType.ARRAY) {
+            return copyList(classData as ArrayObject);
+        
+        } else {
             return newError("new operator can only be used with Class or Hashmap. Invalid type: " + classData.Type());
+        
         }
     }
     
+
+
+
+
+
     private bindContextToMethods(instance: ClassifiedObject) {
         var pairs = instance.Methods;
     
@@ -507,6 +525,10 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
         }
     }
     
+
+
+
+
     private evalExecStatement(es: ExecStatement, env: Environment, objectContext: ClassifiedObject) {
         var files = es.Operand.Values.map(fileNode => this.Eval(fileNode, env, objectContext).Inspect()+"");
     
@@ -626,11 +648,17 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
         return NULL;
     }
     
+
+
+
+
     private evalConceptStatement(node: ConceptStatement, env: Environment, objectContext: ClassifiedObject) {
     
         return NULL;
     }
     
+
+
     private evalStreamExpression(se: StreamExpression, env: Environment, objectContext: ClassifiedObject): StreamObject {
         var transforms = [];
         if (se.Transforms.length) {
@@ -663,6 +691,11 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
         return stream;
     }
     
+
+
+
+
+
     private evalIndexExpression(left: EObject, indexNode: Node, env: Environment, objectContext?: ClassifiedObject) {
     
         let indexExpType = this.getIndexExpType(left, indexNode);
@@ -774,6 +807,23 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
         }
         return new StringObject(stringObject.Value[idx]);
     }
+
+
+    private evalCallExpression(node: CallExpression, env: Environment, objectContext: ClassifiedObject): EObject {
+        const fun = this.Eval((node as CallExpression).Function, env); //, node.Function.ObjectContext); // objectContext);
+                
+        if (isError(fun)) {
+            return fun;
+        }
+    
+        const args = this.evalExpressions((node as CallExpression).Values, env, objectContext);
+        if (args.length == 1 && isError(args[0])) {
+            return args[0];
+        }
+
+        return applyFunction(fun, env, args, objectContext);
+    }
+
     
     private evalIndexedAssignmentStatement(left: EObject, indexNode: Node, assignment: EObject, env: Environment, objectContext: ClassifiedObject) {
         var indexExpType = this.getIndexExpType(left, indexNode);
@@ -854,27 +904,38 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
         return NULL;
     }
     
-    private evalIdentifier(node, env: Environment, objectContext) {
-        var name = node.Value;
+    private evalIdentifier(node: Identifier, env: Environment, objectContext) {
+        let name = node.Value;
+       
+    
         if (name == "this") {
+       
             if (objectContext != null) {
                 return objectContext;
             }
+
             return newError("statement has no object context");
+       
         } else {
-            var ident = env.get(name);
+            
+            const ident = env.get(name);
     
             if (ident != null) {
                 return ident;
             }
+            
             var builtin = builtins[name];
     
             if (builtin != null && builtin != undefined) {
                 return builtin;
             }
+
             return newError("identifier not found: %s", name);
         }
     }
+
+
+
     
     private evalHashLiteral(node: HashLiteral, env: Environment) {
         var hashmap = new Hash({}), elements = {};
@@ -1007,15 +1068,16 @@ export class ExpressionEvaluator implements Evaluator<Node, EObject> {
 
     }
 
-    private evalPropertyTransformReceiverFunction(receiver: PropertyTransformReceiverFunction): void {
+    private evalPropertyTransformReceiverFunction(  receiver: PropertyTransformReceiverFunction  ): void {
 
     }
 
-    private evalMethodTransformReceiverProcedure(receiver: MethodTransformReceiverProcedure): void {
+    private evalMethodTransformReceiverProcedure(   receiver: MethodTransformReceiverProcedure   ): void {
 
     }
 
-    private evalConceptReceiver(receiver: ConceptReceiver, object: FunctionObject | ClassifiedObject) {
+    private evalConceptReceiver(                    receiver: ConceptReceiver, 
+                                                    object:   FunctionObject | ClassifiedObject) {
 
     }
 
